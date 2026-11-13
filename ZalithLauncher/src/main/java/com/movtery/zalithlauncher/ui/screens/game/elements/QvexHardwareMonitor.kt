@@ -128,6 +128,30 @@ private fun readCpuFrequency(): Int? {
             }
         } catch (_: Exception) {
             // Không có quyền đọc hoặc thiết bị không hỗ trợ.
+private fun readBatteryInfo(
+    context: Context
+): Triple<Int?, Boolean?, Float?> {
+    val batteryIntent = context.registerReceiver(
+        null,
+        IntentFilter(Intent.ACTION_BATTERY_CHANGED)
+    ) ?: return Triple(null, null, null)
+
+    val level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1)
+    val scale = batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, -1)
+    val percentage = if (level >= 0 && scale > 0) {
+        (level * 100) / scale
+    } else null
+
+    val status = batteryIntent.getIntExtra(BatteryManager.EXTRA_STATUS, -1)
+    val charging = status == BatteryManager.BATTERY_STATUS_CHARGING ||
+        status == BatteryManager.BATTERY_STATUS_FULL
+
+    val temperature = batteryIntent.getIntExtra(
+        BatteryManager.EXTRA_TEMPERATURE, -1
+    ).let { if (it >= 0) it / 10f else null }
+
+    return Triple(percentage, charging, temperature)
+}        
         }
     }
 
