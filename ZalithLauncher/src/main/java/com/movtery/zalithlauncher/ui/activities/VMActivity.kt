@@ -602,6 +602,17 @@ class VMActivity : BaseAppCompatActivity(), SurfaceTextureListener {
                         },
                         lifecycleScope = lifecycleScope
                     )
+                    if (
+                        withHandler { type } == HandlerType.GAME &&
+                        AllSettings.qvexPowerMax.getValue() &&
+                        AllSettings.qvexHardwareMonitor.getValue()
+                    ) {
+                        QvexHardwareMonitor(
+                            modifier = Modifier
+                                .align(Alignment.TopEnd)
+                                .padding(12.dp)
+                        )
+                    }                
                 }
             }
         }
