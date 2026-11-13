@@ -43,6 +43,7 @@ private data class QvexHardwareStats(
     val batteryLevel: Int? = null,
     val batteryCharging: Boolean? = null,
     val batteryTemperature: Float? = null
+    val thermalStatus: String? = null
 )
 
 private fun readCpuStats(): QvexCpuStats? {
@@ -160,7 +161,26 @@ private fun readBatteryInfo(
 
     return Triple(percentage, charging, temperature)
 }
+private fun readThermalStatus(context: Context): String? {
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+        return null
+    }
 
+    val powerManager =
+        context.getSystemService(Context.POWER_SERVICE) as? PowerManager
+            ?: return null
+
+    return when (powerManager.currentThermalStatus) {
+        PowerManager.THERMAL_STATUS_NONE -> "NORMAL"
+        PowerManager.THERMAL_STATUS_LIGHT -> "LIGHT"
+        PowerManager.THERMAL_STATUS_MODERATE -> "MODERATE"
+        PowerManager.THERMAL_STATUS_SEVERE -> "SEVERE"
+        PowerManager.THERMAL_STATUS_CRITICAL -> "CRITICAL"
+        PowerManager.THERMAL_STATUS_EMERGENCY -> "EMERGENCY"
+        PowerManager.THERMAL_STATUS_SHUTDOWN -> "SHUTDOWN"
+        else -> "UNKNOWN"
+    }
+}
 private suspend fun sampleHardware(
     context: Context,
     previousCpu: QvexCpuStats?
@@ -176,7 +196,9 @@ private suspend fun sampleHardware(
             batteryLevel = battery.first,
             batteryCharging = battery.second,
             batteryTemperature = battery.third
+            thermalStatus = readThermalStatus(context)
         )
+    
 
         stats to currentCpu
     }
@@ -252,6 +274,10 @@ fun QvexHardwareMonitor(
             HardwareRow(
                 label = "BATTERY TEMP",
                 value = stats.batteryTemperature?.let { "$it°C" } ?: "N/A"
+            )
+            HardwareRow(
+                label = "THERMAL STATUS",
+                value = stats.thermalStatus ?: "N/A"
             )
         }
     }
