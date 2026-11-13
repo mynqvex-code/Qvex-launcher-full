@@ -232,6 +232,18 @@ fun QvexHardwareMonitor(
         while (true) {
             val result = sampleHardware(context, previousCpu)
             stats = result.first
+
+            val batteryTemp = result.first.batteryTemperature
+
+            if (batteryTemp != null) {
+                if (batteryTemp > 50f && !hasShownTemperatureWarning) {
+                    showHighTemperatureWarning = true
+                    hasShownTemperatureWarning = true
+                } else if (batteryTemp <= 50f) {
+                    hasShownTemperatureWarning = false
+                }
+            }
+
             previousCpu = result.second
             delay(1000)
         }
