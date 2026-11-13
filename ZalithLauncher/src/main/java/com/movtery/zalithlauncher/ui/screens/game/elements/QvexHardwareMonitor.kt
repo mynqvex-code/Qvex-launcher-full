@@ -1,5 +1,6 @@
 package com.movtery.zalithlauncher.ui.screens.game.elements
 
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.foundation.background
 import android.content.Context
 import android.content.Intent
@@ -183,6 +184,7 @@ private suspend fun sampleHardware(
 fun QvexHardwareMonitor(
     modifier: Modifier = Modifier
 ) {
+  val context = LocalContext.current
     var stats by remember {
         mutableStateOf(
             QvexHardwareStats(
@@ -197,7 +199,7 @@ fun QvexHardwareMonitor(
         var previousCpu: QvexCpuStats? = null
 
         while (true) {
-            val result = sampleHardware(previousCpu)
+            val result = sampleHardware(context, previousCpu)
             stats = result.first
             previousCpu = result.second
             delay(1000)
