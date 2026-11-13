@@ -301,6 +301,28 @@ fun QvexHardwareMonitor(
             )
         }
     }
+    if (showHighTemperatureWarning) {
+        AlertDialog(
+            onDismissRequest = {
+                showHighTemperatureWarning = false
+            },
+            title = {
+                Text("Cảnh báo nhiệt độ")
+            },
+            text = {
+                Text("Nhiệt độ cao, vui lòng tạm dừng trò chơi.")
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        showHighTemperatureWarning = false
+                    }
+                ) {
+                    Text("Đã hiểu")
+                }
+            }
+        )
+    }
 }
 
 @Composable
