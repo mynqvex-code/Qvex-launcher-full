@@ -110,6 +110,7 @@ object AllSettings : SettingsRegistry() {
     val requestMaxRefreshRate = boolSetting("requestMaxRefreshRate", true)
     // QVEX MAX POWER
     val qvexPowerMax = boolSetting("qvexPowerMax", false)
+    val qvexHardwareMonitor = boolSetting("qvexHardwareMonitor", false)    
     val qvexCpuMax = boolSetting("qvexCpuMax", false)
     val qvexGpuMax = boolSetting("qvexGpuMax", false)
     val qvexRamOptimization = boolSetting("qvexRamOptimization", false)
