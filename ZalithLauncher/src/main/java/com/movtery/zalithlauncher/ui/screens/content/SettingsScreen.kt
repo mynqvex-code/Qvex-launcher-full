@@ -223,6 +223,9 @@ private fun NavigationUI(
                         submitError = submitError,
                     )
                 }
+                entry<NormalNavKey.Settings.PowerMax> {
+    PowerMaxScreen(key, settingsScreenKey, mainScreenKey)
+                }
                 entry<NormalNavKey.Settings.JavaManager> {
                     JavaManageScreen(key, settingsScreenKey, mainScreenKey, eventViewModel, submitError)
                 }
