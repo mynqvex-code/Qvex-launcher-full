@@ -130,6 +130,7 @@ import com.movtery.zalithlauncher.ui.control.input.TextInputMode
 import com.movtery.zalithlauncher.ui.screens.game.elements.OpenFolderLayer
 import com.movtery.zalithlauncher.ui.screens.game.elements.OpenFolderOperation
 import com.movtery.zalithlauncher.ui.theme.ZalithLauncherTheme
+import com.movtery.zalithlauncher.ui.screens.game.elements.QvexHardwareMonitor
 import com.movtery.zalithlauncher.ui.toAndroidString
 import com.movtery.zalithlauncher.utils.computeGameDisplayLayout
 import com.movtery.zalithlauncher.utils.computeGameRenderSize
