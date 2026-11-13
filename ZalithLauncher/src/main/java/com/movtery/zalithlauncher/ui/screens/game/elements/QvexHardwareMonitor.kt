@@ -145,7 +145,7 @@ private fun readBatteryInfo(
     val level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1)
     val scale = batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, -1)
     val percentage = if (level >= 0 && scale > 0) {
-        (level * 100) / scale
+        level * 100 / scale
     } else null
 
     val status = batteryIntent.getIntExtra(BatteryManager.EXTRA_STATUS, -1)
@@ -158,12 +158,22 @@ private fun readBatteryInfo(
 
     return Triple(percentage, charging, temperature)
 }
-        stats to currentCpu
-    }
+
+private suspend fun sampleHardware(
+    context: Context,
+    previousCpu: QvexCpuStats?
+): Pair<QvexHardwareStats, QvexCpuStats?> =
+    withContext(Dispatchers.IO) {
+        val currentCpu = readCpuStats()
+        val battery = readBatteryInfo(context)
+
         val stats = QvexHardwareStats(
             cpuUsage = calculateCpuUsage(previousCpu, currentCpu),
             gpuUsage = readGpuUsage(),
-            cpuFrequency = readCpuFrequency()
+            cpuFrequency = readCpuFrequency(),
+            batteryLevel = battery.first,
+            batteryCharging = battery.second,
+            batteryTemperature = battery.third
         )
 
         stats to currentCpu
