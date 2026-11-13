@@ -37,7 +37,10 @@ private data class QvexCpuStats(
 private data class QvexHardwareStats(
     val cpuUsage: Int?,
     val gpuUsage: Int?,
-    val cpuFrequency: Int?
+    val cpuFrequency: Int?,
+    val batteryLevel: Int?,
+    val batteryCharging: Boolean?,
+    val batteryTemperature: Float?
 )
 
 private fun readCpuStats(): QvexCpuStats? {
