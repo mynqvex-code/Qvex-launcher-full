@@ -1719,6 +1719,8 @@
     <string name="settings_tab_gamepad">Gamepad</string>
     <!-- Name of the Launcher category on the settings screen and the title of its page -->
     <string name="settings_tab_launcher">Launcher</string>
+    <!-- Name of the QVEX MAX POWER category on the settings screen -->
+    <string name="settings_tab_power_max">QVEX MAX POWER</string>
     <!-- Name of the Java management category on the settings screen and the title of its page -->
     <string name="settings_tab_java_manage">Java</string>
     <!-- Title of the control layout management page in the launcher settings -->
