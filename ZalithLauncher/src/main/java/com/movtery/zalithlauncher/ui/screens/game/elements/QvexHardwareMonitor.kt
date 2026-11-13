@@ -242,6 +242,22 @@ fun QvexHardwareMonitor(
 
 @Composable
 private fun HardwareRow(
+    HardwareRow(
+    label = "BATTERY",
+    value = stats.batteryLevel?.let { "$it%" } ?: "N/A"
+)
+
+HardwareRow(
+    label = "CHARGING",
+    value = stats.batteryCharging?.let {
+        if (it) "YES" else "NO"
+    } ?: "N/A"
+)
+
+HardwareRow(
+    label = "BATTERY TEMP",
+    value = stats.batteryTemperature?.let { "$it°C" } ?: "N/A"
+)
     label: String,
     value: String
 ) {
