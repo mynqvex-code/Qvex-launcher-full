@@ -210,6 +210,12 @@ fun QvexHardwareMonitor(
     modifier: Modifier = Modifier
 ) {
   val context = LocalContext.current
+    var showHighTemperatureWarning by remember {
+        mutableStateOf(false)
+    }
+    var hasShownTemperatureWarning by remember {
+        mutableStateOf(false)
+    }    
     var stats by remember {
         mutableStateOf(
             QvexHardwareStats(
