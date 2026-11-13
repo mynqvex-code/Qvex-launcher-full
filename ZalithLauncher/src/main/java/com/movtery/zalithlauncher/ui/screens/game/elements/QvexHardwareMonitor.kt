@@ -128,6 +128,12 @@ private fun readCpuFrequency(): Int? {
             }
         } catch (_: Exception) {
             // Không có quyền đọc hoặc thiết bị không hỗ trợ.
+        }
+    }
+
+    return null
+}
+
 private fun readBatteryInfo(
     context: Context
 ): Triple<Int?, Boolean?, Float?> {
@@ -151,11 +157,6 @@ private fun readBatteryInfo(
     ).let { if (it >= 0) it / 10f else null }
 
     return Triple(percentage, charging, temperature)
-}        
-        }
-    }
-
-    return null
 }
 
 private suspend fun sampleHardware(
