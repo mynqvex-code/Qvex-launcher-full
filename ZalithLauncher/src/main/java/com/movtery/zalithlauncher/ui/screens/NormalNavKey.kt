@@ -92,6 +92,10 @@ sealed interface NormalNavKey : TitledNavKey {
         @Serializable data object Launcher : Settings {
             @Contextual override val title: AndroidStringText = androidText(R.string.settings_tab_launcher)
         }
+        /** QVEX MAX POWER */
+@Serializable data object PowerMax : Settings {
+    @Contextual override val title: AndroidStringText = androidText(R.string.settings_tab_power_max)
+}
         /** Java管理屏幕 */
         @Serializable data object JavaManager : Settings {
             @Contextual override val title: AndroidStringText = androidText(R.string.settings_tab_java_manage)
