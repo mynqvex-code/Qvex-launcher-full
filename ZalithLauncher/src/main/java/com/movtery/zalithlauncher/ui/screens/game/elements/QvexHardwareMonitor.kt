@@ -1,6 +1,11 @@
 package com.movtery.zalithlauncher.ui.screens.game.elements
 
 import androidx.compose.foundation.background
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.os.BatteryManager
+import android.os.Build
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
