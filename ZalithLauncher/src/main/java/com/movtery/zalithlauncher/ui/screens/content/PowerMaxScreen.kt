@@ -89,12 +89,20 @@ fun PowerMaxScreen(
 
                 SwitchSettingsCard(
                     unit = AllSettings.qvexFpsPriority,
-                    position = CardPosition.Bottom,
+                    position = CardPosition.middle,
                     title = "FPS PRIORITY",
                     summary = "Ưu tiên FPS ổn định khi chơi Minecraft.",
                     enabled = AllSettings.qvexPowerMax.state
                 )
+                SwitchSettingsCard(
+                    unit = AllSettings.qvexHardwareMonitor,
+                    position = CardPosition.Bottom,
+                    title = "HARDWARE MONITOR",
+                    summary = "Hiển thị phần trăm sử dụng CPU và GPU theo thời gian thực.",
+                    enabled = AllSettings.qvexPowerMax.state
+)
             }
+            
 
             Text(
                 text = "Các chế độ con chỉ có thể bật khi QVEX MAX POWER được kích hoạt."
