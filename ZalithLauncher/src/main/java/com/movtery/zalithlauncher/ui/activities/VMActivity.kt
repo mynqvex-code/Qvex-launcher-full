@@ -616,7 +616,6 @@ class VMActivity : BaseAppCompatActivity(), SurfaceTextureListener {
                                     .padding(12.dp)
                             )
                         }
-                                        }
                         )
                     }                
                 }
