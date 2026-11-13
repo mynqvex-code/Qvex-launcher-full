@@ -231,10 +231,26 @@ fun QvexHardwareMonitor(
                 label = "GPU",
                 value = stats.gpuUsage?.let { "$it%" } ?: "N/A"
             )
-
             HardwareRow(
                 label = "CPU CLOCK",
                 value = stats.cpuFrequency?.let { "$it MHz" } ?: "N/A"
+            )
+
+            HardwareRow(
+                label = "BATTERY",
+                value = stats.batteryLevel?.let { "$it%" } ?: "N/A"
+            )
+
+            HardwareRow(
+                label = "CHARGING",
+                value = stats.batteryCharging?.let {
+                    if (it) "YES" else "NO"
+                } ?: "N/A"
+            )
+
+            HardwareRow(
+                label = "BATTERY TEMP",
+                value = stats.batteryTemperature?.let { "$it°C" } ?: "N/A"
             )
         }
     }
@@ -242,24 +258,9 @@ fun QvexHardwareMonitor(
 
 @Composable
 private fun HardwareRow(
-    HardwareRow(
-    label = "BATTERY",
-    value = stats.batteryLevel?.let { "$it%" } ?: "N/A"
-)
-
-HardwareRow(
-    label = "CHARGING",
-    value = stats.batteryCharging?.let {
-        if (it) "YES" else "NO"
-    } ?: "N/A"
-)
-
-HardwareRow(
-    label = "BATTERY TEMP",
-    value = stats.batteryTemperature?.let { "$it°C" } ?: "N/A"
-)
     label: String,
     value: String
+) {
 ) {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween
