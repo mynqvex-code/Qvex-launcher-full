@@ -2,20 +2,15 @@ name: Build APK
 
 on:
   workflow_dispatch:
-  workflow_call:
     inputs:
       variant:
+        description: Build variant
         required: true
-        type: string
-    secrets:
-      KEY_PASSWORD:
-        required: false
-      STORE_PASSWORD:
-        required: false
-      OAUTH_CLIENT_ID:
-        required: false
-      CURSEFORGE_API_KEY:
-        required: false
+        type: choice
+        options:
+          - Debug
+          - Release
+        default: Debug
 
 jobs:
   build:
