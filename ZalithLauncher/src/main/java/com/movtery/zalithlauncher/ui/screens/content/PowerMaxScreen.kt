@@ -101,7 +101,7 @@ fun PowerMaxScreen(
                     title = "HARDWARE MONITOR",
                     summary = "Hiển thị phần trăm sử dụng CPU và GPU theo thời gian thực.",
                     enabled = AllSettings.qvexPowerMax.state
-)
+                )
             }
             
 
