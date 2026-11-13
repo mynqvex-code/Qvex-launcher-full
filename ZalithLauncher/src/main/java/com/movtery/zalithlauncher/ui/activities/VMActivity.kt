@@ -607,10 +607,16 @@ class VMActivity : BaseAppCompatActivity(), SurfaceTextureListener {
                         AllSettings.qvexPowerMax.getValue() &&
                         AllSettings.qvexHardwareMonitor.getValue()
                     ) {
-                        QvexHardwareMonitor(
-                            modifier = Modifier
-                                .align(Alignment.TopEnd)
-                                .padding(12.dp)
+                        Box(
+                            modifier = Modifier.fillMaxSize()
+                        ) {
+                            QvexHardwareMonitor(
+                                modifier = Modifier
+                                    .align(Alignment.TopEnd)
+                                    .padding(12.dp)
+                            )
+                        }
+                                        }
                         )
                     }                
                 }
