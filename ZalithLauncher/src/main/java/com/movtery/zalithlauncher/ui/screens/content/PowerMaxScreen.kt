@@ -89,9 +89,9 @@ fun PowerMaxScreen(
 
                 SwitchSettingsCard(
                     unit = AllSettings.qvexFpsPriority,
-                    position = CardPosition.middle,
+                    position = CardPosition.Middle,
                     title = "FPS BOOSTER",
-                    summary = "Ưu tiên FPS ổn định khi chơi Minecraft.",
+                    summary = "Ưu tiên FPS cao, ổn định khi chơi Minecraft.",
                     enabled = AllSettings.qvexPowerMax.state
                 )
                 SwitchSettingsCard(
