@@ -261,7 +261,6 @@ private fun HardwareRow(
     label: String,
     value: String
 ) {
-) {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
