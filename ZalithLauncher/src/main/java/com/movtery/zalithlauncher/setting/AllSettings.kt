@@ -108,7 +108,14 @@ object AllSettings : SettingsRegistry() {
      * 游戏运行时请求系统切换到同分辨率最高刷新率档位（关闭则回落系统自适应刷新）
      */
     val requestMaxRefreshRate = boolSetting("requestMaxRefreshRate", true)
-
+    // QVEX MAX POWER
+    val qvexPowerMax = boolSetting("qvexPowerMax", false)
+    val qvexCpuMax = boolSetting("qvexCpuMax", false)
+    val qvexGpuMax = boolSetting("qvexGpuMax", false)
+    val qvexRamOptimization = boolSetting("qvexRamOptimization", false)
+    val qvexThermalGuard = boolSetting("qvexThermalGuard", false)
+    val qvexBatteryMonitor = boolSetting("qvexBatteryMonitor", false)
+    val qvexFpsPriority = boolSetting("qvexFpsPriority", false)
     /**
      * 使用系统的 Vulkan 驱动
      */
