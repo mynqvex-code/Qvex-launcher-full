@@ -295,10 +295,6 @@ fun QvexHardwareMonitor(
                 label = "BATTERY TEMP",
                 value = stats.batteryTemperature?.let { "$it°C" } ?: "N/A"
             )
-            HardwareRow(
-                label = "THERMAL STATUS",
-                value = stats.thermalStatus ?: "N/A"
-            )
         }
     }
     if (showHighTemperatureWarning) {
