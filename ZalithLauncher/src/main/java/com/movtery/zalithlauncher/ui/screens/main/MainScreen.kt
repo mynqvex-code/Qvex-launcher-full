@@ -271,7 +271,15 @@ private fun <E: TitledNavKey> TopBar(
     CompositionLocalProvider(
         LocalContentColor provides contentColor
     ) {
-        ConstraintLayout(modifier = modifier) {
+        CompositionLocalProvider(
+    LocalContentColor provides contentColor
+) {
+    Surface(
+        modifier = modifier,
+        color = Color(0xFF081321),
+        contentColor = Color(0xFFEAF8FF)
+    ) {
+        ConstraintLayout(modifier = Modifier.fillMaxSize()) {
             val (backCenter, title, endButtons) = createRefs()
 
             val backDispatcher = LocalOnBackPressedDispatcherOwner.current?.onBackPressedDispatcher
