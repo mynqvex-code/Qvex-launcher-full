@@ -158,29 +158,6 @@ private fun readBatteryInfo(
 
     return Triple(percentage, charging, temperature)
 }
-
-private suspend fun sampleHardware(
-    previousCpu: QvexCpuStats?
-): Pair<QvexHardwareStats, QvexCpuStats?> =
-    withContext(Dispatchers.IO) {
-        val currentCpu = readCpuStats()
-private suspend fun sampleHardware(
-    context: Context,
-    previousCpu: QvexCpuStats?
-): Pair<QvexHardwareStats, QvexCpuStats?> =
-    withContext(Dispatchers.IO) {
-        val currentCpu = readCpuStats()
-        val battery = readBatteryInfo(context)
-
-        val stats = QvexHardwareStats(
-            cpuUsage = calculateCpuUsage(previousCpu, currentCpu),
-            gpuUsage = readGpuUsage(),
-            cpuFrequency = readCpuFrequency(),
-            batteryLevel = battery.first,
-            batteryCharging = battery.second,
-            batteryTemperature = battery.third
-        )
-
         stats to currentCpu
     }
         val stats = QvexHardwareStats(
