@@ -451,6 +451,7 @@ private fun <E: TitledNavKey> TopBar(
             }
         }
     }
+    }
 }
 
 @Composable
