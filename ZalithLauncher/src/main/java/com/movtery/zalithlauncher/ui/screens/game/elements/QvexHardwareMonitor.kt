@@ -42,7 +42,7 @@ private data class QvexHardwareStats(
     val cpuFrequency: Int?,
     val batteryLevel: Int? = null,
     val batteryCharging: Boolean? = null,
-    val batteryTemperature: Float? = null
+    val batteryTemperature: Float? = null,
     val thermalStatus: String? = null
 )
 
@@ -195,7 +195,7 @@ private suspend fun sampleHardware(
             cpuFrequency = readCpuFrequency(),
             batteryLevel = battery.first,
             batteryCharging = battery.second,
-            batteryTemperature = battery.third
+            batteryTemperature = battery.third,
             thermalStatus = readThermalStatus(context)
         )
     
