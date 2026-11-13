@@ -271,9 +271,6 @@ private fun <E: TitledNavKey> TopBar(
     CompositionLocalProvider(
         LocalContentColor provides contentColor
     ) {
-        CompositionLocalProvider(
-    LocalContentColor provides contentColor
-) {
     Surface(
         modifier = modifier,
         color = Color(0xFF081321),
