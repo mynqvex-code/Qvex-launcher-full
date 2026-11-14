@@ -1,0 +1,76 @@
+package com.movtery.zalithlauncher.ui.activities
+
+import android.app.Activity
+import android.os.Build
+import android.os.Debug
+import android.os.PerformanceHintManager
+import android.os.Process
+
+object QvexFpsBooster {
+
+    private var session: PerformanceHintManager.Session? = null
+    private var lastCpuTimeNs = 0L
+    private var renderThreadId = -1
+    private var targetDurationNs = 0L
+
+    @Synchronized
+    fun onFrameBatch(activity: Activity) {
+        val enabled =
+            AllSettings.qvexPowerMax.getValue() &&
+            AllSettings.qvexFpsPriority.getValue()
+
+        if (!enabled || Build.VERSION.SDK_INT < Build.VERSION_CODES.S) {
+            stop()
+            return
+        }
+
+        val threadId = Process.myTid()
+        val cpuTime = Debug.threadCpuTimeNanos()
+
+        val refreshRate = activity.windowManager
+            .defaultDisplay.refreshRate
+
+        if (refreshRate <= 0f) return
+
+        val newTarget = (8_000_000_000L / refreshRate).toLong()
+
+        if (session == null || renderThreadId != threadId) {
+            stop()
+
+            val manager = activity.getSystemService(
+                PerformanceHintManager::class.java
+            ) ?: return
+
+            session = manager.createHintSession(
+                intArrayOf(threadId),
+                newTarget
+            ) ?: return
+
+            renderThreadId = threadId
+            targetDurationNs = newTarget
+            lastCpuTimeNs = cpuTime
+            return
+        }
+
+        if (targetDurationNs != newTarget) {
+            session?.updateTargetWorkDuration(newTarget)
+            targetDurationNs = newTarget
+        }
+
+        val actualDuration = cpuTime - lastCpuTimeNs
+        lastCpuTimeNs = cpuTime
+
+        if (actualDuration > 0L) {
+            session?.reportActualWorkDuration(actualDuration)
+        }
+    }
+
+    @Synchronized
+    fun stop() {
+        session?.close()
+        session = null
+        lastCpuTimeNs = 0L
+        renderThreadId = -1
+        targetDurationNs = 0L
+    }
+}
