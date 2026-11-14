@@ -145,7 +145,7 @@ class GameHandler(
         Terracotta.setWaiting(false)
     }
 
-    override fun onGraphicOutput() {
+    override fun onGraphicOutput(threadId: Int) {
         if (!isGameRendering) {
             isGameRendering = true
             showGameInfo = false
