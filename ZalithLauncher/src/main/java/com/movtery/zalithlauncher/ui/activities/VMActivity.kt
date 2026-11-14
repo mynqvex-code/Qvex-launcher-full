@@ -484,9 +484,15 @@ class VMActivity : BaseAppCompatActivity(), SurfaceTextureListener {
 
         window?.apply {
             setBackgroundDrawable(NativeColor.BLACK.toDrawable())
-            if (AllSettings.sustainedPerformance.getValue()) {
-                setSustainedPerformanceMode(true)
-            }
+            
+setSustainedPerformanceMode(
+    AllSettings.sustainedPerformance.getValue() ||
+    (
+        AllSettings.qvexPowerMax.getValue() &&
+        AllSettings.qvexFpsPriority.getValue()
+    )
+)
+
             addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON) // 防止系统息屏
         }
 
