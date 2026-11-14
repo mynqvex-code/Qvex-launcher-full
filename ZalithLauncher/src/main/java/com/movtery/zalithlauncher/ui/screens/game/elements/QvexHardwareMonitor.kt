@@ -312,28 +312,56 @@ fun QvexHardwareMonitor(
     var hudSize by remember {
         mutableStateOf(IntSize.Zero)
     }
-    LaunchedEffect(Unit) {
-        var previousCpu: QvexCpuStats? = null
+    
+LaunchedEffect(Unit) {
+    var previousCpu: QvexCpuStats? = null
+    val gpuSamples = mutableListOf<Int>()
+    var gpuReadFailures = 0
+    var stableGpuUsage: Int? = null
 
-        while (true) {
-            val result = sampleHardware(context, previousCpu)
-            stats = result.first
+    while (true) {
+        val result = sampleHardware(context, previousCpu)
+        val rawGpuUsage = result.first.gpuUsage
 
-            val batteryTemp = result.first.batteryTemperature
+        if (rawGpuUsage != null) {
+            gpuReadFailures = 0
 
-            if (batteryTemp != null) {
-                if (batteryTemp > 50f && !hasShownTemperatureWarning) {
-                    showHighTemperatureWarning = true
-                    hasShownTemperatureWarning = true
-                } else if (batteryTemp <= 50f) {
-                    hasShownTemperatureWarning = false
-                }
+            gpuSamples.add(rawGpuUsage)
+            if (gpuSamples.size > 3) {
+                gpuSamples.removeAt(0)
             }
 
-            previousCpu = result.second
-            delay(1000)
+            val sortedSamples = gpuSamples.sorted()
+            stableGpuUsage = sortedSamples[sortedSamples.size / 2]
+        } else {
+            gpuReadFailures++
+
+            if (gpuReadFailures >= 3) {
+                stableGpuUsage = null
+                gpuSamples.clear()
+            }
         }
+
+        stats = result.first.copy(
+            gpuUsage = stableGpuUsage
+        )
+
+        val batteryTemp = result.first.batteryTemperature
+
+        if (batteryTemp != null) {
+            if (batteryTemp > 50f && !hasShownTemperatureWarning) {
+                showHighTemperatureWarning = true
+                hasShownTemperatureWarning = true
+            } else if (batteryTemp <= 50f) {
+                hasShownTemperatureWarning = false
+            }
+        }
+
+        previousCpu = result.second
+        delay(1000)
     }
+}
+
 
 
     BoxWithConstraints(modifier = modifier) {
