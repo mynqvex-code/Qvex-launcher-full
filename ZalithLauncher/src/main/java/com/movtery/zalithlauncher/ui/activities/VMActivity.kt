@@ -760,6 +760,7 @@ LaunchedEffect(
     }
 
     override fun onDestroy() {
+        QvexFpsBooster.stop()
         getSystemService(DisplayManager::class.java)?.unregisterDisplayListener(displayListener)
         stopAllService()
         withHandler { onDestroy() }
