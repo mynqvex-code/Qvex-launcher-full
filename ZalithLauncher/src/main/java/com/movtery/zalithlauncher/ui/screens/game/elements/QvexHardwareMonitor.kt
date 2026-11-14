@@ -206,6 +206,7 @@ private suspend fun sampleHardware(
         val stats = QvexHardwareStats(
     cpuUsage = calculateCpuUsage(previousCpu, currentCpu),
     gpuUsage = readGpuUsage(),
+    gpuFrequency = readGpuFrequency(),
     cpuFrequency = readCpuFrequency(),
     batteryTemperature = readBatteryTemperature(context)
 )
