@@ -352,6 +352,11 @@ hudPreferences.edit()
                         label = "GPU",
                         value = stats.gpuUsage?.let { "$it%" } ?: "N/A"
                     )
+                    
+                    HardwareRow(
+                        label = "GPU CLOCK",
+                        value = stats.gpuFrequency?.let { "$it MHz" } ?: "N/A"
+                    )
                 }
 
                 Column {
