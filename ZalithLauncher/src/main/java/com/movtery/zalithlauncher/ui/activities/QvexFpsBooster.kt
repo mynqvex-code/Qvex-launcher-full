@@ -47,7 +47,7 @@ object QvexFpsBooster {
 
             renderThreadId = threadId
             targetDurationNs = newTarget
-            lastCpuTimeNs = cpuTime
+            lastFrameTimeNs = frameTime
             return
         }
 
