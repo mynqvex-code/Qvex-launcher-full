@@ -482,7 +482,6 @@ CallbackBridge.setGraphicOutputListener { threadId ->
     withHandler { onGraphicOutput(threadId) }
     QvexFpsBooster.onFrameBatch(this@VMActivity)
 }
-        }
 
         window?.apply {
             setBackgroundDrawable(NativeColor.BLACK.toDrawable())
