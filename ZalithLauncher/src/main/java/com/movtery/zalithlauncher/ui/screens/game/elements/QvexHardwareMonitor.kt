@@ -244,7 +244,12 @@ fun QvexHardwareMonitor(
     val density = LocalDensity.current
 
     var hudOffset by remember {
-        mutableStateOf(IntOffset.Zero)
+        mutableStateOf(
+            IntOffset(
+                hudPreferences.getInt("hud_x", 0),
+                hudPreferences.getInt("hud_y", 0)
+            )
+        )
     }
 
     var hudSize by remember {
