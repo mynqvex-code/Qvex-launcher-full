@@ -80,14 +80,6 @@ fun PowerMaxScreen(
                 )
 
                 SwitchSettingsCard(
-                    unit = AllSettings.qvexBatteryMonitor,
-                    position = CardPosition.Middle,
-                    title = "BATTERY MONITOR",
-                    summary = "Theo dõi pin và trạng thái sạc.",
-                    enabled = AllSettings.qvexPowerMax.state
-                )
-
-                SwitchSettingsCard(
                     unit = AllSettings.qvexFpsPriority,
                     position = CardPosition.Middle,
                     title = "FPS BOOSTER",
