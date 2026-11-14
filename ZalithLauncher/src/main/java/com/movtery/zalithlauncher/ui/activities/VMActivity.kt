@@ -853,19 +853,30 @@ class VMActivity : BaseAppCompatActivity(), SurfaceTextureListener {
      * surface 级 setFrameRate 投票（CHANGE_FRAME_RATE_ALWAYS，非无缝切档的机型也生效）。
      * 关闭时清除两类请求，回落系统自适应刷新。
      */
-    fun applyMaxRefreshRatePolicy() {
-        val display = currentDisplay() ?: return
-        if (!AllSettings.requestMaxRefreshRate.getValue()) {
-            requestedRefreshRate = 0f
-            setPreferredDisplayModeId(0)
-            clearSurfaceFrameRate()
-            return
-        }
-        val best = maxRefreshRateMode(display)
-        requestedRefreshRate = best.refreshRate
-        setPreferredDisplayModeId(best.modeId)
-        voteMaxDisplayRefreshRate()
+    
+fun applyMaxRefreshRatePolicy() {
+    val display = currentDisplay() ?: return
+    val best = maxRefreshRateMode(display)
+
+    val fpsBoosterRequestsHighRefreshRate =
+        AllSettings.qvexPowerMax.getValue() &&
+        AllSettings.qvexFpsPriority.getValue() &&
+        best.refreshRate > 90f
+
+    if (!AllSettings.requestMaxRefreshRate.getValue() &&
+        !fpsBoosterRequestsHighRefreshRate
+    ) {
+        requestedRefreshRate = 0f
+        setPreferredDisplayModeId(0)
+        clearSurfaceFrameRate()
+        return
     }
+
+    requestedRefreshRate = best.refreshRate
+    setPreferredDisplayModeId(best.modeId)
+    voteMaxDisplayRefreshRate()
+}
+
 
     /** 当前关联的 Display；API 30 前走已废弃的 getDefaultDisplay */
     private fun currentDisplay(): Display? {
