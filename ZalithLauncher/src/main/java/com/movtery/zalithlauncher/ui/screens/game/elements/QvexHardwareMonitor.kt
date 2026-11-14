@@ -434,22 +434,8 @@ LaunchedEffect(safeHudOffset) {
                         )
 
                         Text(
-                            text = "CPU ${stats.cpuFrequency?.let { "${it}MHz" } ?: "N/A"}",
-                            color = Color(0xFF80CBC4),
-                            fontSize = 12.sp,
-                            maxLines = 1
-                        )
-
-                        Text(
                             text = "GPU ${stats.gpuUsage?.let { "$it%" } ?: "N/A"}",
                             color = Color.White,
-                            fontSize = 12.sp,
-                            maxLines = 1
-                        )
-
-                        Text(
-                            text = "GPU ${stats.gpuFrequency?.let { "${it}MHz" } ?: "N/A"}",
-                            color = Color(0xFF80CBC4),
                             fontSize = 12.sp,
                             maxLines = 1
                         )
