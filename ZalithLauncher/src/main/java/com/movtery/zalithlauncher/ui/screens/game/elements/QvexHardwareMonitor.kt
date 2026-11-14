@@ -235,7 +235,15 @@ fun QvexHardwareMonitor(
             )
         )
     }
+    val density = LocalDensity.current
 
+    var hudOffset by remember {
+        mutableStateOf(IntOffset.Zero)
+    }
+
+    var hudSize by remember {
+        mutableStateOf(IntSize.Zero)
+    }
     LaunchedEffect(Unit) {
         var previousCpu: QvexCpuStats? = null
 
