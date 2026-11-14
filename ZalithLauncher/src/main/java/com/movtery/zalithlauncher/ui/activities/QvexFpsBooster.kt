@@ -2,14 +2,14 @@ package com.movtery.zalithlauncher.ui.activities
 
 import android.app.Activity
 import android.os.Build
-import android.os.Debug
+import android.os.SystemClock
 import android.os.PerformanceHintManager
 import android.os.Process
 import com.movtery.zalithlauncher.setting.AllSettings
 object QvexFpsBooster {
 
     private var session: PerformanceHintManager.Session? = null
-    private var lastCpuTimeNs = 0L
+    private var lastFrameTimeNs = 0L
     private var renderThreadId = -1
     private var targetDurationNs = 0L
 
