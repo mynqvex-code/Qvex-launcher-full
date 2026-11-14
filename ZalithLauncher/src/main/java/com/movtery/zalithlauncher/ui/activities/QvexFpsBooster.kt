@@ -56,8 +56,8 @@ object QvexFpsBooster {
             targetDurationNs = newTarget
         }
 
-        val actualDuration = cpuTime - lastCpuTimeNs
-        lastCpuTimeNs = cpuTime
+        val actualDuration = frameTime - lastFrameTimeNs
+        lastFrameTimeNs = frameTime
 
         if (actualDuration > 0L) {
             session?.reportActualWorkDuration(actualDuration)
