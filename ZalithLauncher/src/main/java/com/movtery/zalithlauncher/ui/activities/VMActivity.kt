@@ -582,16 +582,18 @@ setSustainedPerformanceMode(
                
 LaunchedEffect(
     AllSettings.qvexCpuMax.state,
+    AllSettings.qvexGpuMax.state,
     AllSettings.sustainedPerformance.state,
     AllSettings.qvexPowerMax.state,
     AllSettings.qvexFpsPriority.state
 ) {
-        window?.setSustainedPerformanceMode(
+    window?.setSustainedPerformanceMode(
         AllSettings.sustainedPerformance.getValue() ||
         (
             AllSettings.qvexPowerMax.getValue() &&
             (
                 AllSettings.qvexCpuMax.getValue() ||
+                AllSettings.qvexGpuMax.getValue() ||
                 AllSettings.qvexFpsPriority.getValue()
             )
         )
