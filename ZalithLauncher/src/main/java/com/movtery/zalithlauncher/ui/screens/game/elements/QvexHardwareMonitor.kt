@@ -282,7 +282,27 @@ fun QvexHardwareMonitor(
     BoxWithConstraints(modifier = modifier) {
         val maxWidthPx = with(density) { maxWidth.roundToPx() }
         val maxHeightPx = with(density) { maxHeight.roundToPx() }
+        val safeHudOffset = IntOffset(
+    hudOffset.x.coerceIn(
+        0,
+        (maxWidthPx - hudSize.width).coerceAtLeast(0)
+    ),
+    hudOffset.y.coerceIn(
+        0,
+        (maxHeightPx - hudSize.height).coerceAtLeast(0)
+    )
+)
 
+LaunchedEffect(safeHudOffset) {
+    if (hudOffset != safeHudOffset) {
+        hudOffset = safeHudOffset
+
+        hudPreferences.edit()
+            .putInt("hud_x", safeHudOffset.x)
+            .putInt("hud_y", safeHudOffset.y)
+            .apply()
+    }
+}
         Surface(
             modifier = Modifier
                 .offset { hudOffset }
