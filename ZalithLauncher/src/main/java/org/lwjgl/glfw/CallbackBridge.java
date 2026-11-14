@@ -529,10 +529,10 @@ public class CallbackBridge {
     //Called from JRE side
     @SuppressWarnings("unused")
     @Keep
-    private static void onGraphicOutput() {
-        if (sGraphicOutputListener != null) {
-            sGraphicOutputListener.onGraphicOutput();
-        }
+    private static void onGraphicOutput(int threadId) {
+    if (sGraphicOutputListener != null) {
+        sGraphicOutputListener.onGraphicOutput(threadId);
+    }
     }
 
     @Keep @CriticalNative public static native void nativeSetUseInputStackQueue(boolean useInputStackQueue);
