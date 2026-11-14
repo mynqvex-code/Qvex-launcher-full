@@ -495,71 +495,101 @@ LaunchedEffect(safeHudOffset) {
             .apply()
     }
 }
+        
+        val hudScrollState = rememberScrollState()
+
         Surface(
             modifier = Modifier
                 .offset { safeHudOffset }
-                .onSizeChanged { hudSize = it },
+                .onSizeChanged { hudSize = it }
+                .widthIn(max = maxWidth),
             color = Color(0xE620242B),
             shape = RoundedCornerShape(12.dp),
             shadowElevation = 4.dp
         ) {
             Row(
                 modifier = Modifier.padding(10.dp),
-                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Column {
-                    Text(
-                        text = "QVEX HARDWARE",
-                        modifier = Modifier.pointerInput(maxWidthPx, maxHeightPx) {
-                            detectDragGestures { change, dragAmount ->
-                                change.consume()
+                Text(
+                    text = "QVEX",
+                    modifier = Modifier.pointerInput(maxWidthPx, maxHeightPx) {
+                        detectDragGestures { change, dragAmount ->
+                            change.consume()
 
-                                val newOffset = IntOffset(
-    (hudOffset.x + dragAmount.x.roundToInt())
-        .coerceIn(0, (maxWidthPx - hudSize.width).coerceAtLeast(0)),
-    (hudOffset.y + dragAmount.y.roundToInt())
-        .coerceIn(0, (maxHeightPx - hudSize.height).coerceAtLeast(0))
-)
+                            val newOffset = IntOffset(
+                                (hudOffset.x + dragAmount.x.roundToInt())
+                                    .coerceIn(0, (maxWidthPx - hudSize.width).coerceAtLeast(0)),
+                                (hudOffset.y + dragAmount.y.roundToInt())
+                                    .coerceIn(0, (maxHeightPx - hudSize.height).coerceAtLeast(0))
+                            )
 
-hudOffset = newOffset
+                            hudOffset = newOffset
 
-hudPreferences.edit()
-    .putInt("hud_x", newOffset.x)
-    .putInt("hud_y", newOffset.y)
-    .apply()
-                        
-                            }
-                        },
-                        color = Color(0xFF64B5F6),
-                        fontSize = 13.sp
-                    )
+                            hudPreferences.edit()
+                                .putInt("hud_x", newOffset.x)
+                                .putInt("hud_y", newOffset.y)
+                                .apply()
+                        }
+                    },
+                    color = Color(0xFF64B5F6),
+                    fontSize = 13.sp
+                )
 
-                    HardwareRow(
-                        label = "CPU",
-                        value = stats.cpuUsage?.let { "$it%" } ?: "N/A"
-                    )
+                if (!isHudCollapsed) {
+                    Row(
+                        modifier = Modifier
+                            .weight(1f)
+                            .horizontalScroll(hudScrollState),
+                        horizontalArrangement = Arrangement.spacedBy(14.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = "CPU ${stats.cpuUsage?.let { "$it%" } ?: "N/A"}",
+                            color = Color.White,
+                            fontSize = 12.sp,
+                            maxLines = 1
+                        )
 
-                    HardwareRow(
-                        label = "GPU",
-                        value = stats.gpuUsage?.let { "$it%" } ?: "N/A"
-                    )
-                    
-                    HardwareRow(
-                        label = "GPU CLOCK",
-                        value = stats.gpuFrequency?.let { "$it MHz" } ?: "N/A"
-                    )
+                        Text(
+                            text = "CPU ${stats.cpuFrequency?.let { "${it}MHz" } ?: "N/A"}",
+                            color = Color(0xFF80CBC4),
+                            fontSize = 12.sp,
+                            maxLines = 1
+                        )
+
+                        Text(
+                            text = "GPU ${stats.gpuUsage?.let { "$it%" } ?: "N/A"}",
+                            color = Color.White,
+                            fontSize = 12.sp,
+                            maxLines = 1
+                        )
+
+                        Text(
+                            text = "GPU ${stats.gpuFrequency?.let { "${it}MHz" } ?: "N/A"}",
+                            color = Color(0xFF80CBC4),
+                            fontSize = 12.sp,
+                            maxLines = 1
+                        )
+
+                        Text(
+                            text = "TEMP ${stats.batteryTemperature?.let { "${it}°C" } ?: "N/A"}",
+                            color = Color(0xFFFFCC80),
+                            fontSize = 12.sp,
+                            maxLines = 1
+                        )
+                    }
                 }
 
-                Column {
-                    HardwareRow(
-                        label = "CPU CLOCK",
-                        value = stats.cpuFrequency?.let { "$it MHz" } ?: "N/A"
-                    )
-
-                    HardwareRow(
-                        label = "BATTERY TEMP",
-                        value = stats.batteryTemperature?.let { "$it°C" } ?: "N/A"
+                TextButton(
+                    onClick = {
+                        isHudCollapsed = !isHudCollapsed
+                    }
+                ) {
+                    Text(
+                        text = if (isHudCollapsed) "＋" else "−",
+                        color = Color.White
                     )
                 }
             }
