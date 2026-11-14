@@ -220,6 +220,12 @@ fun QvexHardwareMonitor(
     modifier: Modifier = Modifier
 ) {
   val context = LocalContext.current
+    val hudPreferences = remember(context) {
+        context.getSharedPreferences(
+            "qvex_hardware_hud",
+            Context.MODE_PRIVATE
+        )
+    }    
     var showHighTemperatureWarning by remember {
         mutableStateOf(false)
     }
