@@ -227,27 +227,81 @@ private fun readGpuUsage(): Int? {
     return null
 }
 
-private fun readGpuFrequency(): Int? {
-    val paths = listOf(
-        "/sys/class/kgsl/kgsl-3d0/devfreq/cur_freq",
-        "/sys/class/kgsl/kgsl-3d0/gpuclk"
-    )
 
-    for (path in paths) {
+private fun readGpuFrequency(): Int? {
+    val paths = mutableListOf<File>()
+
+    // Adreno - Qualcomm KGSL
+    paths.add(File("/sys/class/kgsl/kgsl-3d0/devfreq/cur_freq"))
+    paths.add(File("/sys/class/kgsl/kgsl-3d0/gpuclk"))
+    paths.add(File("/sys/class/kgsl/kgsl-3d0/cur_freq"))
+
+    // Mali - common interfaces
+    paths.add(File("/sys/class/misc/mali0/device/cur_freq"))
+    paths.add(File("/sys/class/misc/mali0/device/clock"))
+
+    // Common GPU kernel interfaces
+    paths.add(File("/sys/kernel/gpu/gpu_clock"))
+    paths.add(File("/sys/kernel/gpu/gpu_freq"))
+
+    // Tự tìm thiết bị Adreno, Mali và GPU trong Devfreq
+    val devfreqDir = File("/sys/class/devfreq")
+
+    val gpuDirectories = devfreqDir.listFiles()
+        ?.filter {
+            val name = it.name.lowercase()
+
+            name.contains("kgsl") ||
+                name.contains("adreno") ||
+                name.contains("mali") ||
+                name.contains("gpu")
+        }
+        ?: emptyList()
+
+    for (directory in gpuDirectories) {
+        for (fileName in listOf(
+            "cur_freq",
+            "gpuclk",
+            "clock",
+            "gpu_clock",
+            "gpu_freq"
+        )) {
+            paths.add(File(directory, fileName))
+        }
+    }
+
+    for (file in paths.distinct()) {
         try {
-            val frequency = File(path).readText().trim().toLongOrNull()
+            val frequency = file.readText()
+                .trim()
+                .toLongOrNull()
                 ?: continue
 
             if (frequency <= 0L) continue
 
-            return (frequency / 1_000_000.0).roundToInt()
+            // Chuyển Hz, kHz hoặc MHz về MHz
+            val mhz = when {
+                frequency >= 10_000_000L ->
+                    frequency / 1_000_000.0
+
+                frequency >= 10_000L ->
+                    frequency / 1_000.0
+
+                else ->
+                    frequency.toDouble()
+            }
+
+            if (mhz in 50.0..5000.0) {
+                return mhz.roundToInt()
+            }
         } catch (_: Exception) {
-            // Không có quyền đọc hoặc thiết bị không hỗ trợ.
+            // Đường dẫn không tồn tại hoặc bị chặn quyền đọc
         }
     }
 
     return null
 }
+
 private fun readCpuFrequency(): Int? {
     val onlineCpus = try {
         File("/sys/devices/system/cpu/online")
