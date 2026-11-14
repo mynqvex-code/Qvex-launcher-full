@@ -148,6 +148,7 @@ class GameHandler(
     }
 
     override fun onGraphicOutput(threadId: Int) {
+        QvexCpuMax.applyToThread(threadId)
         if (!isGameRendering) {
             isGameRendering = true
             showGameInfo = false
