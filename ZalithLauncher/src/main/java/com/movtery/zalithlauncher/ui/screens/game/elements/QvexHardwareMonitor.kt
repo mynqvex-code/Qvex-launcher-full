@@ -231,33 +231,43 @@ private fun readGpuUsage(): Int? {
 }
 
 
+
 private fun readGpuFrequency(): Int? {
     val paths = mutableListOf<File>()
 
     // Adreno - Qualcomm KGSL
     paths.add(File("/sys/class/kgsl/kgsl-3d0/devfreq/cur_freq"))
+    paths.add(File("/sys/class/kgsl/kgsl-3d0/devfreq/gpuclk"))
+    paths.add(File("/sys/class/kgsl/kgsl-3d0/devfreq/clock_mhz"))
     paths.add(File("/sys/class/kgsl/kgsl-3d0/gpuclk"))
     paths.add(File("/sys/class/kgsl/kgsl-3d0/cur_freq"))
+    paths.add(File("/sys/class/kgsl/kgsl-3d0/clock_mhz"))
 
-    // Mali - common interfaces
+    // Mali
     paths.add(File("/sys/class/misc/mali0/device/cur_freq"))
     paths.add(File("/sys/class/misc/mali0/device/clock"))
 
-    // Common GPU kernel interfaces
+    // Common GPU interfaces
     paths.add(File("/sys/kernel/gpu/gpu_clock"))
     paths.add(File("/sys/kernel/gpu/gpu_freq"))
 
-    // Tự tìm thiết bị Adreno, Mali và GPU trong Devfreq
+    // Tự tìm GPU trong Devfreq
     val devfreqDir = File("/sys/class/devfreq")
 
     val gpuDirectories = devfreqDir.listFiles()
-        ?.filter {
-            val name = it.name.lowercase()
+        ?.filter { directory ->
+            val name = directory.name.lowercase()
 
-            name.contains("kgsl") ||
+            val isGpu = name.contains("kgsl") ||
                 name.contains("adreno") ||
                 name.contains("mali") ||
                 name.contains("gpu")
+
+            val isBusDevice = name.contains("gpubw") ||
+                name.contains("cpubw") ||
+                name.contains("memlat")
+
+            isGpu && !isBusDevice
         }
         ?: emptyList()
 
@@ -267,7 +277,8 @@ private fun readGpuFrequency(): Int? {
             "gpuclk",
             "clock",
             "gpu_clock",
-            "gpu_freq"
+            "gpu_freq",
+            "clock_mhz"
         )) {
             paths.add(File(directory, fileName))
         }
@@ -275,9 +286,12 @@ private fun readGpuFrequency(): Int? {
 
     for (file in paths.distinct()) {
         try {
-            val frequency = file.readText()
-                .trim()
-                .toLongOrNull()
+            val rawValue = file.readText().trim()
+
+            val frequency = Regex("""\d+""")
+                .find(rawValue)
+                ?.value
+                ?.toLongOrNull()
                 ?: continue
 
             if (frequency <= 0L) continue
@@ -298,12 +312,13 @@ private fun readGpuFrequency(): Int? {
                 return mhz.roundToInt()
             }
         } catch (_: Exception) {
-            // Đường dẫn không tồn tại hoặc bị chặn quyền đọc
+            // Không đọc được hoặc thiết bị không hỗ trợ
         }
     }
 
     return null
 }
+
 
 private fun readCpuFrequency(): Int? {
     val onlineCpus = try {
