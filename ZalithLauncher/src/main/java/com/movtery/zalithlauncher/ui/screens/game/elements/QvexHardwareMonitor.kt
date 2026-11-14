@@ -90,30 +90,86 @@ private fun calculateCpuUsage(
         ).roundToInt().coerceIn(0, 100)
 }
 
+
 private fun readGpuUsage(): Int? {
-    val paths = listOf(
-        "/sys/class/kgsl/kgsl-3d0/gpu_busy_percentage",
-        "/sys/class/kgsl/kgsl-3d0/gpubusy"
+    val paths = mutableListOf<Pair<String, Boolean>>()
+
+    // Adreno - KGSL
+    paths.add(
+        "/sys/class/kgsl/kgsl-3d0/gpu_busy_percentage" to false
+    )
+    paths.add(
+        "/sys/class/kgsl/kgsl-3d0/gpubusy" to true
     )
 
-    for (path in paths) {
+    // Mali - common utilization interfaces
+    paths.add(
+        "/sys/class/misc/mali0/device/utilization" to false
+    )
+    paths.add(
+        "/sys/class/misc/mali0/device/gpu_busy" to false
+    )
+
+    // Mali / GPU devfreq interfaces
+    val devfreqDir = File("/sys/class/devfreq")
+    val gpuDirectories = devfreqDir.listFiles()
+        ?.filter {
+            val name = it.name.lowercase()
+            name.contains("mali") || name.contains("gpu")
+        }
+        ?: emptyList()
+
+    for (directory in gpuDirectories) {
+        paths.add("${directory.path}/load" to false)
+        paths.add("${directory.path}/utilization" to false)
+        paths.add("${directory.path}/gpu_busy_percentage" to false)
+    }
+
+    for ((path, allowRatio) in paths) {
         try {
             val value = File(path).readText().trim()
 
-            val percentage = value.toIntOrNull()
-            if (percentage != null && percentage in 0..100) {
-                return percentage
+            // Dạng có ký hiệu phần trăm: "GPU utilization: 45%"
+            val percentMatch = Regex("(\\d{1,3})\\s*%")
+                .find(value)
+
+            if (percentMatch != null) {
+                val percentage = percentMatch.groupValues[1].toInt()
+                if (percentage in 0..100) return percentage
             }
 
-            val numbers = Regex("\\d+").findAll(value)
-                .mapNotNull { it.value.toLongOrNull() }
-                .toList()
+            // Dạng có nhãn: "utilization: 45"
+            val labeledMatch = Regex(
+                "(?i)(?:utilization|busy|load)\\s*[:=]?\\s*(\\d{1,3})"
+            ).find(value)
 
-            if (numbers.size >= 2 && numbers[1] > 0) {
-                return (
-                    numbers[0].toDouble() /
-                        numbers[1].toDouble() * 100.0
-                    ).roundToInt().coerceIn(0, 100)
+            if (labeledMatch != null) {
+                val percentage = labeledMatch.groupValues[1].toInt()
+                if (percentage in 0..100) return percentage
+            }
+
+            // Dạng số nguyên: "45"
+            val simpleValue = value.toIntOrNull()
+            if (simpleValue != null && simpleValue in 0..100) {
+                return simpleValue
+            }
+
+            // KGSL gpubusy: busy_time total_time
+            if (allowRatio) {
+                val numbers = Regex("\\d+").findAll(value)
+                    .mapNotNull { it.value.toLongOrNull() }
+                    .toList()
+
+                if (
+                    numbers.size >= 2 &&
+                    numbers[1] > 0L &&
+                    numbers[0] <= numbers[1]
+                ) {
+                    return (
+                        numbers[0].toDouble() /
+                            numbers[1].toDouble() * 100.0
+                        ).roundToInt().coerceIn(0, 100)
+                }
             }
         } catch (_: Exception) {
             // Không có quyền đọc hoặc thiết bị không hỗ trợ.
@@ -122,6 +178,7 @@ private fun readGpuUsage(): Int? {
 
     return null
 }
+
 private fun readGpuFrequency(): Int? {
     val paths = listOf(
         "/sys/class/kgsl/kgsl-3d0/devfreq/cur_freq",
