@@ -47,6 +47,7 @@ private data class QvexCpuStats(
 private data class QvexHardwareStats(
     val cpuUsage: Int?,
     val gpuUsage: Int?,
+    val gpuFrequency: Int?,
     val cpuFrequency: Int?,
     val batteryTemperature: Float? = null
 )
@@ -121,7 +122,27 @@ private fun readGpuUsage(): Int? {
 
     return null
 }
+private fun readGpuFrequency(): Int? {
+    val paths = listOf(
+        "/sys/class/kgsl/kgsl-3d0/devfreq/cur_freq",
+        "/sys/class/kgsl/kgsl-3d0/gpuclk"
+    )
 
+    for (path in paths) {
+        try {
+            val frequency = File(path).readText().trim().toLongOrNull()
+                ?: continue
+
+            if (frequency <= 0L) continue
+
+            return (frequency / 1_000_000.0).roundToInt()
+        } catch (_: Exception) {
+            // Không có quyền đọc hoặc thiết bị không hỗ trợ.
+        }
+    }
+
+    return null
+}
 private fun readCpuFrequency(): Int? {
     val onlineCpus = try {
         File("/sys/devices/system/cpu/online")
