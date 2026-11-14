@@ -62,7 +62,7 @@ lastFrameTimeNs = frameTime
 if (actualDuration > 0L && actualDuration <= newTarget * 4) {
     session?.reportActualWorkDuration(actualDuration)
 }
-
+    }
     @Synchronized
     fun stop() {
         session?.close()
