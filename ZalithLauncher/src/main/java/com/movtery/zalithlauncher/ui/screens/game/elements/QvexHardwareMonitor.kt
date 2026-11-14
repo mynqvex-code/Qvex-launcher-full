@@ -303,11 +303,19 @@ fun QvexHardwareMonitor(
                             detectDragGestures { change, dragAmount ->
                                 change.consume()
 
-                                hudOffset = IntOffset(
-                                    (hudOffset.x + dragAmount.x.roundToInt())
-                                        .coerceIn(0, (maxWidthPx - hudSize.width).coerceAtLeast(0)),
-                                    (hudOffset.y + dragAmount.y.roundToInt())
-                                        .coerceIn(0, (maxHeightPx - hudSize.height).coerceAtLeast(0))
+                                val newOffset = IntOffset(
+    (hudOffset.x + dragAmount.x.roundToInt())
+        .coerceIn(0, (maxWidthPx - hudSize.width).coerceAtLeast(0)),
+    (hudOffset.y + dragAmount.y.roundToInt())
+        .coerceIn(0, (maxHeightPx - hudSize.height).coerceAtLeast(0))
+)
+
+hudOffset = newOffset
+
+hudPreferences.edit()
+    .putInt("hud_x", newOffset.x)
+    .putInt("hud_y", newOffset.y)
+    .apply()
                                 )
                             }
                         },
