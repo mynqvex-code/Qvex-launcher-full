@@ -580,7 +580,7 @@ setSustainedPerformanceMode(
                 } 
                
 LaunchedEffect(
-    AllSettings.qvexCpuMax.state
+    AllSettings.qvexCpuMax.state,
     AllSettings.sustainedPerformance.state,
     AllSettings.qvexPowerMax.state,
     AllSettings.qvexFpsPriority.state
