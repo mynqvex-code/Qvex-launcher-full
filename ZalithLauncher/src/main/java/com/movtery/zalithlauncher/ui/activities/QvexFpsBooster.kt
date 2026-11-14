@@ -68,7 +68,7 @@ if (actualDuration > 0L && actualDuration <= newTarget * 4) {
     fun stop() {
         session?.close()
         session = null
-        lastFrameTimeNs = 0L
+        lastCpuTimeNs = 0L
         renderThreadId = -1
         targetDurationNs = 0L
     }
