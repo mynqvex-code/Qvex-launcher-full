@@ -565,7 +565,9 @@ class VMActivity : BaseAppCompatActivity(), SurfaceTextureListener {
     AllSettings.requestMaxRefreshRate.state,
     AllSettings.qvexPowerMax.state,
     AllSettings.qvexFpsPriority.state
-) {    
+) {
+    applyMaxRefreshRatePolicy()
+                } 
                 Screen {
                     withHandler {
                         ComposableLayout(vmViewModel.textInputMode)
