@@ -314,7 +314,7 @@ void* maybe_load_vulkan() {
 static int frameCount = 0;
 static int fps = 0;
 static time_t lastTime = 0;
-
+static int qvexFrameCounter = 0;
 void calculateFPS() {
     frameCount++;
     time_t currentTime = time(NULL);
@@ -325,21 +325,49 @@ void calculateFPS() {
         frameCount = 0;
     }
 
-    if (!pojav_environ->hasGraphicOutput && pojav_environ->dalvikJavaVMPtr && pojav_environ->bridgeClazz && pojav_environ->method_onGraphicOutput) {
-        pojav_environ->hasGraphicOutput = true;
+        if (pojav_environ->dalvikJavaVMPtr &&
+        pojav_environ->bridgeClazz &&
+        pojav_environ->method_onGraphicOutput) {
 
-        JNIEnv *dalvikEnv = NULL;
-        jboolean detachedBefore = (*pojav_environ->dalvikJavaVMPtr)->GetEnv(pojav_environ->dalvikJavaVMPtr, (void **) &dalvikEnv, JNI_VERSION_1_4) == JNI_EDETACHED;
-        if (detachedBefore) {
-            (*pojav_environ->dalvikJavaVMPtr)->AttachCurrentThread(pojav_environ->dalvikJavaVMPtr, &dalvikEnv, NULL);
+        int firstOutput = !pojav_environ->hasGraphicOutput;
+
+        if (firstOutput) {
+            pojav_environ->hasGraphicOutput = true;
         }
-        if (dalvikEnv != NULL) {
-            (*dalvikEnv)->CallStaticVoidMethod(dalvikEnv, pojav_environ->bridgeClazz, pojav_environ->method_onGraphicOutput);
+
+        if (firstOutput || ++qvexFrameCounter >= 8) {
+            qvexFrameCounter = 0;
+
+            JNIEnv *dalvikEnv = NULL;
+            jboolean detachedBefore =
+                (*pojav_environ->dalvikJavaVMPtr)->GetEnv(
+                    pojav_environ->dalvikJavaVMPtr,
+                    (void **) &dalvikEnv,
+                    JNI_VERSION_1_4
+                ) == JNI_EDETACHED;
+
             if (detachedBefore) {
-                (*pojav_environ->dalvikJavaVMPtr)->DetachCurrentThread(pojav_environ->dalvikJavaVMPtr);
+                (*pojav_environ->dalvikJavaVMPtr)->AttachCurrentThread(
+                    pojav_environ->dalvikJavaVMPtr,
+                    &dalvikEnv,
+                    NULL
+                );
+            }
+
+            if (dalvikEnv != NULL) {
+                (*dalvikEnv)->CallStaticVoidMethod(
+                    dalvikEnv,
+                    pojav_environ->bridgeClazz,
+                    pojav_environ->method_onGraphicOutput
+                );
+
+                if (detachedBefore) {
+                    (*pojav_environ->dalvikJavaVMPtr)->DetachCurrentThread(
+                        pojav_environ->dalvikJavaVMPtr
+                    );
+                }
             }
         }
-    }
 }
 
 EXTERNAL_API JNIEXPORT void JNICALL
