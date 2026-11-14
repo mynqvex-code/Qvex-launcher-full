@@ -143,7 +143,8 @@ class GameHandler(
     }
 
     override fun onDestroy() {
-        Terracotta.setWaiting(false)
+    QvexCpuMax.stop()
+    Terracotta.setWaiting(false)
     }
 
     override fun onGraphicOutput(threadId: Int) {
