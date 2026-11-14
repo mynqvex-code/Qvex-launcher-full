@@ -665,7 +665,6 @@ LaunchedEffect(
                 }
             }
         }
-    }
 
     override fun getTaskDescriptionTitle(): String? {
         return runCatching {
