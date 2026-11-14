@@ -249,54 +249,50 @@ fun QvexHardwareMonitor(
         }
     }
 
+
     Surface(
         modifier = modifier,
         color = Color(0xE620242B),
         shape = RoundedCornerShape(12.dp),
         shadowElevation = 4.dp
     ) {
-        Column(
-            modifier = Modifier.padding(12.dp),
-            verticalArrangement = Arrangement.spacedBy(6.dp)
+        Row(
+            modifier = Modifier.padding(10.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(
-                text = "QVEX HARDWARE",
-                color = Color(0xFF64B5F6),
-                fontSize = 13.sp
-            )
+            Column {
+                Text(
+                    text = "QVEX HARDWARE",
+                    color = Color(0xFF64B5F6),
+                    fontSize = 13.sp
+                )
 
-            HardwareRow(
-                label = "CPU",
-                value = stats.cpuUsage?.let { "$it%" } ?: "N/A"
-            )
+                HardwareRow(
+                    label = "CPU",
+                    value = stats.cpuUsage?.let { "$it%" } ?: "N/A"
+                )
 
-            HardwareRow(
-                label = "GPU",
-                value = stats.gpuUsage?.let { "$it%" } ?: "N/A"
-            )
-            HardwareRow(
-                label = "CPU CLOCK",
-                value = stats.cpuFrequency?.let { "$it MHz" } ?: "N/A"
-            )
+                HardwareRow(
+                    label = "GPU",
+                    value = stats.gpuUsage?.let { "$it%" } ?: "N/A"
+                )
+            }
 
-            HardwareRow(
-                label = "BATTERY",
-                value = stats.batteryLevel?.let { "$it%" } ?: "N/A"
-            )
+            Column {
+                HardwareRow(
+                    label = "CPU CLOCK",
+                    value = stats.cpuFrequency?.let { "$it MHz" } ?: "N/A"
+                )
 
-            HardwareRow(
-                label = "CHARGING",
-                value = stats.batteryCharging?.let {
-                    if (it) "YES" else "NO"
-                } ?: "N/A"
-            )
-
-            HardwareRow(
-                label = "BATTERY TEMP",
-                value = stats.batteryTemperature?.let { "$it°C" } ?: "N/A"
-            )
+                HardwareRow(
+                    label = "BATTERY TEMP",
+                    value = stats.batteryTemperature?.let { "$it°C" } ?: "N/A"
+                )
+            }
         }
     }
+    
     if (showHighTemperatureWarning) {
         AlertDialog(
             onDismissRequest = {
