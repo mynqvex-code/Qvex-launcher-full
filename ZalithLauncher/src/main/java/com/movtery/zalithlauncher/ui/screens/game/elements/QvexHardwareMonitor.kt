@@ -316,7 +316,7 @@ hudPreferences.edit()
     .putInt("hud_x", newOffset.x)
     .putInt("hud_y", newOffset.y)
     .apply()
-                                )
+                        
                             }
                         },
                         color = Color(0xFF64B5F6),
