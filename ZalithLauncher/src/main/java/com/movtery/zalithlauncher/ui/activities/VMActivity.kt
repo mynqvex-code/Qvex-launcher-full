@@ -585,11 +585,14 @@ LaunchedEffect(
     AllSettings.qvexPowerMax.state,
     AllSettings.qvexFpsPriority.state
 ) {
-    window?.setSustainedPerformanceMode(
+        window?.setSustainedPerformanceMode(
         AllSettings.sustainedPerformance.getValue() ||
         (
             AllSettings.qvexPowerMax.getValue() &&
-            AllSettings.qvexFpsPriority.getValue()
+            (
+                AllSettings.qvexCpuMax.getValue() ||
+                AllSettings.qvexFpsPriority.getValue()
+            )
         )
     )
 }
