@@ -10,8 +10,8 @@ object QvexCpuMax {
 
     @Synchronized
     fun applyToThread(threadId: Int) {
-        if (!AllSettings.qvexPowerMax.getValue() ||
-            !AllSettings.qvexCpuMax.getValue()
+        if (!AllSettings.qvexPowerMax.state ||
+    !AllSettings.qvexCpuMax.state
         ) {
             stop()
             return
