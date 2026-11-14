@@ -25,7 +25,7 @@ object QvexFpsBooster {
         }
 
         val threadId = Process.myTid()
-        val frameTime = System.nanoTime()
+        val cpuTime = Debug.threadCpuTimeNanos()
 
         val refreshRate = activity.windowManager
             .defaultDisplay.refreshRate
@@ -48,7 +48,7 @@ object QvexFpsBooster {
 
             renderThreadId = threadId
             targetDurationNs = newTarget
-            lastFrameTimeNs = frameTime
+            lastCpuTimeNs = cpuTime
             return
         }
 
