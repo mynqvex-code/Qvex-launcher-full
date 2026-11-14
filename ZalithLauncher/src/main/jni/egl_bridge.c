@@ -356,10 +356,11 @@ void calculateFPS() {
 
             if (dalvikEnv != NULL) {
                 (*dalvikEnv)->CallStaticVoidMethod(
-                    dalvikEnv,
-                    pojav_environ->bridgeClazz,
-                    pojav_environ->method_onGraphicOutput
-                );
+    dalvikEnv,
+    pojav_environ->bridgeClazz,
+    pojav_environ->method_onGraphicOutput,
+    (jint)gettid()
+);
 
                 if (detachedBefore) {
                     (*pojav_environ->dalvikJavaVMPtr)->DetachCurrentThread(
