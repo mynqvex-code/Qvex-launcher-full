@@ -369,7 +369,7 @@ void calculateFPS() {
             }
         }
 }
-
+}
 EXTERNAL_API JNIEXPORT void JNICALL
 Java_org_lwjgl_vulkan_VK_updateFps(ABI_COMPAT JNIEnv *env, ABI_COMPAT jclass thiz) {
     calculateFPS();
