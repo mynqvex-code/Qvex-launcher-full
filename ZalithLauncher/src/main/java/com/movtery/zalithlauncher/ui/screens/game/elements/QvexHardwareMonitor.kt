@@ -236,6 +236,7 @@ fun QvexHardwareMonitor(
             QvexHardwareStats(
                 cpuUsage = null,
                 gpuUsage = null,
+                gpuFrequency = null
                 cpuFrequency = null
             )
         )
