@@ -40,9 +40,12 @@ import kotlinx.coroutines.withContext
 import java.io.File
 import kotlin.math.roundToInt
 
+
 private data class QvexCpuStats(
     val idle: Long,
-    val total: Long
+    val total: Long,
+    val processCpuTimeMs: Long? = null,
+    val elapsedRealtimeMs: Long? = null
 )
 
 private data class QvexHardwareStats(
@@ -54,21 +57,37 @@ private data class QvexHardwareStats(
 )
 
 private fun readCpuStats(): QvexCpuStats? {
-    return try {
+    // Ưu tiên đọc CPU toàn hệ thống
+    try {
         val line = File("/proc/stat").bufferedReader().use {
             it.readLine()
-        } ?: return null
+        } ?: throw Exception("CPU stats unavailable")
 
-        val values = line.trim().split(Regex("\\s+"))
+        val values = line.trim()
+            .split(Regex("\\s+"))
             .drop(1)
             .mapNotNull { it.toLongOrNull() }
 
-        if (values.size < 4) return null
+        if (values.size >= 4) {
+            val idle = values[3] + (values.getOrNull(4) ?: 0L)
+            val total = values.sum()
 
-        val idle = values[3] + (values.getOrNull(4) ?: 0L)
-        val total = values.sum()
+            if (total > 0L) {
+                return QvexCpuStats(idle, total)
+            }
+        }
+    } catch (_: Exception) {
+        // Chuyển sang phương án dự phòng
+    }
 
-        QvexCpuStats(idle, total)
+    // Dự phòng: đo mức sử dụng CPU của launcher
+    return try {
+        QvexCpuStats(
+            idle = 0L,
+            total = 0L,
+            processCpuTimeMs = Process.getElapsedCpuTime(),
+            elapsedRealtimeMs = SystemClock.elapsedRealtime()
+        )
     } catch (_: Exception) {
         null
     }
@@ -80,16 +99,44 @@ private fun calculateCpuUsage(
 ): Int? {
     if (previous == null || current == null) return null
 
+    // Nếu đang dùng dữ liệu CPU của launcher
+    val previousProcess = previous.processCpuTimeMs
+    val currentProcess = current.processCpuTimeMs
+
+    if (previousProcess != null && currentProcess != null) {
+        val previousElapsed = previous.elapsedRealtimeMs ?: return null
+        val currentElapsed = current.elapsedRealtimeMs ?: return null
+
+        val cpuDifference = currentProcess - previousProcess
+        val elapsedDifference = currentElapsed - previousElapsed
+
+        if (cpuDifference < 0L || elapsedDifference <= 0L) {
+            return null
+        }
+
+        return (
+            cpuDifference.toDouble() /
+                elapsedDifference.toDouble() * 100.0
+            ).roundToInt().coerceIn(0, 100)
+    }
+
+    // Không trộn dữ liệu hệ thống với dữ liệu launcher
+    if (previousProcess != null || currentProcess != null) {
+        return null
+    }
+
+    // Tính CPU toàn hệ thống
     val totalDifference = current.total - previous.total
     val idleDifference = current.idle - previous.idle
 
-    if (totalDifference <= 0) return null
+    if (totalDifference <= 0L) return null
 
     return (
-        (totalDifference - idleDifference).toFloat() /
-            totalDifference.toFloat() * 100f
+        (totalDifference - idleDifference).toDouble() /
+            totalDifference.toDouble() * 100.0
         ).roundToInt().coerceIn(0, 100)
 }
+
 
 
 private fun readGpuUsage(): Int? {
