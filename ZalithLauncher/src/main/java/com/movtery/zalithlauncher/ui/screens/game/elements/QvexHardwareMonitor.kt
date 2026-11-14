@@ -268,9 +268,14 @@ fun QvexHardwareMonitor(
     }
 
 
-        Box(modifier = modifier) {
+    BoxWithConstraints(modifier = modifier) {
+        val maxWidthPx = with(density) { maxWidth.roundToPx() }
+        val maxHeightPx = with(density) { maxHeight.roundToPx() }
+
         Surface(
-            modifier = Modifier.align(Alignment.TopStart),
+            modifier = Modifier
+                .offset { hudOffset }
+                .onSizeChanged { hudSize = it },
             color = Color(0xE620242B),
             shape = RoundedCornerShape(12.dp),
             shadowElevation = 4.dp
@@ -283,6 +288,18 @@ fun QvexHardwareMonitor(
                 Column {
                     Text(
                         text = "QVEX HARDWARE",
+                        modifier = Modifier.pointerInput(maxWidthPx, maxHeightPx) {
+                            detectDragGestures { change, dragAmount ->
+                                change.consume()
+
+                                hudOffset = IntOffset(
+                                    (hudOffset.x + dragAmount.x.roundToInt())
+                                        .coerceIn(0, (maxWidthPx - hudSize.width).coerceAtLeast(0)),
+                                    (hudOffset.y + dragAmount.y.roundToInt())
+                                        .coerceIn(0, (maxHeightPx - hudSize.height).coerceAtLeast(0))
+                                )
+                            }
+                        },
                         color = Color(0xFF64B5F6),
                         fontSize = 13.sp
                     )
@@ -311,9 +328,7 @@ fun QvexHardwareMonitor(
                 }
             }
         }
-        }
     }
-    
     if (showHighTemperatureWarning) {
         AlertDialog(
             onDismissRequest = {
