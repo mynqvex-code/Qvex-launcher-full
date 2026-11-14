@@ -9,15 +9,11 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.foundation.background
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.BatteryManager
-import android.os.PowerManager
-import android.os.Build
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -52,10 +48,7 @@ private data class QvexHardwareStats(
     val cpuUsage: Int?,
     val gpuUsage: Int?,
     val cpuFrequency: Int?,
-    val batteryLevel: Int? = null,
-    val batteryCharging: Boolean? = null,
-    val batteryTemperature: Float? = null,
-    val thermalStatus: String? = null
+    val batteryTemperature: Float? = null
 )
 
 private fun readCpuStats(): QvexCpuStats? {
@@ -169,69 +162,33 @@ private fun readCpuFrequency(): Int? {
 
     return (frequencies.average() / 1000.0).roundToInt()
 }
-private fun readBatteryInfo(
-    context: Context
-): Triple<Int?, Boolean?, Float?> {
+    private fun readBatteryTemperature(context: Context): Float? {
     val batteryIntent = context.registerReceiver(
         null,
         IntentFilter(Intent.ACTION_BATTERY_CHANGED)
-    ) ?: return Triple(null, null, null)
-
-    val level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1)
-    val scale = batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, -1)
-    val percentage = if (level >= 0 && scale > 0) {
-        level * 100 / scale
-    } else null
-
-    val status = batteryIntent.getIntExtra(BatteryManager.EXTRA_STATUS, -1)
-    val charging = status == BatteryManager.BATTERY_STATUS_CHARGING ||
-        status == BatteryManager.BATTERY_STATUS_FULL
+    ) ?: return null
 
     val temperature = batteryIntent.getIntExtra(
         BatteryManager.EXTRA_TEMPERATURE, -1
-    ).let { if (it >= 0) it / 10f else null }
+    )
 
-    return Triple(percentage, charging, temperature)
-}
-private fun readThermalStatus(context: Context): String? {
-    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-        return null
+    return if (temperature >= 0) temperature / 10f else null
     }
 
-    val powerManager =
-        context.getSystemService(Context.POWER_SERVICE) as? PowerManager
-            ?: return null
-
-    return when (powerManager.currentThermalStatus) {
-        PowerManager.THERMAL_STATUS_NONE -> "NORMAL"
-        PowerManager.THERMAL_STATUS_LIGHT -> "LIGHT"
-        PowerManager.THERMAL_STATUS_MODERATE -> "MODERATE"
-        PowerManager.THERMAL_STATUS_SEVERE -> "SEVERE"
-        PowerManager.THERMAL_STATUS_CRITICAL -> "CRITICAL"
-        PowerManager.THERMAL_STATUS_EMERGENCY -> "EMERGENCY"
-        PowerManager.THERMAL_STATUS_SHUTDOWN -> "SHUTDOWN"
-        else -> "UNKNOWN"
-    }
-}
+    
 private suspend fun sampleHardware(
     context: Context,
     previousCpu: QvexCpuStats?
 ): Pair<QvexHardwareStats, QvexCpuStats?> =
     withContext(Dispatchers.IO) {
         val currentCpu = readCpuStats()
-        val battery = readBatteryInfo(context)
-
         val stats = QvexHardwareStats(
-            cpuUsage = calculateCpuUsage(previousCpu, currentCpu),
-            gpuUsage = readGpuUsage(),
-            cpuFrequency = readCpuFrequency(),
-            batteryLevel = battery.first,
-            batteryCharging = battery.second,
-            batteryTemperature = battery.third,
-            thermalStatus = readThermalStatus(context)
-        )
+    cpuUsage = calculateCpuUsage(previousCpu, currentCpu),
+    gpuUsage = readGpuUsage(),
+    cpuFrequency = readCpuFrequency(),
+    batteryTemperature = readBatteryTemperature(context)
+)
     
-
         stats to currentCpu
     }
 
