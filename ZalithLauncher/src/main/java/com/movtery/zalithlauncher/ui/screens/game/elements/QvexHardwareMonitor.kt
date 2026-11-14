@@ -230,46 +230,6 @@ private fun readGpuUsage(): Int? {
 
 
 
-private fun readCpuFrequency(): Int? {
-    val onlineCpus = try {
-        File("/sys/devices/system/cpu/online")
-            .readText()
-            .trim()
-            .split(",")
-            .flatMap { part ->
-                val range = part.split("-")
-                if (range.size == 2) {
-                    val start = range[0].toInt()
-                    val end = range[1].toInt()
-                    (start..end).toList()
-                } else {
-                    listOf(part.toInt())
-                }
-            }
-    } catch (_: Exception) {
-        (0..7).toList()
-    }
-
-    val frequencies = onlineCpus.mapNotNull { cpu ->
-        val paths = listOf(
-            "/sys/devices/system/cpu/cpu$cpu/cpufreq/scaling_cur_freq",
-            "/sys/devices/system/cpu/cpu$cpu/cpufreq/cpuinfo_cur_freq"
-        )
-
-        paths.firstNotNullOfOrNull { path ->
-            try {
-                File(path).readText().trim().toLongOrNull()
-                    ?.takeIf { it > 0 }
-            } catch (_: Exception) {
-                null
-            }
-        }
-    }
-
-    if (frequencies.isEmpty()) return null
-
-    return (frequencies.average() / 1000.0).roundToInt()
-}
     private fun readBatteryTemperature(context: Context): Float? {
     val batteryIntent = context.registerReceiver(
         null,
@@ -293,8 +253,6 @@ private suspend fun sampleHardware(
         val stats = QvexHardwareStats(
     cpuUsage = calculateCpuUsage(previousCpu, currentCpu),
     gpuUsage = readGpuUsage(),
-    gpuFrequency = readGpuFrequency(),
-    cpuFrequency = readCpuFrequency(),
     batteryTemperature = readBatteryTemperature(context)
 )
     
@@ -323,8 +281,6 @@ fun QvexHardwareMonitor(
             QvexHardwareStats(
                 cpuUsage = null,
                 gpuUsage = null,
-                gpuFrequency = null,
-                cpuFrequency = null
             )
         )
     }
