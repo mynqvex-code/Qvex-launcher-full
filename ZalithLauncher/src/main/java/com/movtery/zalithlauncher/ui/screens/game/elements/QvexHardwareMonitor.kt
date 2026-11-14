@@ -305,7 +305,7 @@ LaunchedEffect(safeHudOffset) {
 }
         Surface(
             modifier = Modifier
-                .offset { hudOffset }
+                .offset { safeHudOffset }
                 .onSizeChanged { hudSize = it },
             color = Color(0xE620242B),
             shape = RoundedCornerShape(12.dp),
