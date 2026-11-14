@@ -589,7 +589,17 @@ LaunchedEffect(
         )
     )
 }
-
+LaunchedEffect(
+    AllSettings.qvexPowerMax.state,
+    AllSettings.qvexFpsPriority.state
+) {
+    if (
+        !AllSettings.qvexPowerMax.getValue() ||
+        !AllSettings.qvexFpsPriority.getValue()
+    ) {
+        QvexFpsBooster.stop()
+    }
+}
                 Screen {
                     withHandler {
                         ComposableLayout(vmViewModel.textInputMode)
