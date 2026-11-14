@@ -1,4 +1,7 @@
 package com.movtery.zalithlauncher.ui.screens.game.elements
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.offset
@@ -414,7 +417,9 @@ fun QvexHardwareMonitor(
     var hudSize by remember {
         mutableStateOf(IntSize.Zero)
     }
-    
+    var isHudCollapsed by remember {
+        mutableStateOf(false)
+    }
 LaunchedEffect(Unit) {
     var previousCpu: QvexCpuStats? = null
     val gpuSamples = mutableListOf<Int>()
