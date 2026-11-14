@@ -574,6 +574,21 @@ setSustainedPerformanceMode(
 ) {
     applyMaxRefreshRatePolicy()
                 } 
+               
+LaunchedEffect(
+    AllSettings.sustainedPerformance.state,
+    AllSettings.qvexPowerMax.state,
+    AllSettings.qvexFpsPriority.state
+) {
+    window?.setSustainedPerformanceMode(
+        AllSettings.sustainedPerformance.getValue() ||
+        (
+            AllSettings.qvexPowerMax.getValue() &&
+            AllSettings.qvexFpsPriority.getValue()
+        )
+    )
+}
+
                 Screen {
                     withHandler {
                         ComposableLayout(vmViewModel.textInputMode)
