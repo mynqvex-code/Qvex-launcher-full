@@ -68,7 +68,7 @@ object QvexFpsBooster {
     fun stop() {
         session?.close()
         session = null
-        lastCpuTimeNs = 0L
+        lastFrameTimeNs = 0L
         renderThreadId = -1
         targetDurationNs = 0L
     }
