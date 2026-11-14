@@ -115,7 +115,6 @@ object AllSettings : SettingsRegistry() {
     val qvexGpuMax = boolSetting("qvexGpuMax", false)
     val qvexRamOptimization = boolSetting("qvexRamOptimization", false)
     val qvexThermalGuard = boolSetting("qvexThermalGuard", false)
-    val qvexBatteryMonitor = boolSetting("qvexBatteryMonitor", false)
     val qvexFpsPriority = boolSetting("qvexFpsPriority", false)
     /**
      * 使用系统的 Vulkan 驱动
