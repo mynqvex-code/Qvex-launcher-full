@@ -57,12 +57,11 @@ object QvexFpsBooster {
         }
 
         val actualDuration = frameTime - lastFrameTimeNs
-        lastFrameTimeNs = frameTime
+lastFrameTimeNs = frameTime
 
-        if (actualDuration > 0L) {
-            session?.reportActualWorkDuration(actualDuration)
-        }
-    }
+if (actualDuration > 0L && actualDuration <= newTarget * 4) {
+    session?.reportActualWorkDuration(actualDuration)
+}
 
     @Synchronized
     fun stop() {
