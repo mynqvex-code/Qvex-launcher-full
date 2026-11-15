@@ -18,6 +18,7 @@
 
 package com.movtery.zalithlauncher
 
+import android.content.ComponentCallbacks2
 import android.app.Application
 import android.content.res.Configuration
 import android.os.Process
@@ -42,6 +43,7 @@ import com.movtery.zalithlauncher.keepalive.TaskKeepAlive
 import com.movtery.zalithlauncher.path.IMAGE_LOADER_CLIENT
 import com.movtery.zalithlauncher.path.PathManager
 import com.movtery.zalithlauncher.setting.loadAllSettings
+import com.movtery.zalithlauncher.setting.AllSettings
 import com.movtery.zalithlauncher.ui.activities.showFatalError
 import com.movtery.zalithlauncher.ui.activities.showLauncherCrash
 import com.movtery.zalithlauncher.utils.device.Architecture
