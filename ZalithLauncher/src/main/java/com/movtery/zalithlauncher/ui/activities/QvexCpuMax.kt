@@ -28,7 +28,7 @@ object QvexCpuMax {
 
             Process.setThreadPriority(
                 threadId,
-                Process.THREAD_PRIORITY_DISPLAY
+                Process.THREAD_PRIORITY_FOREGROUND
             )
 
             targetThreadId = threadId
