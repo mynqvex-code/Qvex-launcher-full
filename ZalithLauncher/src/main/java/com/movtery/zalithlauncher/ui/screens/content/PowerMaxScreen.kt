@@ -67,7 +67,7 @@ fun PowerMaxScreen(
                     unit = AllSettings.qvexRamOptimization,
                     position = CardPosition.Middle,
                     title = "RAM OPTIMIZATION",
-                    summary = "Theo dõi và tối ưu tài nguyên bộ nhớ.",
+                    summary = "Tự động giải phóng bộ nhớ đệm ảnh của launcher khi Android báo thiếu RAM. Không can thiệp bộ nhớ Minecraft.",
                     enabled = AllSettings.qvexPowerMax.state
                 )
 
