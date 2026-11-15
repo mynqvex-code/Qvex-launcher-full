@@ -24,7 +24,7 @@
     <uses-permission android:name="android.permission.HIGH_SAMPLING_RATE_SENSORS"/>
 
     <application
-        android:name="com.movtery.zalithlauncher.ZLApplication"
+        android:name="com.myqvexzz.qvexlauncher.ZLApplication"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:networkSecurityConfig="@xml/network_security_config"
         android:fullBackupContent="@xml/backup_rules"
@@ -45,7 +45,7 @@
         tools:targetApi="33"
         tools:ignore="DiscouragedApi">
         <activity
-            android:name="com.movtery.zalithlauncher.ui.activities.SplashActivity"
+            android:name="com.myqvexzz.qvexlauncher.ui.activities.SplashActivity"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.SplashScreen"
             android:exported="true"
@@ -108,29 +108,29 @@
         </activity-alias>
 
         <activity
-            android:name="com.movtery.zalithlauncher.ui.activities.MainActivity"
+            android:name="com.myqvexzz.qvexlauncher.ui.activities.MainActivity"
             android:launchMode="singleTop"
             android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|keyboard|navigation"
             android:screenOrientation="sensorLandscape" />
         <activity
-            android:name="com.movtery.zalithlauncher.ui.activities.ControlEditorActivity"
+            android:name="com.myqvexzz.qvexlauncher.ui.activities.ControlEditorActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|keyboard|navigation"
             android:screenOrientation="sensorLandscape" />
         <activity
-            android:name="com.movtery.zalithlauncher.ui.activities.VMActivity"
+            android:name="com.myqvexzz.qvexlauncher.ui.activities.VMActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|keyboard|navigation"
             android:process=":game"
             android:launchMode="standard"
             android:screenOrientation="sensorLandscape" />
-        <activity android:name="com.movtery.zalithlauncher.ui.activities.ErrorActivity"
+        <activity android:name="com.myqvexzz.qvexlauncher.ui.activities.ErrorActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|keyboard|navigation"
             android:screenOrientation="sensorLandscape" />
-        <activity android:name="com.movtery.zalithlauncher.ui.activities.FatalErrorActivity"
+        <activity android:name="com.myqvexzz.qvexlauncher.ui.activities.FatalErrorActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"
             android:theme="@style/Theme.Material3.DayNight.Dialog.Alert" />
 
         <activity
-            android:name="com.movtery.zalithlauncher.filemanager.ui.FileManagerActivity"
+            android:name="com.myqvexzz.qvexlauncher.filemanager.ui.FileManagerActivity"
             android:process=":filemanager"
             android:taskAffinity=":filemanager"
             android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|keyboard|navigation|uiMode|locale|layoutDirection"
@@ -140,7 +140,7 @@
             android:exported="false" />
 
         <service
-            android:name="com.movtery.zalithlauncher.filemanager.events.FileManagerEventService"
+            android:name="com.myqvexzz.qvexlauncher.filemanager.events.FileManagerEventService"
             android:process=":filemanager"
             android:exported="false">
             <intent-filter>
@@ -149,7 +149,7 @@
         </service>
 
         <service
-            android:name="com.movtery.zalithlauncher.keepalive.TaskKeepAliveService"
+            android:name="com.myqvexzz.qvexlauncher.keepalive.TaskKeepAliveService"
             android:enabled="true"
             android:exported="false"
             android:foregroundServiceType="specialUse">
@@ -159,7 +159,7 @@
         </service>
 
         <service
-            android:name="com.movtery.zalithlauncher.game.download.jvm_server.JvmService"
+            android:name="com.myqvexzz.qvexlauncher.game.download.jvm_server.JvmService"
             android:enabled="true"
             android:foregroundServiceType="specialUse"
             android:process=":jvm">
@@ -169,7 +169,7 @@
         </service>
 
         <service
-            android:name="com.movtery.zalithlauncher.game.launch.GameService"
+            android:name="com.myqvexzz.qvexlauncher.game.launch.GameService"
             android:enabled="true"
             android:foregroundServiceType="specialUse"
             android:process=":game">
@@ -179,7 +179,7 @@
         </service>
 
         <service
-            android:name="com.movtery.zalithlauncher.terracotta.TerracottaVPNService"
+            android:name="com.myqvexzz.qvexlauncher.terracotta.TerracottaVPNService"
             android:permission="android.permission.BIND_VPN_SERVICE"
             android:exported="true"
             android:process=":game"
@@ -203,7 +203,7 @@
         </service>
 
         <provider
-            android:name="com.movtery.zalithlauncher.provider.FolderProvider"
+            android:name="com.myqvexzz.qvexlauncher.provider.FolderProvider"
             android:authorities="${packageName}.document.provider"
             android:exported="true"
             android:grantUriPermissions="true"

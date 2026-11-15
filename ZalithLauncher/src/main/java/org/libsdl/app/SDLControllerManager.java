@@ -26,7 +26,7 @@ import android.view.View;
 
 import androidx.annotation.Keep;
 
-import com.movtery.zalithlauncher.utils.logging.Logger;
+import com.myqvexzz.qvexlauncher.utils.logging.Logger;
 
 import java.util.ArrayList;
 import java.util.Collections;

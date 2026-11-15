@@ -1,7 +1,7 @@
 package org.lwjgl.glfw;
 
-import static com.movtery.zalithlauncher.bridge.ZLBridgeStatesKt.CURSOR_DISABLED;
-import static com.movtery.zalithlauncher.bridge.ZLBridgeStatesKt.CURSOR_ENABLED;
+import static com.myqvexzz.qvexlauncher.bridge.ZLBridgeStatesKt.CURSOR_DISABLED;
+import static com.myqvexzz.qvexlauncher.bridge.ZLBridgeStatesKt.CURSOR_ENABLED;
 
 import android.content.ClipData;
 import android.content.ClipDescription;
@@ -17,16 +17,16 @@ import androidx.annotation.Keep;
 import androidx.annotation.Nullable;
 
 import com.movtery.inputmap.keycodes.LwjglGlfwKeycode;
-import com.movtery.zalithlauncher.BuildKeys;
-import com.movtery.zalithlauncher.bridge.CursorShape;
-import com.movtery.zalithlauncher.bridge.LoggerBridge;
-import com.movtery.zalithlauncher.bridge.NativeLibraryLoader;
-import com.movtery.zalithlauncher.bridge.ZLBridgeStates;
-import com.movtery.zalithlauncher.bridge.ZLNativeInvoker;
-import com.movtery.zalithlauncher.context.ContextsKt;
-import com.movtery.zalithlauncher.game.input.EfficientAndroidLWJGLKeycode;
-import com.movtery.zalithlauncher.game.sdl.DirectGamepadEnableHandler;
-import com.movtery.zalithlauncher.game.sdl.SdlBridge;
+import com.myqvexzz.qvexlauncher.BuildKeys;
+import com.myqvexzz.qvexlauncher.bridge.CursorShape;
+import com.myqvexzz.qvexlauncher.bridge.LoggerBridge;
+import com.myqvexzz.qvexlauncher.bridge.NativeLibraryLoader;
+import com.myqvexzz.qvexlauncher.bridge.ZLBridgeStates;
+import com.myqvexzz.qvexlauncher.bridge.ZLNativeInvoker;
+import com.myqvexzz.qvexlauncher.context.ContextsKt;
+import com.myqvexzz.qvexlauncher.game.input.EfficientAndroidLWJGLKeycode;
+import com.myqvexzz.qvexlauncher.game.sdl.DirectGamepadEnableHandler;
+import com.myqvexzz.qvexlauncher.game.sdl.SdlBridge;
 
 import org.libsdl.app.SDLActivity;
 import org.libsdl.app.SDLSurface;
