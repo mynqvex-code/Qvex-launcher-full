@@ -482,7 +482,7 @@ class VMActivity : BaseAppCompatActivity(), SurfaceTextureListener {
 CallbackBridge.setGraphicOutputListener { threadId ->
     withHandler { onGraphicOutput(threadId) }
     QvexCpuMax.applyToThread(threadId)
-    QvexFpsBooster.onFrameBatch(this@VMActivity)
+    QvexFpsBooster.onFrameBatch(this@VMActivity, threadId)
 }
         window?.apply {
             setBackgroundDrawable(NativeColor.BLACK.toDrawable())
