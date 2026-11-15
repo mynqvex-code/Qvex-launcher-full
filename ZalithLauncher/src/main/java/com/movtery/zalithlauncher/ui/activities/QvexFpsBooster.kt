@@ -72,7 +72,7 @@ object QvexFpsBooster {
     }
     @Synchronized
     fun stop() {
-        session?.close()
+        runCatching { session?.close() }
         session = null
         lastFrameTimeNs = 0L
         renderThreadId = -1
