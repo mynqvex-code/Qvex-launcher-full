@@ -18,6 +18,7 @@
 
 package com.movtery.zalithlauncher.ui.screens.content.home.version
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.gestures.awaitFirstDown
@@ -108,6 +109,11 @@ fun CardState.VersionCardContent(cardId: String) {
                     currentVersion?.let(onOpenSettings)
                 }
             }
+            .border(
+                width = 1.dp,
+                color = MaterialTheme.colorScheme.primary.copy(alpha = 0.65f),
+                shape = MaterialTheme.shapes.extraLarge
+            )
             .padding(12.dp)
     ) {
         when {
