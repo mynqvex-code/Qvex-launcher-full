@@ -106,7 +106,7 @@ fun writeComponentAssetManifests(assetsDir: File) {
 }
 
 android {
-    namespace = zalithPackageName
+    namespace = qvexPackageName
     compileSdk {
         version = release(37) {
             minorApiLevel = 2
