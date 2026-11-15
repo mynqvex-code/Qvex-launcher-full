@@ -69,7 +69,7 @@ Java_com_myqvexzz_qvexlauncher_utils_device_VulkanChecker_nativeSetLogCallback(
 void *loadTurnipVulkan(const char *driver_path, const char *native_dir, const char *cache_dir);
 
 JNIEXPORT jobject JNICALL
-Java_com_myqvexzz_qvexlauncher_utils_device_VulkanChecker_nativeCheckVulkan
+Java_com_myqvexzz_qvexlauncher_utils_device_VulkanChecker_nativeCheckVulkan(
         JNIEnv *env,
         jclass clazz,
         jstring jDriverPath,
