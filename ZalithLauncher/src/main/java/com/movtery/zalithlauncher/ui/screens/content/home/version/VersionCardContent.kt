@@ -109,7 +109,7 @@ fun CardState.VersionCardContent(cardId: String) {
                 sizeClass.height == CardSizeClass.COMPACT -> 8.dp
         sizeClass.width == CardSizeClass.MEDIUM -> 10.dp
         else -> 12.dp
-        }
+    }
     Box(
         modifier = Modifier
             .fillMaxSize()
