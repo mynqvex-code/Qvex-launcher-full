@@ -51,7 +51,7 @@ fun PowerMaxScreen(
                     unit = AllSettings.qvexCpuMax,
                     position = CardPosition.Middle,
                     title = "CPU MAX",
-                    summary = "Ưu tiên hiệu năng xử lý CPU.",
+                    summary = "Ưu tiên luồng render Minecraft trong lịch CPU, giúp xử lý đồ họa ổn định hơn. Không ép xung CPU.",
                     enabled = AllSettings.qvexPowerMax.state
                 )
 
