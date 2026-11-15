@@ -363,14 +363,21 @@ LaunchedEffect(
 
         val batteryTemp = result.first.batteryTemperature
 
-        if (batteryTemp != null) {
-            if (batteryTemp > 50f && !hasShownTemperatureWarning) {
-                showHighTemperatureWarning = true
-                hasShownTemperatureWarning = true
-            } else if (batteryTemp <= 50f) {
-                hasShownTemperatureWarning = false
-            }
-        }
+val thermalGuardEnabled =
+    AllSettings.qvexPowerMax.getValue() &&
+    AllSettings.qvexThermalGuard.getValue()
+
+if (!thermalGuardEnabled) {
+    showHighTemperatureWarning = false
+    hasShownTemperatureWarning = false
+} else if (batteryTemp != null) {
+    if (batteryTemp > 50f && !hasShownTemperatureWarning) {
+        showHighTemperatureWarning = true
+        hasShownTemperatureWarning = true
+    } else if (batteryTemp <= 50f) {
+        hasShownTemperatureWarning = false
+    }
+}
 
         previousCpu = result.second
         delay(1000)
