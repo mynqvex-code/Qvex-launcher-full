@@ -56,6 +56,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.takeOrElse
@@ -343,7 +344,10 @@ private fun CardNameText(
                 .then(if (version == null) Modifier.alpha(0.55f) else Modifier),
             maxLines = 1,
             text = name,
-            style = MaterialTheme.typography.labelLarge
+            style = MaterialTheme.typography.labelLarge.copy(
+    fontWeight = FontWeight.SemiBold,
+    color = MaterialTheme.colorScheme.primary
+)
         )
     }
 }
