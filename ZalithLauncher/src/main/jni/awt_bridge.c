@@ -38,7 +38,7 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved) {
         dalvikJavaVMPtr = vm;
         JNIEnv *env = NULL;
         (*vm)->GetEnv(vm, (void**)&env, JNI_VERSION_1_4);
-        class_ZLInvoker = (*env)->NewGlobalRef(env,(*env)->FindClass(env, "com/movtery/zalithlauncher/bridge/ZLNativeInvoker"));
+        class_ZLInvoker = (*env)->NewGlobalRef(env,(*env)->FindClass(env, "com/myqvexzz/qvexlauncher/bridge/ZLNativeInvoker"
         method_OpenLink= (*env)->GetStaticMethodID(env, class_ZLInvoker, "openLink", "(Ljava/lang/String;)V");
         method_OpenPath= (*env)->GetStaticMethodID(env, class_ZLInvoker, "openLink", "(Ljava/lang/String;)V");
         method_QuerySystemClipboard = (*env)->GetStaticMethodID(env, class_ZLInvoker, "querySystemClipboard", "()V");
