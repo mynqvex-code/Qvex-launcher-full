@@ -24,19 +24,7 @@ object QvexFpsBooster {
 
         if (threadId <= 0) return
 
-val currentThreadId = Process.myTid()
-
-if (!threadCheckLogged) {
-    Log.i(
-        "QVEX_FPS_CHECK",
-        "callbackTid=$currentThreadId, nativeThreadId=$threadId, same=${currentThreadId == threadId}"
-    )
-    threadCheckLogged = true
-}
-
-if (currentThreadId != threadId) return
-
-val frameTime = Debug.threadCpuTimeNanos()
+val frameTime = SystemClock.uptimeNanos()
 
         val refreshRate = activity.windowManager
             .defaultDisplay.refreshRate
