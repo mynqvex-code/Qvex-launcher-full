@@ -483,7 +483,7 @@ private fun TextLaunchButton(version: Version, modifier: Modifier = Modifier) {
 @Composable
 private fun CompactLaunchButton(version: Version, modifier: Modifier = Modifier) {
     val onLaunch = LocalHomeCardLauncher.current
-        Button(
+     Button(
         onClick = { onLaunch(version) },
         modifier = modifier,
         colors = androidx.compose.material3.ButtonDefaults.buttonColors(
