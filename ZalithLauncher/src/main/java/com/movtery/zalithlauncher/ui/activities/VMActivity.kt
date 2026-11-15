@@ -152,6 +152,7 @@ import kotlinx.coroutines.withContext
 import org.libsdl.app.SDLActivity
 import org.libsdl.app.SDLSurface
 import org.lwjgl.glfw.CallbackBridge
+import org.lwjgl.glfw.GraphicOutputListener
 import java.io.File
 import java.io.IOException
 import kotlin.time.Duration.Companion.milliseconds
