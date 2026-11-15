@@ -122,7 +122,7 @@
             android:process=":game"
             android:launchMode="standard"
             android:screenOrientation="sensorLandscape" />
-        <activity android:name=".ui.activities.ErrorActivity"
+        <activity android:name="com.movtery.zalithlauncher.ui.activities.ErrorActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|keyboard|navigation"
             android:screenOrientation="sensorLandscape" />
         <activity android:name=".ui.activities.FatalErrorActivity"
