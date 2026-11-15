@@ -375,7 +375,8 @@ if (!thermalGuardEnabled) {
         showHighTemperatureWarning = true
         hasShownTemperatureWarning = true
     } else if (batteryTemp <= 50f) {
-        hasShownTemperatureWarning = false
+    showHighTemperatureWarning = false
+    hasShownTemperatureWarning = false
     }
 }
 
