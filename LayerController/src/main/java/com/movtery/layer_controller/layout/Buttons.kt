@@ -135,10 +135,10 @@ internal fun TextButton(
                 style = style,
                 isDark = isDark,
                 isPressed = isPressed
-            val safeFontSize = fontSize
-    .takeIf { it.isFinite() && it > 0f }
-    ?: 14f
             )
+            val safeFontSize = fontSize
+                .takeIf { it.isFinite() && it > 0f }
+                ?: 14f
             val buttonTextStyle = when (data) {
                 is ObservableNormalData -> ButtonTextStyle(
                     text = data.text,
