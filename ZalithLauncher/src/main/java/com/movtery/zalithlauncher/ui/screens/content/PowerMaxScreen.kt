@@ -59,7 +59,7 @@ fun PowerMaxScreen(
                     unit = AllSettings.qvexGpuMax,
                     position = CardPosition.Middle,
                     title = "GPU MAX",
-                    summary = "Ưu tiên hiệu năng đồ họa.",
+                    summary = "Yêu cầu Android duy trì hiệu năng CPU/GPU ổn định khi chơi game. Không ép xung GPU.",
                     enabled = AllSettings.qvexPowerMax.state
                 )
 
