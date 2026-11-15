@@ -435,7 +435,7 @@ private fun CardTexts(
             is VersionCardStatus.Available -> if (showDetails) {
                 //版本详细信息
                 val versionInfo = status.version.getVersionInfo()
-                                FlowRow(
+                FlowRow(
                     horizontalArrangement = Arrangement.spacedBy(6.dp),
                     verticalArrangement = Arrangement.spacedBy(DetailItemGap)
                 ) {
@@ -448,7 +448,8 @@ private fun CardTexts(
                             text = "${loaderInfo.loader.displayName} ${loaderInfo.version}"
                         )
                     }
-                                }
+                }
+              }
             }
             //占位状态标签不受尺寸门槛限制，任何形态都需要提示原因
             is VersionCardStatus.Deleted -> StatusPlaceholder(
