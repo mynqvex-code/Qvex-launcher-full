@@ -521,7 +521,7 @@ public class CallbackBridge {
         }, 16);
     }
 
-    private static GraphicOutputListener sGraphicOutputListener;
+    private static volatile GraphicOutputListener sGraphicOutputListener;
     public static void setGraphicOutputListener(GraphicOutputListener listener) {
         sGraphicOutputListener = listener;
     }
