@@ -507,12 +507,16 @@ private fun ActionMenuCardContent(
     toVersionManageScreen: () -> Unit,
     toVersionSettingsScreen: () -> Unit,
 ) {
-    BackgroundCard(
+        BackgroundCard(
         modifier = Modifier
             .actionMenuDragAnchor()
             .guideNode(GuideKeys.Main.Step.CardDrag)
             .then(modifier),
-        shape = MaterialTheme.shapes.extraLarge
+        shape = MaterialTheme.shapes.extraLarge,
+        border = androidx.compose.foundation.BorderStroke(
+            1.dp,
+            MaterialTheme.colorScheme.primary.copy(alpha = 0.65f)
+        )
     ) {
         ConstraintLayout(
             modifier = Modifier.fillMaxSize()
