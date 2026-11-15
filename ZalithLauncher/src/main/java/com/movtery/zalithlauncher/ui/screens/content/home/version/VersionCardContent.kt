@@ -133,7 +133,7 @@ fun CardState.VersionCardContent(cardId: String) {
                 color = MaterialTheme.colorScheme.primary.copy(alpha = 0.65f),
                 shape = MaterialTheme.shapes.extraLarge
             )
-            .padding(12.dp)
+            .padding(cardPadding)
     ) {
         when {
             sizeClass.width >= CardSizeClass.MEDIUM &&
