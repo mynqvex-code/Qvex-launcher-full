@@ -371,9 +371,9 @@ private fun CardNameText(
             maxLines = 1,
             text = name,
             style = MaterialTheme.typography.labelLarge.copy(
-    fontWeight = FontWeight.SemiBold,
-    color = MaterialTheme.colorScheme.primary
-)
+                fontWeight = FontWeight.SemiBold,
+                color = MaterialTheme.colorScheme.primary
+            )
         )
     }
 }
