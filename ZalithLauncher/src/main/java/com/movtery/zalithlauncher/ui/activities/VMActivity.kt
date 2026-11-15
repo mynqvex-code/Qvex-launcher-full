@@ -577,28 +577,18 @@ setSustainedPerformanceMode(
                 } 
                
 LaunchedEffect(
-    AllSettings.qvexCpuMax.state,
     AllSettings.qvexGpuMax.state,
     AllSettings.sustainedPerformance.state,
-    AllSettings.qvexPowerMax.state,
-    AllSettings.qvexFpsPriority.state
+    AllSettings.qvexPowerMax.state
 ) {
     window?.setSustainedPerformanceMode(
         AllSettings.sustainedPerformance.getValue() ||
         (
             AllSettings.qvexPowerMax.getValue() &&
-            (
-                AllSettings.qvexCpuMax.getValue() ||
-                AllSettings.qvexGpuMax.getValue() ||
-                AllSettings.qvexFpsPriority.getValue()
-            )
+            AllSettings.qvexGpuMax.getValue()
         )
     )
 }
-LaunchedEffect(
-    AllSettings.qvexPowerMax.state,
-    AllSettings.qvexFpsPriority.state
-) {
     if (
         !AllSettings.qvexPowerMax.getValue() ||
         !AllSettings.qvexFpsPriority.getValue()
