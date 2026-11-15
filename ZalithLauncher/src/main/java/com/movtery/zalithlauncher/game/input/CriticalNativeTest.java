@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/gpl-3.0.txt>.
  */
 
-package com.movtery.zalithlauncher.game.input;
+package com.myqvexzz.qvexlauncher.game.input;
 
 import androidx.annotation.Keep;
 import dalvik.annotation.optimization.CriticalNative;
