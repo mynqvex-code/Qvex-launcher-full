@@ -108,7 +108,7 @@
         </activity-alias>
 
         <activity
-            android:name=".ui.activities.MainActivity"
+            android:name="com.movtery.zalithlauncher.ui.activities.MainActivity"
             android:launchMode="singleTop"
             android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|keyboard|navigation"
             android:screenOrientation="sensorLandscape" />
