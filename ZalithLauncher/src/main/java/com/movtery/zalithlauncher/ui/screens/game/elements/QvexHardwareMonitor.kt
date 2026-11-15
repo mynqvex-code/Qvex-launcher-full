@@ -1,4 +1,5 @@
 package com.movtery.zalithlauncher.ui.screens.game.elements
+import android.app.ActivityManager
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.layout.widthIn
