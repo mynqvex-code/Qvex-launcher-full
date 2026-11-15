@@ -507,7 +507,7 @@ private fun ActionMenuCardContent(
     toVersionManageScreen: () -> Unit,
     toVersionSettingsScreen: () -> Unit,
 ) {
-        BackgroundCard(
+    BackgroundCard(
         modifier = Modifier
             .actionMenuDragAnchor()
             .guideNode(GuideKeys.Main.Step.CardDrag)
