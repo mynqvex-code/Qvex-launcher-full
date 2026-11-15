@@ -202,7 +202,7 @@ fun HomeGrid(
                 )
             }
     ) {
-      Column(
+        Column(
             modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(scrollState)
