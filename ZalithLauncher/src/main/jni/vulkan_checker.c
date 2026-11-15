@@ -42,11 +42,13 @@ static void vulkan_log(JNIEnv *env, const char *level, const char *fmt, ...) {
 /* apiVersion 的 patch 字段宽 12 位；较新 Vulkan 头文件中名为 VK_MAX_PATCH_VERSION */
 #define ZL_MAX_PATCH_VERSION 4095
 
-JNIEXPORT void JNICALL
-Java_com_myqvexzz_qvexlauncher_utils_device_VulkanChecker_nativeSetLogCallback
+JNIEXPORT jobject JNICALL
+Java_com_myqvexzz_qvexlauncher_utils_device_VulkanChecker_nativeCheckVulkan(
         JNIEnv *env,
         jclass clazz,
-        jobject callback
+        jstring jDriverPath,
+        jstring jNativeDir,
+        jstring jCacheDir
 ) {
     (void) clazz;
 
