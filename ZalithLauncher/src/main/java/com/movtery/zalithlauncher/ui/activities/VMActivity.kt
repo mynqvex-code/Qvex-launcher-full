@@ -478,11 +478,12 @@ class VMActivity : BaseAppCompatActivity(), SurfaceTextureListener {
         )
 
         //设置画面渲染输出回调
+
 CallbackBridge.setGraphicOutputListener { threadId ->
     withHandler { onGraphicOutput(threadId) }
+    QvexCpuMax.applyToThread(threadId)
     QvexFpsBooster.onFrameBatch(this@VMActivity)
 }
-
         window?.apply {
             setBackgroundDrawable(NativeColor.BLACK.toDrawable())
             
