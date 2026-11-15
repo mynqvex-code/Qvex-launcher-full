@@ -448,9 +448,8 @@ private fun CardTexts(
                             text = "${loaderInfo.loader.displayName} ${loaderInfo.version}"
                         )
                     }
-                }
+                 }
               }
-            }
             //占位状态标签不受尺寸门槛限制，任何形态都需要提示原因
             is VersionCardStatus.Deleted -> StatusPlaceholder(
                 text = stringResource(R.string.home_version_card_deleted)
