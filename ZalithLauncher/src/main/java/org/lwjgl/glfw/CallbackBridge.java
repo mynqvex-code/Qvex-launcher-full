@@ -534,7 +534,14 @@ public class CallbackBridge {
         sGraphicOutputListener.onGraphicOutput(threadId);
     }
     }
-
+    @SuppressWarnings("unused")
+    @Keep
+    private static void onFrameWorkDuration(int threadId, long durationNs) {
+    GraphicOutputListener listener = sGraphicOutputListener;
+    if (listener != null) {
+        listener.onFrameWorkDuration(threadId, durationNs);
+    }
+}
     @Keep @CriticalNative public static native void nativeSetUseInputStackQueue(boolean useInputStackQueue);
 
     @Keep @CriticalNative private static native boolean nativeSendChar(char codepoint);
