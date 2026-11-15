@@ -19,7 +19,7 @@
 package com.myqvexzz.qvexlauncher.utils.device
 
 import androidx.annotation.Keep
-import com.movtery.zalithlauncher.utils.logging.Logger
+import com.myqvexzz.qvexlauncher.utils.logging.Logger
 import org.apache.commons.io.FileUtils
 import java.io.File
 
