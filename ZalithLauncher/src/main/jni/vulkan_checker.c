@@ -418,7 +418,7 @@ Java_com_myqvexzz_qvexlauncher_utils_device_VulkanChecker_nativeCheckVulkan
     PUT_FEAT("vertexAttributeInstanceRateDivisor", vertexAttributeInstanceRateDivisor);
 #undef PUT_FEAT
 
-    jclass capClass = (*env)->FindClass(env, "com/myqvexzz/qvexlauncher/utils/device/VulkanCapabilities"
+    jclass capClass = (*env)->FindClass(env, "com/myqvexzz/qvexlauncher/utils/device/VulkanCapabilities");
     jmethodID capInit = (*env)->GetMethodID(env, capClass, "<init>", "(IIILjava/util/List;Ljava/util/Map;)V");
 
     jint major = (jint) VK_API_VERSION_MAJOR(deviceApiVersion);
