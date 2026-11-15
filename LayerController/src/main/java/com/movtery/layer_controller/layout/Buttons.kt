@@ -165,7 +165,7 @@ internal fun TextButton(
                 fontStyle = if (buttonTextStyle.textItalic) FontStyle.Italic else null,
                 textDecoration = if (buttonTextStyle.textUnderline) TextDecoration.Underline else null,
                 style = LocalTextStyle.current.copy(
-                    llineHeight = (safeFontSize * 1.1).sp
+                    lineHeight = (safeFontSize * 1.1).sp
                 )
             )
 
