@@ -27,8 +27,17 @@ object QvexFpsBooster {
 
         if (threadId <= 0) return
 
-// Chỉ đo khi callback đang chạy trên chính luồng render.
-if (Process.myTid() != threadId) return
+val currentThreadId = Process.myTid()
+
+if (!threadCheckLogged) {
+    Log.i(
+        "QVEX_FPS_CHECK",
+        "callbackTid=$currentThreadId, nativeThreadId=$threadId, same=${currentThreadId == threadId}"
+    )
+    threadCheckLogged = true
+}
+
+if (currentThreadId != threadId) return
 
 val frameTime = Debug.threadCpuTimeNanos()
 
