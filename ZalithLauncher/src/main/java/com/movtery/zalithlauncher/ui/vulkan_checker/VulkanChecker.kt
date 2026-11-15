@@ -45,25 +45,24 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import com.movtery.zalithlauncher.R
-import com.movtery.zalithlauncher.game.version.installed.Version
-import com.movtery.zalithlauncher.ui.components.SimpleAlertDialog
-import com.movtery.zalithlauncher.ui.components.fadeEdge
-import com.movtery.zalithlauncher.ui.components.rememberDialogMaxHeight
-import com.movtery.zalithlauncher.ui.components.verticalScrollWithBar
-import com.movtery.zalithlauncher.ui.theme.cardColor
-import com.movtery.zalithlauncher.ui.theme.onCardColor
-import com.movtery.zalithlauncher.utils.device.McVersionSpan
-import com.movtery.zalithlauncher.utils.device.VulkanDependency
-import com.movtery.zalithlauncher.utils.device.VulkanRequirements
-import com.movtery.zalithlauncher.utils.device.profileSupport
-import com.movtery.zalithlauncher.utils.device.supports
+import com.myqvexzz.qvexlauncher.R
+import com.myqvexzz.qvexlauncher.game.version.installed.Version
+import com.myqvexzz.qvexlauncher.ui.components.SimpleAlertDialog
+import com.myqvexzz.qvexlauncher.ui.components.fadeEdge
+import com.myqvexzz.qvexlauncher.ui.components.rememberDialogMaxHeight
+import com.myqvexzz.qvexlauncher.ui.components.verticalScrollWithBar
+import com.myqvexzz.qvexlauncher.ui.theme.cardColor
+import com.myqvexzz.qvexlauncher.ui.theme.onCardColor
+import com.myqvexzz.qvexlauncher.utils.device.McVersionSpan
+import com.myqvexzz.qvexlauncher.utils.device.VulkanDependency
+import com.myqvexzz.qvexlauncher.utils.device.VulkanRequirements
+import com.myqvexzz.qvexlauncher.utils.device.profileSupport
+import com.myqvexzz.qvexlauncher.utils.device.supports
 
 @Composable
 fun VulkanChecker(
     operation: VCOperation,
-    onChange: (VCOperation) -> Unit,
-    startCheck: (Version) -> Unit,
+    onChange: (VCOperation) -> Unit,    startCheck: (Version) -> Unit,
     confirmResult: () -> Unit,
 ) {
     when (operation) {
