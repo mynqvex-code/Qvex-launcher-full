@@ -307,27 +307,48 @@ private fun TallContent(
 @Composable
 private fun InfoRow(version: Version) {
     val versionInfo = version.getVersionInfo()
+
     Row(
         modifier = Modifier
-            .alpha(0.7f)
             .basicMarquee(iterations = Int.MAX_VALUE),
-        horizontalArrangement = Arrangement.spacedBy(12.dp)
+        horizontalArrangement = Arrangement.spacedBy(6.dp),
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(
-            text = versionInfo?.minecraftVersion ?: "",
-            style = MaterialTheme.typography.labelSmall
-        )
+        versionInfo?.minecraftVersion
+            ?.takeIf { it.isNotBlank() }
+            ?.let { InfoTag(text = "MC $it") }
+
         versionInfo?.loaderInfos?.forEach { loaderInfo ->
-            Text(
-                text = loaderInfo.loader.displayName,
-                style = MaterialTheme.typography.labelSmall
-            )
-            Text(
-                text = loaderInfo.version,
-                style = MaterialTheme.typography.labelSmall
+            InfoTag(
+                text = "${loaderInfo.loader.displayName} ${loaderInfo.version}"
             )
         }
     }
+}
+
+@Composable
+private fun InfoTag(text: String) {
+    val accent = MaterialTheme.colorScheme.primary
+
+    Text(
+        modifier = Modifier
+            .background(
+                color = accent.copy(alpha = 0.10f),
+                shape = CircleShape
+            )
+            .border(
+                width = 1.dp,
+                color = accent.copy(alpha = 0.35f),
+                shape = CircleShape
+            )
+            .padding(horizontal = 7.dp, vertical = 3.dp),
+        text = text,
+        maxLines = 1,
+        style = MaterialTheme.typography.labelSmall.copy(
+            fontWeight = FontWeight.SemiBold,
+            color = accent
+        )
+    )
 }
 
 /** 版本名称 */
