@@ -789,7 +789,7 @@ static bool tryCriticalNative(JNIEnv *env) {
     static const JNINativeMethod testJNIMethod[] = {
             { "testCriticalNative", "(II)V", dvm_testCriticalNative}
     };
-    jclass criticalNativeTest = (*env)->FindClass(env, "com/myqvexzz/qvexlauncher/game/input/CriticalNativeTest"
+    jclass criticalNativeTest = (*env)->FindClass(env, "com/myqvexzz/qvexlauncher/game/input/CriticalNativeTest"); 
     if(criticalNativeTest == NULL) {
         LOG_TO_D("No CriticalNativeTest class found !");
         (*env)->ExceptionClear(env);
