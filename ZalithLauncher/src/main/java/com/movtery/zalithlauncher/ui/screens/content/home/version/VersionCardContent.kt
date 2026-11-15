@@ -430,26 +430,20 @@ private fun CardTexts(
             is VersionCardStatus.Available -> if (showDetails) {
                 //版本详细信息
                 val versionInfo = status.version.getVersionInfo()
-                FlowRow(
-                    modifier = Modifier.alpha(0.7f),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                                FlowRow(
+                    horizontalArrangement = Arrangement.spacedBy(6.dp),
                     verticalArrangement = Arrangement.spacedBy(DetailItemGap)
                 ) {
-                    Text(
-                        text = versionInfo?.minecraftVersion ?: "",
-                        style = MaterialTheme.typography.labelSmall
-                    )
+                    versionInfo?.minecraftVersion
+                        ?.takeIf { it.isNotBlank() }
+                        ?.let { InfoTag(text = "MC $it") }
+
                     versionInfo?.loaderInfos?.forEach { loaderInfo ->
-                        Text(
-                            text = loaderInfo.loader.displayName,
-                            style = MaterialTheme.typography.labelSmall
-                        )
-                        Text(
-                            text = loaderInfo.version,
-                            style = MaterialTheme.typography.labelSmall
+                        InfoTag(
+                            text = "${loaderInfo.loader.displayName} ${loaderInfo.version}"
                         )
                     }
-                }
+                                }
             }
             //占位状态标签不受尺寸门槛限制，任何形态都需要提示原因
             is VersionCardStatus.Deleted -> StatusPlaceholder(
