@@ -443,8 +443,7 @@ horizontalArrangement = Arrangement.spacedBy(6.dp),
                 if (!isHudCollapsed) {
                     Row(
                         modifier = Modifier
-                            .weight(1f)
-                            .horizontalScroll(hudScrollState),
+                       .horizontalScroll(hudScrollState),
                         horizontalArrangement = Arrangement.spacedBy(8.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
