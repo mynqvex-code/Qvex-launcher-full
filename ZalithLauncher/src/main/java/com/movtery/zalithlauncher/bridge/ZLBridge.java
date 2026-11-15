@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/gpl-3.0.txt>.
  */
 
-package com.movtery.zalithlauncher.bridge;
+package com.myqvexzz.qvexlauncher.bridge;
 
 import android.content.Context;
 
