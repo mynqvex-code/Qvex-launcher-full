@@ -55,7 +55,7 @@ private data class QvexCpuStats(
 private data class QvexHardwareStats(
     val cpuUsage: Int?,
     val gpuUsage: Int?,
-    val batteryTemperature: Float? = null
+    val batteryTemperature: Float? = null,
     val ramUsage: Int? = null
 )
 
@@ -230,8 +230,28 @@ private fun readGpuUsage(): Int? {
     return null
 }
 
+    
+    private fun readRamUsage(context: Context): Int? {
+    return try {
+        val manager = context.getSystemService(
+            Context.ACTIVITY_SERVICE
+        ) as ActivityManager
 
+        val memoryInfo = ActivityManager.MemoryInfo()
+        manager.getMemoryInfo(memoryInfo)
 
+        if (memoryInfo.totalMem <= 0L) {
+            null
+        } else {
+            (
+                (memoryInfo.totalMem - memoryInfo.availMem)
+                    .toDouble() / memoryInfo.totalMem * 100.0
+            ).roundToInt().coerceIn(0, 100)
+        }
+    } catch (_: Exception) {
+        null
+    }
+    }
     private fun readBatteryTemperature(context: Context): Float? {
     val batteryIntent = context.registerReceiver(
         null,
@@ -256,7 +276,8 @@ private suspend fun sampleHardware(
     cpuUsage = calculateCpuUsage(previousCpu, currentCpu),
     gpuUsage = readGpuUsage(),
     batteryTemperature = readBatteryTemperature(context)
-)
+    ramUsage = readRamUsage(context)
+   )
     
         stats to currentCpu
     }
@@ -391,9 +412,8 @@ LaunchedEffect(safeHudOffset) {
             shadowElevation = 4.dp
         ) {
             Row(
-                modifier = Modifier.padding(10.dp),
-                horizontalArrangement = Arrangement.spacedBy(10.dp),
-                verticalAlignment = Alignment.CenterVertically
+                modifier = Modifier.padding(horizontal = 7.dp, vertical = 5.dp),
+horizontalArrangement = Arrangement.spacedBy(6.dp),
             ) {
                 Text(
                     text = "QVEX",
@@ -417,7 +437,7 @@ LaunchedEffect(safeHudOffset) {
                         }
                     },
                     color = Color(0xFF64B5F6),
-                    fontSize = 13.sp
+                    fontSize = 11.sp
                 )
 
                 if (!isHudCollapsed) {
@@ -425,27 +445,34 @@ LaunchedEffect(safeHudOffset) {
                         modifier = Modifier
                             .weight(1f)
                             .horizontalScroll(hudScrollState),
-                        horizontalArrangement = Arrangement.spacedBy(14.dp),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
+                            text = "RAM ${stats.ramUsage?.let { "$it%" } ?: "N/A"}",
+                            color = Color(0xFF80CBC4),
+                            fontSize = 10.sp,
+                            maxLines = 1
+                        )
+                        
+                        Text(
                             text = "CPU ${stats.cpuUsage?.let { "$it%" } ?: "N/A"}",
                             color = Color.White,
-                            fontSize = 12.sp,
+                            fontSize = 10.sp,
                             maxLines = 1
                         )
 
                         Text(
                             text = "GPU ${stats.gpuUsage?.let { "$it%" } ?: "N/A"}",
                             color = Color.White,
-                            fontSize = 12.sp,
+                            fontSize = 10.sp,
                             maxLines = 1
                         )
 
                         Text(
                             text = "TEMP ${stats.batteryTemperature?.let { "${it}°C" } ?: "N/A"}",
                             color = Color(0xFFFFCC80),
-                            fontSize = 12.sp,
+                            fontSize = 10.sp,
                             maxLines = 1
                         )
                     }
@@ -499,13 +526,13 @@ private fun HardwareRow(
         Text(
             text = label,
             color = Color.White,
-            fontSize = 12.sp
+            fontSize = 10.sp
         )
 
         Text(
             text = value,
             color = Color(0xFF80CBC4),
-            fontSize = 12.sp
+            fontSize = 10.sp
         )
     }
 }
