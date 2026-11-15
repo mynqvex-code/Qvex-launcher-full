@@ -125,12 +125,12 @@
         <activity android:name="com.movtery.zalithlauncher.ui.activities.ErrorActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|keyboard|navigation"
             android:screenOrientation="sensorLandscape" />
-        <activity android:name=".ui.activities.FatalErrorActivity"
+        <activity android:name="com.movtery.zalithlauncher.ui.activities.FatalErrorActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"
             android:theme="@style/Theme.Material3.DayNight.Dialog.Alert" />
 
         <activity
-            android:name=".filemanager.ui.FileManagerActivity"
+            android:name="com.movtery.zalithlauncher.filemanager.ui.FileManagerActivity"
             android:process=":filemanager"
             android:taskAffinity=":filemanager"
             android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|keyboard|navigation|uiMode|locale|layoutDirection"
@@ -140,7 +140,7 @@
             android:exported="false" />
 
         <service
-            android:name=".filemanager.events.FileManagerEventService"
+            android:name="com.movtery.zalithlauncher.filemanager.events.FileManagerEventService"
             android:process=":filemanager"
             android:exported="false">
             <intent-filter>
@@ -149,7 +149,7 @@
         </service>
 
         <service
-            android:name=".keepalive.TaskKeepAliveService"
+            android:name="com.movtery.zalithlauncher.keepalive.TaskKeepAliveService"
             android:enabled="true"
             android:exported="false"
             android:foregroundServiceType="specialUse">
@@ -159,7 +159,7 @@
         </service>
 
         <service
-            android:name=".game.download.jvm_server.JvmService"
+            android:name="com.movtery.zalithlauncher.game.download.jvm_server.JvmService"
             android:enabled="true"
             android:foregroundServiceType="specialUse"
             android:process=":jvm">
