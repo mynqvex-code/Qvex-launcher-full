@@ -478,9 +478,21 @@ private fun TextLaunchButton(version: Version, modifier: Modifier = Modifier) {
 @Composable
 private fun CompactLaunchButton(version: Version, modifier: Modifier = Modifier) {
     val onLaunch = LocalHomeCardLauncher.current
-    Button(
+        Button(
         onClick = { onLaunch(version) },
         modifier = modifier,
+        colors = androidx.compose.material3.ButtonDefaults.buttonColors(
+            containerColor = MaterialTheme.colorScheme.primary,
+            contentColor = MaterialTheme.colorScheme.onPrimary
+        ),
+        border = androidx.compose.foundation.BorderStroke(
+            1.dp,
+            MaterialTheme.colorScheme.primary.copy(alpha = 0.8f)
+        ),
+        elevation = androidx.compose.material3.ButtonDefaults.buttonElevation(
+            defaultElevation = 3.dp,
+            pressedElevation = 1.dp
+        ),
         contentPadding = PaddingValues(horizontal = 8.dp, vertical = 2.dp)
     ) {
         Icon(
@@ -500,10 +512,22 @@ private fun CompactLaunchButton(version: Version, modifier: Modifier = Modifier)
 @Composable
 private fun IconLaunchButton(version: Version, modifier: Modifier = Modifier) {
     val onLaunch = LocalHomeCardLauncher.current
-    Button(
+        Button(
         onClick = { onLaunch(version) },
         modifier = modifier,
         shape = CircleShape,
+        colors = androidx.compose.material3.ButtonDefaults.buttonColors(
+            containerColor = MaterialTheme.colorScheme.primary,
+            contentColor = MaterialTheme.colorScheme.onPrimary
+        ),
+        border = androidx.compose.foundation.BorderStroke(
+            1.dp,
+            MaterialTheme.colorScheme.primary.copy(alpha = 0.8f)
+        ),
+        elevation = androidx.compose.material3.ButtonDefaults.buttonElevation(
+            defaultElevation = 3.dp,
+            pressedElevation = 1.dp
+        ),
         contentPadding = PaddingValues(horizontal = 8.dp, vertical = 2.dp)
     ) {
         Icon(
