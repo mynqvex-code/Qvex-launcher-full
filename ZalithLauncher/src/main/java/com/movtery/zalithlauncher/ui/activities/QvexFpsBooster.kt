@@ -32,7 +32,7 @@ object QvexFpsBooster {
 
         if (refreshRate <= 0f) return
 
-        val newTarget = (8_000_000_000L / refreshRate).toLong()
+        val newTarget = (1_000_000_000L / refreshRate).toLong()
 
         if (session == null || renderThreadId != threadId) {
             stop()
