@@ -112,6 +112,16 @@ fun CardState.VersionCardContent(cardId: String) {
                     currentVersion?.let(onOpenSettings)
                 }
             }
+            .background(
+                brush = Brush.linearGradient(
+                 colors = listOf(
+                 MaterialTheme.colorScheme.primary.copy(alpha = 0.10f),
+                 Color.Transparent,
+                 MaterialTheme.colorScheme.primary.copy(alpha = 0.025f)
+                    )
+                ),
+                shape = MaterialTheme.shapes.extraLarge
+            )
             .border(
                 width = 1.dp,
                 color = MaterialTheme.colorScheme.primary.copy(alpha = 0.65f),
