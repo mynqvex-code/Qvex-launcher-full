@@ -159,13 +159,13 @@ internal fun TextButton(
             RtLText(
                 text = buttonTextStyle.text.translate(locale),
                 color = color,
-                fontSize = fontSize.sp,
+                fontSize = safeFontSize.sp,
                 textAlign = buttonTextStyle.textAlignment.textAlign,
                 fontWeight = if (buttonTextStyle.textBold) FontWeight.Bold else null,
                 fontStyle = if (buttonTextStyle.textItalic) FontStyle.Italic else null,
                 textDecoration = if (buttonTextStyle.textUnderline) TextDecoration.Underline else null,
                 style = LocalTextStyle.current.copy(
-                    lineHeight = (fontSize * 1.1).sp
+                    llineHeight = (safeFontSize * 1.1).sp
                 )
             )
 
