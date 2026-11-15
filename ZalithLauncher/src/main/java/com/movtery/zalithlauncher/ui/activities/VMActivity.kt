@@ -657,7 +657,6 @@ LaunchedEffect(
         modifier = Modifier.fillMaxSize()
     )
                         }
-                        }
                     }                
                 }
             }
