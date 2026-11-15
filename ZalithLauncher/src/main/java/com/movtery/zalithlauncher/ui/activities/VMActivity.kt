@@ -610,6 +610,17 @@ LaunchedEffect(
         QvexFpsBooster.stop()
     }
 }
+   LaunchedEffect(
+    AllSettings.qvexPowerMax.state,
+    AllSettings.qvexCpuMax.state
+) {
+    if (
+        !AllSettings.qvexPowerMax.getValue() ||
+        !AllSettings.qvexCpuMax.getValue()
+    ) {
+        QvexCpuMax.stop()
+    }
+   }
                 Screen {
                     withHandler {
                         ComposableLayout(vmViewModel.textInputMode)
