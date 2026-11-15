@@ -104,7 +104,12 @@ fun CardState.VersionCardContent(cardId: String) {
     //版本详细信息的显示门槛
     val showDetails = sizeClass.height >= CardSizeClass.MEDIUM
     val iconSize = iconSizeFor(sizeClass)
-
+    val cardPadding = when {
+        sizeClass.width <= CardSizeClass.SMALL ||
+                sizeClass.height == CardSizeClass.COMPACT -> 8.dp
+        sizeClass.width == CardSizeClass.MEDIUM -> 10.dp
+        else -> 12.dp
+        }
     Box(
         modifier = Modifier
             .fillMaxSize()
