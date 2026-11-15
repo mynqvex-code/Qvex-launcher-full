@@ -315,6 +315,70 @@ static int frameCount = 0;
 static int fps = 0;
 static time_t lastTime = 0;
 static int qvexFrameCounter = 0;
+static __thread int64_t qvexLastThreadCpuTimeNs = 0;
+
+static void qvexReportFrameWorkDuration() {
+    if (!pojav_environ->dalvikJavaVMPtr ||
+        !pojav_environ->bridgeClazz ||
+        !pojav_environ->method_onFrameWorkDuration) {
+        return;
+    }
+
+    struct timespec cpuTime;
+    if (clock_gettime(CLOCK_THREAD_CPUTIME_ID, &cpuTime) != 0) {
+        return;
+    }
+
+    int64_t currentTimeNs =
+        (int64_t)cpuTime.tv_sec * 1000000000LL +
+        (int64_t)cpuTime.tv_nsec;
+
+    if (qvexLastThreadCpuTimeNs == 0) {
+        qvexLastThreadCpuTimeNs = currentTimeNs;
+        return;
+    }
+
+    int64_t durationNs = currentTimeNs - qvexLastThreadCpuTimeNs;
+    qvexLastThreadCpuTimeNs = currentTimeNs;
+
+    if (durationNs <= 0) return;
+
+    JNIEnv *env = NULL;
+    jboolean detachedBefore =
+        (*pojav_environ->dalvikJavaVMPtr)->GetEnv(
+            pojav_environ->dalvikJavaVMPtr,
+            (void **)&env,
+            JNI_VERSION_1_4
+        ) == JNI_EDETACHED;
+
+    if (detachedBefore) {
+        if ((*pojav_environ->dalvikJavaVMPtr)->AttachCurrentThread(
+            pojav_environ->dalvikJavaVMPtr, &env, NULL
+        ) != JNI_OK) {
+            return;
+        }
+    }
+
+    if (env != NULL) {
+        (*env)->CallStaticVoidMethod(
+            env,
+            pojav_environ->bridgeClazz,
+            pojav_environ->method_onFrameWorkDuration,
+            (jint)gettid(),
+            (jlong)durationNs
+        );
+
+        if ((*env)->ExceptionCheck(env)) {
+            (*env)->ExceptionClear(env);
+        }
+    }
+
+    if (detachedBefore) {
+        (*pojav_environ->dalvikJavaVMPtr)->DetachCurrentThread(
+            pojav_environ->dalvikJavaVMPtr
+        );
+    }
+}
 void calculateFPS() {
     frameCount++;
     time_t currentTime = time(NULL);
