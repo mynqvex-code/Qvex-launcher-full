@@ -490,11 +490,7 @@ setSustainedPerformanceMode(
     AllSettings.sustainedPerformance.getValue() ||
     (
         AllSettings.qvexPowerMax.getValue() &&
-        (
-            AllSettings.qvexCpuMax.getValue() ||
-            AllSettings.qvexGpuMax.getValue() ||
-            AllSettings.qvexFpsPriority.getValue()
-        )
+        AllSettings.qvexGpuMax.getValue()
     )
 )
 
