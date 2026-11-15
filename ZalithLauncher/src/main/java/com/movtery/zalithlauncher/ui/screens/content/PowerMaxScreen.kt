@@ -75,7 +75,7 @@ fun PowerMaxScreen(
                     unit = AllSettings.qvexThermalGuard,
                     position = CardPosition.Middle,
                     title = "THERMAL GUARD",
-                    summary = "Theo dõi nhiệt độ và điều chỉnh khi máy nóng.",
+                    summary = "Theo dõi nhiệt độ và cảnh báo khi máy nóng.\nPhụ thuộc vào Hardware Monitor.",
                     enabled = AllSettings.qvexPowerMax.state
                 )
 
