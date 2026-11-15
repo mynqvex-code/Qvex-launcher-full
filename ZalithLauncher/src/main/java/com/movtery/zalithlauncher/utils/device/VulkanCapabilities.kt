@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/gpl-3.0.txt>.
  */
 
-package com.movtery.zalithlauncher.utils.device
+package com.myqvexzz.qvexlauncher.utils.device
 
 import androidx.annotation.Keep
 import com.movtery.zalithlauncher.utils.logging.Logger
