@@ -50,6 +50,7 @@ struct pojav_environ_s {
     jmethodID method_onGrabStateChanged;
     jmethodID method_onCursorShapeChanged;
     jmethodID method_onGraphicOutput;
+    jmethodID method_onFrameWorkDuration;
     jmethodID method_onDirectInputEnable;
     jmethodID method_glftSetWindowAttrib;
     jmethodID method_internalWindowSizeChanged;
