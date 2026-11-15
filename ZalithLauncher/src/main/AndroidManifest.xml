@@ -24,7 +24,7 @@
     <uses-permission android:name="android.permission.HIGH_SAMPLING_RATE_SENSORS"/>
 
     <application
-        android:name=".ZLApplication"
+        android:name="com.movtery.zalithlauncher.ZLApplication"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:networkSecurityConfig="@xml/network_security_config"
         android:fullBackupContent="@xml/backup_rules"
