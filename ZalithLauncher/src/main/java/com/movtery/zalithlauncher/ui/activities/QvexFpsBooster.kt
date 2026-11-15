@@ -4,7 +4,6 @@ import android.app.Activity
 import android.os.Build
 import android.os.Debug
 import android.os.PerformanceHintManager
-import android.os.Process
 import com.movtery.zalithlauncher.setting.AllSettings
 object QvexFpsBooster {
 
@@ -14,7 +13,7 @@ object QvexFpsBooster {
     private var targetDurationNs = 0L
 
     @Synchronized
-    fun onFrameBatch(activity: Activity) {
+    fun onFrameBatch(activity: Activity, threadId: Int) {
         val enabled =
             AllSettings.qvexPowerMax.getValue() &&
             AllSettings.qvexFpsPriority.getValue()
@@ -24,8 +23,9 @@ object QvexFpsBooster {
             return
         }
 
-        val threadId = Process.myTid()
-        val frameTime = Debug.threadCpuTimeNanos()
+        if (threadId <= 0) return
+
+val frameTime = Debug.threadCpuTimeNanos()
 
         val refreshRate = activity.windowManager
             .defaultDisplay.refreshRate
