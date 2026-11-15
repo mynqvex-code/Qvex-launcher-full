@@ -125,7 +125,7 @@ fun AboutInfoScreen(
                         )
 
                         ButtonIconItem(
-                            icon = painterResource(R.drawable.img_avatar_movtery),
+                            icon = painterResource(R.drawable.avatar_qvex_launcher),
                             title = stringResource(R.string.about_launcher_author_movtery_title),
                             text = stringResource(R.string.about_launcher_author_movtery_text, launcherName),
                             button = {
