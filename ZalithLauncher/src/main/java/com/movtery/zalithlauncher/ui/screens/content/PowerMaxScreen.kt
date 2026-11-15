@@ -83,7 +83,7 @@ fun PowerMaxScreen(
                     unit = AllSettings.qvexFpsPriority,
                     position = CardPosition.Middle,
                     title = "FPS BOOSTER",
-                    summary = "Ưu tiên FPS cao, ổn định khi chơi Minecraft.",
+                    summary = "Ưu tiên FPS cao, ổn định khi chơi Minecraft.\nHỗ trợ Android 12 trở lên.",
                     enabled = AllSettings.qvexPowerMax.state
                 )
 
