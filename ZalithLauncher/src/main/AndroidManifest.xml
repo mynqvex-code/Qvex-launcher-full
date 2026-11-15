@@ -169,7 +169,7 @@
         </service>
 
         <service
-            android:name=".game.launch.GameService"
+            android:name="com.movtery.zalithlauncher.game.launch.GameService"
             android:enabled="true"
             android:foregroundServiceType="specialUse"
             android:process=":game">
