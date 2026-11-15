@@ -24,13 +24,13 @@ import android.content.ClipboardManager
 import android.content.Context.CLIPBOARD_SERVICE
 import androidx.annotation.Keep
 import androidx.core.net.toUri
-import com.movtery.zalithlauncher.BuildKeys
-import com.movtery.zalithlauncher.context.GlobalContext
-import com.movtery.zalithlauncher.game.launch.Launcher
-import com.movtery.zalithlauncher.utils.file.shareFile
-import com.movtery.zalithlauncher.utils.killProgress
-import com.movtery.zalithlauncher.utils.logging.Logger
-import com.movtery.zalithlauncher.utils.network.openLink
+import com.myqvexzz.qvexlauncher.BuildKeys
+import com.myqvexzz.qvexlauncher.context.GlobalContext
+import com.myqvexzz.qvexlauncher.game.launch.Launcher
+import com.myqvexzz.qvexlauncher.utils.file.shareFile
+import com.myqvexzz.qvexlauncher.utils.killProgress
+import com.myqvexzz.qvexlauncher.utils.logging.Logger
+import com.myqvexzz.qvexlauncher.utils.network.openLink
 import java.io.File
 
 private const val TAG = "ZLNativeInvoker"
