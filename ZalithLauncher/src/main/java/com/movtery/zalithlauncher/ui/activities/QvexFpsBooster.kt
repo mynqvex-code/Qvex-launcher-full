@@ -26,6 +26,9 @@ object QvexFpsBooster {
 
         if (threadId <= 0) return
 
+// Chỉ đo khi callback đang chạy trên chính luồng render.
+if (Process.myTid() != threadId) return
+
 val frameTime = Debug.threadCpuTimeNanos()
 
         val refreshRate = activity.windowManager
