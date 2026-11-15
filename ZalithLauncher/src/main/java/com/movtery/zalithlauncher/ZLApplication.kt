@@ -121,7 +121,21 @@ class ZLApplication : Application(), SingletonImageLoader.Factory {
         super.onConfigurationChanged(newConfig)
         refreshContext(this)
     }
+    override fun onTrimMemory(level: Int) {
+    super.onTrimMemory(level)
 
+    if (!AllSettings.qvexPowerMax.getValue() ||
+        !AllSettings.qvexRamOptimization.getValue()
+    ) {
+        return
+    }
+
+    if (level >= ComponentCallbacks2.TRIM_MEMORY_RUNNING_LOW) {
+        runCatching {
+            SingletonImageLoader.get(this).memoryCache?.clear()
+        }
+    }
+    }
     override fun newImageLoader(context: PlatformContext): ImageLoader {
         return ImageLoader.Builder(context)
             .memoryCachePolicy(CachePolicy.ENABLED)
