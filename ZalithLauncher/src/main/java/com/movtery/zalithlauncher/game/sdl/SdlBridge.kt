@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/gpl-3.0.txt>.
  */
 
-package com.movtery.zalithlauncher.game.sdl
+package com.myqvexzz.qvexlauncher.game.sdl
 
 import android.app.Activity
 import android.content.Context
@@ -26,9 +26,9 @@ import android.view.Surface
 import android.view.ViewGroup
 import androidx.annotation.Keep
 import androidx.annotation.MainThread
-import com.movtery.zalithlauncher.setting.AllSettings
-import com.movtery.zalithlauncher.ui.control.gamepad.isGamepadDevice
-import com.movtery.zalithlauncher.utils.logging.Logger
+import com.myqvexzz.qvexlauncher.setting.AllSettings
+import com.myqvexzz.qvexlauncher.ui.control.gamepad.isGamepadDevice
+import com.myqvexzz.qvexlauncher.utils.logging.Logger
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
