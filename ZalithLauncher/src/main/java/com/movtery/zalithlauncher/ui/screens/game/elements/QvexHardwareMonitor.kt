@@ -325,7 +325,10 @@ fun QvexHardwareMonitor(
     var isHudCollapsed by remember {
         mutableStateOf(false)
     }
-LaunchedEffect(Unit) {
+LaunchedEffect(
+    AllSettings.qvexPowerMax.state,
+    AllSettings.qvexThermalGuard.state
+) {
     var previousCpu: QvexCpuStats? = null
     val gpuSamples = mutableListOf<Int>()
     var gpuReadFailures = 0
