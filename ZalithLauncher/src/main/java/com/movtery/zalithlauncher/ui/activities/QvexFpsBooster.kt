@@ -5,6 +5,7 @@ import android.os.Build
 import android.os.Debug
 import android.os.PerformanceHintManager
 import android.os.Process
+import android.util.Log
 import com.movtery.zalithlauncher.setting.AllSettings
 object QvexFpsBooster {
 
