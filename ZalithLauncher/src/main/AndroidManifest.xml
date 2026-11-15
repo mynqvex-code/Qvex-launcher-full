@@ -45,7 +45,7 @@
         tools:targetApi="33"
         tools:ignore="DiscouragedApi">
         <activity
-            android:name=".ui.activities.SplashActivity"
+            android:name="com.movtery.zalithlauncher.ui.activities.SplashActivity"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.SplashScreen"
             android:exported="true"
