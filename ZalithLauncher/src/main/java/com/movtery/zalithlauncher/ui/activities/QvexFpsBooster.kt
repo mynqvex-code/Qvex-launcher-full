@@ -13,7 +13,7 @@ object QvexFpsBooster {
     private var lastFrameTimeNs = 0L
     private var renderThreadId = -1
     private var targetDurationNs = 0L
-
+    private var threadCheckLogged = false
     @Synchronized
     fun onFrameBatch(activity: Activity, threadId: Int) {
         val enabled =
