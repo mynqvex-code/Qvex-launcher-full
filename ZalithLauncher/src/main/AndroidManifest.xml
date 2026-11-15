@@ -179,7 +179,7 @@
         </service>
 
         <service
-            android:name=".terracotta.TerracottaVPNService"
+            android:name="com.movtery.zalithlauncher.terracotta.TerracottaVPNService"
             android:permission="android.permission.BIND_VPN_SERVICE"
             android:exported="true"
             android:process=":game"
@@ -203,7 +203,7 @@
         </service>
 
         <provider
-            android:name=".provider.FolderProvider"
+            android:name="com.movtery.zalithlauncher.provider.FolderProvider"
             android:authorities="${packageName}.document.provider"
             android:exported="true"
             android:grantUriPermissions="true"
