@@ -440,13 +440,24 @@ private fun VersionsContent(
                 }
                 version?.takeIf { !isRefreshing && it.isValid() }?.let {
                     IconButton(
-                        modifier = Modifier.padding(end = 8.dp),
-                        onClick = toVersionSettingsScreen
-                    ) {
-                        Icon(
-                            painter = painterResource(R.drawable.ic_settings_filled),
-                            contentDescription = stringResource(R.string.versions_manage_settings)
-                        )
+    modifier = Modifier
+        .padding(end = 8.dp)
+        .background(
+            QvexGlassColors.GlassBlue.copy(alpha = 0.45f),
+            MaterialTheme.shapes.large
+        )
+        .border(
+            1.dp,
+            QvexGlassColors.GlassBorder,
+            MaterialTheme.shapes.large
+        ),
+    onClick = toVersionSettingsScreen
+) {
+                      Icon(
+    painter = painterResource(R.drawable.ic_settings_filled),
+    contentDescription = stringResource(R.string.versions_manage_settings),
+    tint = QvexGlassColors.Cyan
+)
                     }
                 }
             }
@@ -780,13 +791,14 @@ private fun VersionManagerLayout(
 
             if (version == null) {
                 Text(
-                    modifier = Modifier
-                        .align(Alignment.CenterVertically)
-                        .basicMarquee(iterations = Int.MAX_VALUE),
-                    text = stringResource(R.string.versions_manage_no_versions),
-                    style = MaterialTheme.typography.labelMedium,
-                    maxLines = 1
-                )
+    modifier = Modifier
+        .align(Alignment.CenterVertically)
+        .basicMarquee(iterations = Int.MAX_VALUE),
+    text = stringResource(R.string.versions_manage_no_versions),
+    style = MaterialTheme.typography.labelMedium,
+    color = QvexGlassColors.TextSecondary,
+    maxLines = 1
+)
             } else {
                 Column(
                     modifier = Modifier
