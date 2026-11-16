@@ -184,7 +184,10 @@ val actionMenuOuterPadding = when {
             val effectiveSide = dragState.previewSide ?: dockedSide
 
             //卡片尺寸与停泊槽内容区保持一致
-            val cardWidth = maxWidth * (actionMenuWeight / (actionMenuWeight + contentWeight)) - actionMenuOuterPadding
+            val cardWidth = (
+    maxWidth * (actionMenuWeight / (actionMenuWeight + contentWeight)) -
+        actionMenuOuterPadding
+).coerceAtMost(320.dp)
             val cardHeight = maxHeight - actionMenuOuterPadding * 2
 
             val toAccountManageScreen: () -> Unit = {
