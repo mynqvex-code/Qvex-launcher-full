@@ -531,7 +531,10 @@ border = androidx.compose.foundation.BorderStroke(
                 onLaunchGame(null)
             },
             content = {
-                MarqueeText(text = stringResource(R.string.main_launch_game))
+    MarqueeText(
+        text = stringResource(R.string.main_launch_game),
+        style = MaterialTheme.typography.titleLarge
+      )
             }
         )
     }
