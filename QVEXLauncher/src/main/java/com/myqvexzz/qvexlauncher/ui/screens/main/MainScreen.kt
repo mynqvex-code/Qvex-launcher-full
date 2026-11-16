@@ -580,6 +580,12 @@ private fun QvexLeftNavigationRail(
         style = MaterialTheme.typography.titleLarge
     )
             }
+           Spacer(
+    modifier = Modifier
+        .width(28.dp)
+        .height(1.dp)
+        .background(QvexGlassColors.GlassBorder)
+) 
             IconButton(
                 onClick = onOpenFileManager
             ) {
