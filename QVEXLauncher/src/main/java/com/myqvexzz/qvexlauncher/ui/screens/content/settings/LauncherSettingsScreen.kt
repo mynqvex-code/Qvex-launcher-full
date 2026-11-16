@@ -288,8 +288,16 @@ fun LauncherSettingsScreen(
                             valueRange = AllSettings.videoBackgroundVolume.floatRange,
                             suffix = "%",
                             enabled = backgroundViewModel.isValid && backgroundViewModel.isVideo,
-                            fineTuningControl = true
-                        )
+fineTuningControl = true,
+sliderColors = SliderDefaults.colors(
+    thumbColor = QvexGlassColors.Cyan,
+    activeTrackColor = QvexGlassColors.Cyan,
+    inactiveTrackColor = QvexGlassColors.GlassBlue,
+    activeTickColor = QvexGlassColors.IceBlue,
+    inactiveTickColor = QvexGlassColors.GlassBlue
+),
+valueContainerColor = QvexGlassColors.GlassDark,
+valueContentColor = QvexGlassColors.Cyan
 
                         IntSliderSettingsCard(
                             modifier = Modifier.fillMaxWidth(),
