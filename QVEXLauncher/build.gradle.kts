@@ -144,7 +144,6 @@ android {
         debug {
             isMinifyEnabled = false
             versionNameSuffix = "-debug"
-            signingConfig = signingConfigs.getByName("debugBuild")
         }
     }
 
