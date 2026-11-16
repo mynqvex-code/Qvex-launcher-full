@@ -222,33 +222,72 @@ fun MainScreen(
             },
         )
 
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f)
-        ) {
-            NavStateHost(rootKey = screenBackStackModel.mainScreen) {
-                NavigationUI(
-                    modifier = Modifier.fillMaxSize(),
-                    screenBackStackModel = screenBackStackModel,
-                    toMainScreen = toMainScreen,
-                    eventViewModel = eventViewModel,
-                    modpackImportViewModel = modpackImportViewModel,
-                    modifyVersionViewModel = modifyVersionViewModel,
-                    submitError = submitError
+        Row(
+    modifier = Modifier
+        .fillMaxWidth()
+        .weight(1f)
+) {
+    if (isWideLandscape) {
+        QvexLeftNavigationRail(
+            inMultiplayerScreen = mainScreenKey is NormalNavKey.Multiplayer,
+            inDownloadScreen = mainScreenKey is NestedNavKey.Download,
+            inSettingsScreen = mainScreenKey is NestedNavKey.Settings,
+            onOpenFileManager = {
+                eventViewModel.sendEvent(
+                    EventViewModel.Event.OpenFileManager(
+                        rootPath = PathManager.DIR_FILES_EXTERNAL.absolutePath
+                    )
                 )
-            }
+            },
+            onMultiplayer = {
+                screenBackStackModel.mainScreen.removeAndNavigateTo(
+                    removes = screenBackStackModel.clearBeforeNavKeys,
+                    screenKey = NormalNavKey.Multiplayer
+                )
+            },
+            onDownloads = {
+                screenBackStackModel.navigateToDownload()
+            },
+            onSettings = {
+                screenBackStackModel.mainScreen.removeAndNavigateTo(
+                    removes = screenBackStackModel.clearBeforeNavKeys,
+                    screenKey = screenBackStackModel.settingsScreen
+                )
+            },
+            modifier = Modifier
+                .fillMaxHeight()
+                .padding(start = 6.dp, top = 6.dp, bottom = 6.dp)
+        )
+    }
 
-            TaskMenu(
-                isExpanded = isTaskMenuExpanded,
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .fillMaxWidth(if (isWideLandscape) 0.28f else 0.34f)
-                    .align(Alignment.CenterStart)
-                    .padding(all = 6.dp)
-            ) {
-                changeTasksExpandedState()
-            }
+    Box(
+        modifier = Modifier
+            .weight(1f)
+            .fillMaxHeight()
+    ) {
+        NavStateHost(rootKey = screenBackStackModel.mainScreen) {
+            NavigationUI(
+                modifier = Modifier.fillMaxSize(),
+                screenBackStackModel = screenBackStackModel,
+                toMainScreen = toMainScreen,
+                eventViewModel = eventViewModel,
+                modpackImportViewModel = modpackImportViewModel,
+                modifyVersionViewModel = modifyVersionViewModel,
+                submitError = submitError
+            )
+        }
+
+        TaskMenu(
+            isExpanded = isTaskMenuExpanded,
+            modifier = Modifier
+                .fillMaxHeight()
+                .fillMaxWidth(if (isWideLandscape) 0.28f else 0.34f)
+                .align(Alignment.CenterStart)
+                .padding(all = 6.dp)
+        ) {
+            changeTasksExpandedState()
+        }
+    }
         }
     }
  }
