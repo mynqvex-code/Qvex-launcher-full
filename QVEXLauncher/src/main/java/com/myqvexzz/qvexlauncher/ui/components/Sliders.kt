@@ -79,7 +79,7 @@ sliderColors: SliderColors = SliderDefaults.colors(),
 valueContainerColor: Color = MaterialTheme.colorScheme.primary,
 valueContentColor: Color = MaterialTheme.colorScheme.onPrimary,
 appendContent: @Composable () -> Unit = {}
-
+{ }
     val formatter = remember(decimalFormat) { DecimalFormat(decimalFormat) }
     fun getTextString(value: Float) = valueText?.invoke(value) ?: "${if (toInt) {
         value.toInt()
