@@ -462,7 +462,7 @@ private fun <E: TitledNavKey> TopBar(
                         )
                     }
                 }
-
+                if (!isWideLandscape) {
                 IconButton(
                     onClick = openFileManager
                 ) {
@@ -501,7 +501,7 @@ private fun <E: TitledNavKey> TopBar(
             }
         }
     }
-    }
+}
 }
 
 @Composable
