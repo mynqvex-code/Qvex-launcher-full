@@ -18,6 +18,13 @@
 
 package com.myqvexzz.qvexlauncher.ui.screens.content.home
 
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.weight
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
+import androidx.compose.ui.unit.sp
+import com.myqvexzz.qvexlauncher.ui.theme.QvexGlassColors
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -202,11 +209,19 @@ fun HomeGrid(
                 )
             }
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .verticalScroll(scrollState)
-                .padding(horizontal = 10.dp, vertical = 8.dp),
+        BoxWithConstraints(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            Row(
+                modifier = Modifier.fillMaxSize(),
+                horizontalArrangement = Arrangement.spacedBy(10.dp)
+            ) {
+                Column(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxHeight()
+                        .verticalScroll(scrollState)
+                        .padding(horizontal = 10.dp, vertical = 8.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             val systemCards = HomeCards.systemCards()
@@ -240,7 +255,17 @@ fun HomeGrid(
                 },
             )
         }
-        CardGridAutoScroll(
+                if (maxWidth >= 900.dp) {
+                    QvexInfoPanel(
+                        modifier = Modifier
+                            .width(190.dp)
+                            .fillMaxHeight()
+                            .padding(vertical = 8.dp)
+                    )
+                }
+            }
+        }  
+     CardGridAutoScroll(
             state = state,
             scrollState = scrollState
         )
@@ -304,6 +329,83 @@ private fun AdjustingBar(
             .padding(all = 3.dp)
             .barGuard(),
         shape = CircleShape,
+       @Composable
+private fun QvexInfoPanel(
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        BackgroundCard(
+            modifier = Modifier.fillMaxWidth(),
+            colors = androidx.compose.material3.CardDefaults.cardColors(
+                containerColor = QvexGlassColors.GlassDark.copy(alpha = 0.78f),
+                contentColor = QvexGlassColors.TextPrimary
+            ),
+            shape = MaterialTheme.shapes.extraLarge,
+            border = androidx.compose.foundation.BorderStroke(
+                1.dp,
+                QvexGlassColors.GlassBorder
+            )
+        ) {
+            Column(
+                modifier = Modifier.padding(14.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Text(
+                    text = "QVEX",
+                    style = MaterialTheme.typography.titleLarge,
+                    color = QvexGlassColors.Cyan
+                )
+                Text(
+                    text = "LAUNCHER CONTROL",
+                    style = MaterialTheme.typography.labelSmall,
+                    color = QvexGlassColors.TextSecondary
+                )
+                Text(
+                    text = "Không gian khởi chạy Minecraft của bạn.",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = QvexGlassColors.TextPrimary
+                )
+            }
+        }
+
+        BackgroundCard(
+            modifier = Modifier.fillMaxWidth(),
+            colors = androidx.compose.material3.CardDefaults.cardColors(
+                containerColor = QvexGlassColors.GlassDark.copy(alpha = 0.72f),
+                contentColor = QvexGlassColors.TextPrimary
+            ),
+            shape = MaterialTheme.shapes.extraLarge,
+            border = androidx.compose.foundation.BorderStroke(
+                1.dp,
+                QvexGlassColors.GlassBorder
+            )
+        ) {
+            Column(
+                modifier = Modifier.padding(14.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Text(
+                    text = "MẸO NHANH",
+                    style = MaterialTheme.typography.titleSmall,
+                    color = QvexGlassColors.Cyan
+                )
+                Text(
+                    text = "Giữ vào thẻ để sắp xếp vị trí.",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = QvexGlassColors.TextSecondary
+                )
+                Text(
+                    text = "Sử dụng bảng phiên bản để chọn Minecraft.",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = QvexGlassColors.TextSecondary
+                )
+            }
+        }
+    }
+}
         color = MaterialTheme.colorScheme.surfaceContainerHighest,
         contentColor = MaterialTheme.colorScheme.onSurface,
         shadowElevation = 3.dp
