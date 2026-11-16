@@ -411,7 +411,6 @@ private fun AccountAvatarRow(
                 )
             }
         }
-        }
     }
 }
 
