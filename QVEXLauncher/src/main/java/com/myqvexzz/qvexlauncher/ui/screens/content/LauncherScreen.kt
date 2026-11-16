@@ -340,7 +340,8 @@ private fun AccountAvatarCenter(
                 Text(
                     text = account?.username ?: stringResource(R.string.account_add_new_account),
                     maxLines = 1,
-                    style = MaterialTheme.typography.titleSmall
+                    style = MaterialTheme.typography.titleSmall,
+color = QvexGlassColors.TextPrimary
                 )
                 if (account != null) {
                     Text(
