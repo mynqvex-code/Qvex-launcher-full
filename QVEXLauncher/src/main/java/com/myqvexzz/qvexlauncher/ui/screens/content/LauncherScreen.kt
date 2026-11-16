@@ -505,9 +505,15 @@ private fun VersionsContent(
 
         ScalingActionButton(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(PaddingValues(horizontal = 12.dp))
-                .padding(bottom = 8.dp),
+    .fillMaxWidth()
+    .shadow(
+        elevation = 12.dp,
+        shape = MaterialTheme.shapes.large,
+        ambientColor = QvexGlassColors.Cyan.copy(alpha = 0.35f),
+        spotColor = QvexGlassColors.Cyan.copy(alpha = 0.45f)
+    )
+    .padding(PaddingValues(horizontal = 12.dp))
+    .padding(bottom = 8.dp),
             shape = MaterialTheme.shapes.large,
             colors = ButtonDefaults.buttonColors(
     containerColor = QvexGlassColors.ElectricBlue,
