@@ -279,7 +279,6 @@ fun MainScreen(
 
         TaskMenu(
             isExpanded = isTaskMenuExpanded,
-            isWideLandscape: Boolean,
             modifier = Modifier
                 .fillMaxHeight()
                 .fillMaxWidth(if (isWideLandscape) 0.28f else 0.34f)
@@ -301,6 +300,7 @@ private fun <E: TitledNavKey> TopBar(
     inLauncherScreen: Boolean,
     taskRunning: Boolean,
     isTasksExpanded: Boolean,
+    isWideLandscape: Boolean,
     modifier: Modifier = Modifier,
     contentColor: Color,
     onScreenBack: () -> Unit,
