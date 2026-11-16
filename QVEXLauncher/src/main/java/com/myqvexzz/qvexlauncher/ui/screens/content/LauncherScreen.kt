@@ -115,8 +115,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlin.math.roundToInt
 
-private const val ContentWeight = 7f
-private const val ActionMenuWeight = 3f
 
 /**
  * 操作菜单停泊槽位与屏幕边缘的间距
@@ -161,6 +159,17 @@ fun LauncherScreen(
                     dragState.parentOrigin = coordinates.positionInRoot()
                 }
         ) { screenType ->
+            val contentWeight = when {
+    maxWidth >= 900.dp -> 7.5f
+    maxWidth >= 600.dp -> 7f
+    else -> 6.5f
+}
+
+val actionMenuWeight = when {
+    maxWidth >= 900.dp -> 2.5f
+    maxWidth >= 600.dp -> 3f
+    else -> 3.5f
+}
             val parentWidthPx = constraints.maxWidth.toFloat()
             dragState.parentWidthPx = parentWidthPx
             dragState.outerPaddingPx = with(LocalDensity.current) { ActionMenuOuterPadding.toPx() }
