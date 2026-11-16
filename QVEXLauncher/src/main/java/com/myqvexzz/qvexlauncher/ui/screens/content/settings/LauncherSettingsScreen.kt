@@ -288,17 +288,17 @@ fun LauncherSettingsScreen(
                             valueRange = AllSettings.videoBackgroundVolume.floatRange,
                             suffix = "%",
                             enabled = backgroundViewModel.isValid && backgroundViewModel.isVideo,
-fineTuningControl = true,
-sliderColors = SliderDefaults.colors(
-    thumbColor = QvexGlassColors.Cyan,
-    activeTrackColor = QvexGlassColors.Cyan,
-    inactiveTrackColor = QvexGlassColors.GlassBlue,
-    activeTickColor = QvexGlassColors.IceBlue,
-    inactiveTickColor = QvexGlassColors.GlassBlue
-),
-valueContainerColor = QvexGlassColors.GlassDark,
-valueContentColor = QvexGlassColors.Cyan
-
+                            fineTuningControl = true,
+                            sliderColors = SliderDefaults.colors(
+                            thumbColor = QvexGlassColors.Cyan,
+                            activeTrackColor = QvexGlassColors.Cyan,
+                            inactiveTrackColor = QvexGlassColors.GlassBlue,
+                            activeTickColor = QvexGlassColors.IceBlue,
+                            inactiveTickColor = QvexGlassColors.GlassBlue
+                          ),
+                            valueContainerColor = QvexGlassColors.GlassDark,
+                            valueContentColor = QvexGlassColors.Cyan
+                       )
                         IntSliderSettingsCard(
                             modifier = Modifier.fillMaxWidth(),
                             position = CardPosition.Bottom,
@@ -309,6 +309,15 @@ valueContentColor = QvexGlassColors.Cyan
                             suffix = "Dp",
                             enabled = backgroundViewModel.isValid,
                             fineTuningControl = true,
+                            sliderColors = SliderDefaults.colors(
+                            thumbColor = QvexGlassColors.Cyan,
+                            activeTrackColor = QvexGlassColors.Cyan,
+                            inactiveTrackColor = QvexGlassColors.GlassBlue,
+                            activeTickColor = QvexGlassColors.IceBlue,
+                            inactiveTickColor = QvexGlassColors.GlassBlue
+                          ),
+                            valueContainerColor = QvexGlassColors.GlassDark,
+                            valueContentColor = QvexGlassColors.Cyan,
                             appendContent = {
                                 val unit = AllSettings.backgroundBlurType
                                 val state = unit.state
