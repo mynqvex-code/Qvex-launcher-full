@@ -595,7 +595,9 @@ private fun QvexLeftNavigationRail(
                     tint = QvexGlassColors.TextSecondary
                 )
             }
-
+            Spacer(
+    modifier = Modifier.height(8.dp)
+)
             IconButton(
                 modifier = Modifier
                     .clip(MaterialTheme.shapes.large)
