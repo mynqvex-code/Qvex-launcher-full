@@ -542,10 +542,14 @@ private fun ActionMenuCardContent(
             .actionMenuDragAnchor()
             .guideNode(GuideKeys.Main.Step.CardDrag)
             .then(modifier),
+                colors = androidx.compose.material3.CardDefaults.cardColors(
+            containerColor = QvexGlassColors.GlassDark.copy(alpha = 0.72f),
+            contentColor = QvexGlassColors.TextPrimary
+        ),
         shape = MaterialTheme.shapes.extraLarge,
         border = androidx.compose.foundation.BorderStroke(
             1.dp,
-            MaterialTheme.colorScheme.primary.copy(alpha = 0.65f)
+            QvexGlassColors.GlassBorder
         )
     ) {
         ConstraintLayout(
