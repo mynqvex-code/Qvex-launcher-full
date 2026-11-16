@@ -221,6 +221,7 @@ fun IndicatorSlider(
             val state = rememberSliderState(
                 value = value,
                 steps = steps,
+                colors = sliderColors,
                 trackRange = valueRange,
             )
             Slider(
