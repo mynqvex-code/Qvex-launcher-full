@@ -18,6 +18,9 @@
 
 package com.myqvexzz.qvexlauncher.ui.screens.content.settings.layouts
 
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.material3.CardDefaults
+import com.myqvexzz.qvexlauncher.ui.theme.QvexGlassColors
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
