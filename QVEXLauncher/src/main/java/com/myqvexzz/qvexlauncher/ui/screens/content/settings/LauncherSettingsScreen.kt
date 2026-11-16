@@ -801,7 +801,7 @@ private fun CustomBackground(
             }
         }
     }
-
+}
 @Composable
 private fun BackgroundOperation(
     operation: BackgroundOperation,
