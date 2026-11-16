@@ -501,9 +501,9 @@ private fun <E: TitledNavKey> TopBar(
             }
         }
     }
+ }
 }
 }
-
 @Composable
 private fun TopBarRailItem(
     selected: Boolean,
