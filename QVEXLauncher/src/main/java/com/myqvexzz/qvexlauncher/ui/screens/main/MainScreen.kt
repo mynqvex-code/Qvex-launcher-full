@@ -40,6 +40,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -170,79 +171,84 @@ fun MainScreen(
         color = backgroundColor,
         contentColor = onBackgroundColor()
     ) {
-        Column(
+        BoxWithConstraints(
+    modifier = Modifier.fillMaxSize()
+) {
+    val isWideLandscape = maxWidth >= 600.dp && maxWidth > maxHeight
+
+    Column(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        TopBar(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxWidth()
+                .height(if (isWideLandscape) 46.dp else 40.dp),
+            mainScreenKey = mainScreenKey,
+            inLauncherScreen = inLauncherScreen,
+            taskRunning = taskRunning,
+            isTasksExpanded = isTaskMenuExpanded,
+            contentColor = onBackgroundColor(),
+            onScreenBack = {
+                screenBackStackModel.mainScreen.backStack.removeFirstOrNull()
+            },
+            toMainScreen = toMainScreen,
+            toSettingsScreen = {
+                screenBackStackModel.mainScreen.removeAndNavigateTo(
+                    removes = screenBackStackModel.clearBeforeNavKeys,
+                    screenKey = screenBackStackModel.settingsScreen
+                )
+            },
+            toDownloadScreen = {
+                screenBackStackModel.navigateToDownload()
+            },
+            toMultiplayerScreen = {
+                screenBackStackModel.mainScreen.removeAndNavigateTo(
+                    removes = screenBackStackModel.clearBeforeNavKeys,
+                    screenKey = NormalNavKey.Multiplayer
+                )
+            },
+            openFileManager = {
+                eventViewModel.sendEvent(
+                    EventViewModel.Event.OpenFileManager(
+                        rootPath = PathManager.DIR_FILES_EXTERNAL.absolutePath
+                    )
+                )
+            },
+            changeExpandedState = {
+                changeTasksExpandedState()
+            },
+        )
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f)
         ) {
-            TopBar(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(40.dp),
-                mainScreenKey = mainScreenKey,
-                inLauncherScreen = inLauncherScreen,
-                taskRunning = taskRunning,
-                isTasksExpanded = isTaskMenuExpanded,
-                contentColor = onBackgroundColor(),
-                onScreenBack = {
-                    screenBackStackModel.mainScreen.backStack.removeFirstOrNull()
-                },
-                toMainScreen = toMainScreen,
-                toSettingsScreen = {
-                    screenBackStackModel.mainScreen.removeAndNavigateTo(
-                        removes = screenBackStackModel.clearBeforeNavKeys,
-                        screenKey = screenBackStackModel.settingsScreen
-                    )
-                },
-                toDownloadScreen = {
-                    screenBackStackModel.navigateToDownload()
-                },
-                toMultiplayerScreen = {
-                    screenBackStackModel.mainScreen.removeAndNavigateTo(
-                        removes = screenBackStackModel.clearBeforeNavKeys,
-                        screenKey = NormalNavKey.Multiplayer
-                    )
-                },
-                openFileManager = {
-                    eventViewModel.sendEvent(
-                        EventViewModel.Event.OpenFileManager(
-                            rootPath = PathManager.DIR_FILES_EXTERNAL.absolutePath
-                        )
-                    )
-                },
-                changeExpandedState = {
-                    changeTasksExpandedState()
-                },
-            )
+            NavStateHost(rootKey = screenBackStackModel.mainScreen) {
+                NavigationUI(
+                    modifier = Modifier.fillMaxSize(),
+                    screenBackStackModel = screenBackStackModel,
+                    toMainScreen = toMainScreen,
+                    eventViewModel = eventViewModel,
+                    modpackImportViewModel = modpackImportViewModel,
+                    modifyVersionViewModel = modifyVersionViewModel,
+                    submitError = submitError
+                )
+            }
 
-            Box(
+            TaskMenu(
+                isExpanded = isTaskMenuExpanded,
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f)
+                    .fillMaxHeight()
+                    .fillMaxWidth(if (isWideLandscape) 0.28f else 0.34f)
+                    .align(Alignment.CenterStart)
+                    .padding(all = 6.dp)
             ) {
-                NavStateHost(rootKey = screenBackStackModel.mainScreen) {
-                    NavigationUI(
-                        modifier = Modifier.fillMaxSize(),
-                        screenBackStackModel = screenBackStackModel,
-                        toMainScreen = toMainScreen,
-                        eventViewModel = eventViewModel,
-                        modpackImportViewModel = modpackImportViewModel,
-                        modifyVersionViewModel = modifyVersionViewModel,
-                        submitError = submitError
-                    )
-                }
-
-                TaskMenu(
-                    isExpanded = isTaskMenuExpanded,
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .fillMaxWidth(0.3f)
-                        .align(Alignment.CenterStart)
-                        .padding(all = 6.dp)
-                ) {
-                    changeTasksExpandedState()
-                }
+                changeTasksExpandedState()
             }
         }
+    }
+ }
     }
 }
 
