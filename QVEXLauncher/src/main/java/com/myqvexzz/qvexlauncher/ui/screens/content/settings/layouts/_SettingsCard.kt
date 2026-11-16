@@ -226,10 +226,12 @@ fun SettingsCard(
     val shape = rememberSettingsCardShape(position, outerShape, innerShape)
 
     BackgroundCard(
-        modifier = modifier,
-        shape = shape,
-        content = content
-    )
+    modifier = modifier,
+    shape = shape,
+    colors = qvexSettingsCardColors(),
+    border = QvexSettingsCardBorder,
+    content = content
+)
 }
 
 @Composable
@@ -244,13 +246,15 @@ fun SettingsCard(
 ) {
     val shape = rememberSettingsCardShape(position, outerShape, innerShape)
 
-    BackgroundCard(
-        modifier = modifier,
-        shape = shape,
-        onClick = onClick,
-        enabled = enabled,
-        content = content
-    )
+  BackgroundCard(
+    modifier = modifier,
+    shape = shape,
+    colors = qvexSettingsCardColors(),
+    border = QvexSettingsCardBorder,
+    onClick = onClick,
+    enabled = enabled,
+    content = content
+)
 }
 
 @Composable
