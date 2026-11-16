@@ -348,23 +348,12 @@ private fun AccountAvatarCenter(
 
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally
-            ) {
+            ) 
                 Text(
-    text = account?.username ?: stringResource(R.string.account_add_new_account),
-    maxLines = 1,
-    style = MaterialTheme.typography.titleSmall,
-    color = QvexGlassColors.TextPrimary
-)
-if (account != null) {
-    Text(
-        text = getAccountTypeName(account),
-        style = MaterialTheme.typography.labelSmall,
-        color = QvexGlassColors.TextSecondary
-    )
-}
+                    text = account?.username ?: stringResource(R.string.account_add_new_account),
                     maxLines = 1,
                     style = MaterialTheme.typography.titleMedium,
-color = QvexGlassColors.TextPrimary
+                    color = QvexGlassColors.TextPrimary
                 )
                 if (account != null) {
                     Text(
