@@ -495,7 +495,16 @@ private fun VersionsContent(
                     DropdownMenuItem(
                         text = {
                             Row(
-                                modifier = Modifier.fillMaxWidth(),
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .clip(MaterialTheme.shapes.medium)
+                                    .background(QvexGlassColors.GlassBlue.copy(alpha = 0.22f))
+                                    .border(
+                                        1.dp,
+                                        QvexGlassColors.GlassBorder,
+                                        MaterialTheme.shapes.medium
+                                    )
+                                    .padding(horizontal = 8.dp, vertical = 4.dp),
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 CommonVersionInfoLayout(
@@ -504,6 +513,16 @@ private fun VersionsContent(
                                     iconSize = 28.dp
                                 )
                                 IconButton(
+                                    modifier = Modifier
+                                        .background(
+                                            QvexGlassColors.GlassBlue.copy(alpha = 0.45f),
+                                            MaterialTheme.shapes.large
+                                        )
+                                        .border(
+                                            1.dp,
+                                            QvexGlassColors.GlassBorder,
+                                            MaterialTheme.shapes.large
+                                        ),
                                     onClick = {
                                         onLaunchGame(version0)
                                         showList = false
@@ -512,7 +531,7 @@ private fun VersionsContent(
                                     Icon(
                                         painter = painterResource(R.drawable.ic_play_arrow_filled),
                                         contentDescription = stringResource(R.string.main_launch_game),
-                                        tint = MaterialTheme.colorScheme.primary
+                                        tint = QvexGlassColors.Cyan
                                     )
                                 }
                             }
@@ -704,9 +723,17 @@ private fun ActionMenuTallerContent(
             )
         }
 
-        BackgroundCard(
+      BackgroundCard(
             modifier = Modifier.fillMaxWidth(),
+            colors = androidx.compose.material3.CardDefaults.cardColors(
+                containerColor = QvexGlassColors.GlassDark.copy(alpha = 0.72f),
+                contentColor = QvexGlassColors.TextPrimary
+            ),
             shape = MaterialTheme.shapes.extraLarge,
+            border = androidx.compose.foundation.BorderStroke(
+                1.dp,
+                QvexGlassColors.GlassBorder
+            )
         ) {
             VersionsContent(
                 modifier = Modifier.fillMaxWidth(),
@@ -798,7 +825,8 @@ private fun VersionManagerLayout(
                 LoadingIndicator(
                     modifier = Modifier
                         .size(24.dp)
-                        .align(Alignment.Center)
+                        .align(Alignment.Center),
+                    color = QvexGlassColors.Cyan
                 )
             }
         } else {
