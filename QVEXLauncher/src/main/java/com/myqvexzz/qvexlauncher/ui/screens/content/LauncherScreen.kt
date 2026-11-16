@@ -742,8 +742,14 @@ private fun VersionManagerLayout(
 ) {
     Row(
         modifier = modifier
-            .actionMenuDragExclusion()
-            .clip(shape = MaterialTheme.shapes.large)
+    .actionMenuDragExclusion()
+    .clip(shape = MaterialTheme.shapes.large)
+    .background(QvexGlassColors.GlassBlue.copy(alpha = 0.45f))
+    .border(
+        1.dp,
+        QvexGlassColors.GlassBorder,
+        MaterialTheme.shapes.large
+    )
             .combinedClickable(
                 role = Role.Button,
                 onClick = swapToVersionManage,
