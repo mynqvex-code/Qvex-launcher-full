@@ -231,6 +231,9 @@ fun IntSliderSettingsCard(
         valueText = valueText,
         titleStyle = titleStyle,
         summaryStyle = summaryStyle,
+        sliderColors = sliderColors,
+        valueContainerColor = valueContainerColor,
+        valueContentColor = valueContentColor,
         appendContent = appendContent,
         previewContent = previewContent
     )
