@@ -499,6 +499,103 @@ private fun TopBarRailItem(
 }
 
 @Composable
+private fun QvexLeftNavigationRail(
+    inMultiplayerScreen: Boolean,
+    inDownloadScreen: Boolean,
+    inSettingsScreen: Boolean,
+    onOpenFileManager: () -> Unit,
+    onMultiplayer: () -> Unit,
+    onDownloads: () -> Unit,
+    onSettings: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Surface(
+        modifier = modifier,
+        shape = MaterialTheme.shapes.extraLarge,
+        color = QvexGlassColors.GlassDark.copy(alpha = 0.78f),
+        border = BorderStroke(
+            1.dp,
+            QvexGlassColors.GlassBorder
+        )
+    ) {
+        Column(
+            modifier = Modifier
+                .width(64.dp)
+                .fillMaxHeight()
+                .padding(vertical = 12.dp, horizontal = 8.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(10.dp)
+        ) {
+            IconButton(
+                onClick = onOpenFileManager
+            ) {
+                Icon(
+                    painter = painterResource(R.drawable.ic_folder_filled),
+                    contentDescription = "File Manager",
+                    tint = QvexGlassColors.TextSecondary
+                )
+            }
+
+            IconButton(
+                modifier = Modifier
+                    .clip(MaterialTheme.shapes.large)
+                    .background(
+                        if (inMultiplayerScreen)
+                            QvexGlassColors.GlassHighlight
+                        else Color.Transparent
+                    ),
+                onClick = onMultiplayer
+            ) {
+                Icon(
+                    painter = painterResource(R.drawable.ic_group_filled),
+                    contentDescription = "Multiplayer",
+                    tint = if (inMultiplayerScreen)
+                        QvexGlassColors.Cyan
+                    else QvexGlassColors.TextSecondary
+                )
+            }
+
+            IconButton(
+                modifier = Modifier
+                    .clip(MaterialTheme.shapes.large)
+                    .background(
+                        if (inDownloadScreen)
+                            QvexGlassColors.GlassHighlight
+                        else Color.Transparent
+                    ),
+                onClick = onDownloads
+            ) {
+                Icon(
+                    painter = painterResource(R.drawable.ic_download_2_filled),
+                    contentDescription = "Downloads",
+                    tint = if (inDownloadScreen)
+                        QvexGlassColors.Cyan
+                    else QvexGlassColors.TextSecondary
+                )
+            }
+
+            IconButton(
+                modifier = Modifier
+                    .clip(MaterialTheme.shapes.large)
+                    .background(
+                        if (inSettingsScreen)
+                            QvexGlassColors.GlassHighlight
+                        else Color.Transparent
+                    ),
+                onClick = onSettings
+            ) {
+                Icon(
+                    painter = painterResource(R.drawable.ic_settings_filled),
+                    contentDescription = "Settings",
+                    tint = if (inSettingsScreen)
+                        QvexGlassColors.Cyan
+                    else QvexGlassColors.TextSecondary
+                )
+            }
+        }
+    }
+}
+@Composable
 private fun NavigationUI(
     modifier: Modifier = Modifier,
     screenBackStackModel: ScreenBackStackViewModel,
