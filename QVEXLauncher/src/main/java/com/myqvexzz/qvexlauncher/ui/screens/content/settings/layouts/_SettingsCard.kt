@@ -41,7 +41,18 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.myqvexzz.qvexlauncher.ui.components.BackgroundCard
 import com.myqvexzz.qvexlauncher.ui.components.TitleAndSummary
+@Composable
+private fun qvexSettingsCardColors() = CardDefaults.cardColors(
+    containerColor = QvexGlassColors.GlassDark.copy(alpha = 0.72f),
+    contentColor = QvexGlassColors.TextPrimary,
+    disabledContainerColor = QvexGlassColors.GlassDark.copy(alpha = 0.42f),
+    disabledContentColor = QvexGlassColors.TextMuted
+)
 
+private val QvexSettingsCardBorder = BorderStroke(
+    1.dp,
+    QvexGlassColors.GlassBorder
+)
 /**
  * 根据卡片在UI组中的位置，选择不同的圆角形状
  */
