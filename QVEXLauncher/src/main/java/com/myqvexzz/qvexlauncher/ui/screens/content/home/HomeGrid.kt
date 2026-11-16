@@ -254,10 +254,10 @@ fun HomeGrid(
                 },
             )
         }
-                if (maxWidth >= 900.dp) {
+                if (maxWidth >= 760.dp) {
                     QvexInfoPanel(
                         modifier = Modifier
-                            .width(190.dp)
+                            .width(170.dp)
                             .fillMaxHeight()
                             .padding(vertical = 8.dp)
                     )
