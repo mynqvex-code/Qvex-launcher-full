@@ -507,13 +507,13 @@ private fun VersionsContent(
                 .padding(bottom = 8.dp),
             shape = MaterialTheme.shapes.large,
             colors = ButtonDefaults.buttonColors(
-                containerColor = MaterialTheme.colorScheme.primary,
-                contentColor = MaterialTheme.colorScheme.onPrimary
-            ),
-            border = androidx.compose.foundation.BorderStroke(
-                1.dp,
-                MaterialTheme.colorScheme.primary.copy(alpha = 0.8f)
-            ),
+    containerColor = QvexGlassColors.ElectricBlue,
+    contentColor = QvexGlassColors.TextPrimary
+),
+border = androidx.compose.foundation.BorderStroke(
+    1.dp,
+    QvexGlassColors.IceBlue.copy(alpha = 0.75f)
+),
             elevation = ButtonDefaults.buttonElevation(
                 defaultElevation = 4.dp,
                 pressedElevation = 1.dp
