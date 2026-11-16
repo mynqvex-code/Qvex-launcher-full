@@ -267,7 +267,16 @@ fun LauncherSettingsScreen(
                             valueRange = AllSettings.launcherBackgroundOpacity.floatRange,
                             suffix = "%",
                             enabled = backgroundViewModel.isValid,
-                            fineTuningControl = true
+                            fineTuningControl = true,
+                            sliderColors = SliderDefaults.colors(
+                                thumbColor = QvexGlassColors.Cyan,
+                                activeTrackColor = QvexGlassColors.Cyan,
+                                inactiveTrackColor = QvexGlassColors.GlassBlue,
+                                activeTickColor = QvexGlassColors.IceBlue,
+                                inactiveTickColor = QvexGlassColors.GlassBlue
+                            ),
+                            valueContainerColor = QvexGlassColors.GlassDark,
+                            valueContentColor = QvexGlassColors.Cyan
                         )
 
                         IntSliderSettingsCard(
