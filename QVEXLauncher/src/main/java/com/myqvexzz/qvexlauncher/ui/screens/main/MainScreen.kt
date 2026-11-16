@@ -18,6 +18,7 @@
 
 package com.myqvexzz.qvexlauncher.ui.screens.main
 
+import com.myqvexzz.qvexlauncher.ui.theme.QvexGlassColors
 import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.compose.foundation.background
 import androidx.compose.foundation.BorderStroke
