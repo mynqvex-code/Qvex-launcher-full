@@ -756,39 +756,51 @@ private fun CustomBackground(
         }
     }
 
-    Row(
-        modifier = modifier,
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
+    BackgroundCard(
+        modifier = modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(18.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = QvexGlassColors.GlassDark.copy(alpha = 0.72f),
+            contentColor = QvexGlassColors.TextPrimary
+        ),
+        border = BorderStroke(
+            1.dp,
+            QvexGlassColors.GlassBorder
+        )
     ) {
-        Column(
-            modifier = Modifier
-                .weight(1f)
-                .clickable { filePicker.launch(Unit) }
-                .padding(all = 16.dp),
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            TitleAndSummary(
-                title = stringResource(R.string.settings_launcher_background_title),
-                summary = stringResource(R.string.settings_launcher_background_summary),
-            )
-        }
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .clickable { filePicker.launch(Unit) }
+                    .padding(16.dp)
+            ) {
+                TitleAndSummary(
+                    title = stringResource(R.string.settings_launcher_background_title),
+                    summary = stringResource(R.string.settings_launcher_background_summary)
+                )
+            }
 
-        AnimatedVisibility(
-            modifier = Modifier.padding(horizontal = 16.dp),
-            visible = backgroundViewModel.isValid
-        ) {
-            IconTextButton(
-                painter = painterResource(R.drawable.ic_restart_alt),
-                text = stringResource(R.string.generic_reset),
-                onClick = {
-                    if (operation == BackgroundOperation.None) {
-                        operation = BackgroundOperation.PreReset
+            AnimatedVisibility(
+                modifier = Modifier.padding(horizontal = 16.dp),
+                visible = backgroundViewModel.isValid
+            ) {
+                IconTextButton(
+                    painter = painterResource(R.drawable.ic_restart_alt),
+                    text = stringResource(R.string.generic_reset),
+                    onClick = {
+                        if (operation == BackgroundOperation.None) {
+                            operation = BackgroundOperation.PreReset
+                        }
                     }
-                }
-            )
+                )
+            }
         }
     }
-}
 
 @Composable
 private fun BackgroundOperation(
