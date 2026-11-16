@@ -91,3 +91,36 @@ val surfaceContainerLowDark = ColorTheme(Color(0xFF241916), Color(0xFF1F1A1C), C
 val surfaceContainerDark = ColorTheme(Color(0xFF291D19), Color(0xFF241E20), Color(0xFF1E2020), Color(0xFF1C2023), Color(0xFF212017), Color(0xFF201F1F), Color(0xFF1C211B))
 val surfaceContainerHighDark = ColorTheme(Color(0xFF342723), Color(0xFF2E282A), Color(0xFF292A2A), Color(0xFF262B2D), Color(0xFF2C2A21), Color(0xFF2A2A2A), Color(0xFF272B26))
 val surfaceContainerHighestDark = ColorTheme(Color(0xFF3F322E), Color(0xFF393335), Color(0xFF333535), Color(0xFF313538), Color(0xFF37352C), Color(0xFF353434), Color(0xFF323630))
+/**
+ * QVEX Launcher - Glassmorphism Color Palette
+ */
+object QvexGlassColors {
+
+    // Accent colors
+    val Cyan = Color(0xFF35C8FF)
+    val ElectricBlue = Color(0xFF168BFF)
+    val IceBlue = Color(0xFF9BE7FF)
+
+    // Glass surfaces
+    val GlassDark = Color(0xFF071525)
+    val GlassBlue = Color(0xFF102B46)
+    val GlassLight = Color(0xFFB8E8FF)
+
+    // Borders and highlights
+    val GlassBorder = Color(0x6635C8FF)
+    val GlassHighlight = Color(0x4435C8FF)
+    val GlowBlue = Color(0xFF168BFF)
+
+    // Text
+    val TextPrimary = Color(0xFFF4FAFF)
+    val TextSecondary = Color(0xFFB3C8DA)
+    val TextMuted = Color(0xFF7895AD)
+
+    // Background overlay
+    val BackgroundDim = Color(0x99030A13)
+
+    // Glass transparency presets
+    const val GLASS_ALPHA_LIGHT = 0.10f
+    const val GLASS_ALPHA_MEDIUM = 0.18f
+    const val GLASS_ALPHA_STRONG = 0.28f
+}
