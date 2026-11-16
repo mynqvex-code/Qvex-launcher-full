@@ -173,13 +173,13 @@ val actionMenuWeight = when {
             val parentWidthPx = constraints.maxWidth.toFloat()
             dragState.parentWidthPx = parentWidthPx
             dragState.outerPaddingPx = with(LocalDensity.current) { ActionMenuOuterPadding.toPx() }
-            dragState.menuSpanPx = parentWidthPx * (ActionMenuWeight / (ActionMenuWeight + ContentWeight))
+            dragState.menuSpanPx = parentWidthPx * (actionMenuWeight / (actionMenuWeight + contentWeight))
 
             //拖拽期间以预览侧为准
             val effectiveSide = dragState.previewSide ?: dockedSide
 
             //卡片尺寸与停泊槽内容区保持一致
-            val cardWidth = maxWidth * (ActionMenuWeight / (ActionMenuWeight + ContentWeight)) - ActionMenuOuterPadding
+            val cardWidth = maxWidth * (actionMenuWeight / (actionMenuWeight + contentWeight)) - ActionMenuOuterPadding
             val cardHeight = maxHeight - ActionMenuOuterPadding * 2
 
             val toAccountManageScreen: () -> Unit = {
@@ -203,7 +203,7 @@ val actionMenuWeight = when {
             Row(modifier = Modifier.fillMaxSize()) {
                 // ActionMenu 对接到了 Start，留出空位
                 if (dockedSide == ActionMenuSide.START) {
-                    Spacer(modifier = Modifier.weight(ActionMenuWeight))
+                    Spacer(modifier = Modifier.weight(actionMenuWeight))
                 }
 
                 CompositionLocalProvider(
@@ -219,7 +219,7 @@ val actionMenuWeight = when {
                             key = GuideKeys.Main.Step.CardTip,
                             holeRadius = 0.dp
                         )
-                        .weight(ContentWeight)
+                        .weight(contentWeight)
                         .offset { IntOffset(x = dragState.previewShift.value.roundToInt(), y = 0) },
                     isVisible = isVisible,
                     onLaunchGame = { version ->
@@ -232,7 +232,7 @@ val actionMenuWeight = when {
 
                 // ActionMenu 对接到了 End，留出空位
                 if (dockedSide == ActionMenuSide.END) {
-                    Spacer(modifier = Modifier.weight(ActionMenuWeight))
+                    Spacer(modifier = Modifier.weight(actionMenuWeight))
                 }
             }
 
