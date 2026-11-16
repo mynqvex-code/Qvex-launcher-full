@@ -326,11 +326,12 @@ fun LauncherSettingsScreen(
                                         .padding(start = 12.dp)
                                         .size(32.dp),
                                     colors = IconButtonDefaults.iconButtonColors(
-                                        containerColor = MaterialTheme.colorScheme.primary,
-                                        contentColor = MaterialTheme.colorScheme.onPrimary,
-                                        disabledContainerColor = MaterialTheme.colorScheme.primary.copy(alpha = DisabledAlpha),
-                                        disabledContentColor = MaterialTheme.colorScheme.onPrimary.copy(alpha = DisabledAlpha),
-                                    ),
+    containerColor = QvexGlassColors.GlassBlue,
+    contentColor = QvexGlassColors.Cyan,
+    disabledContainerColor = QvexGlassColors.GlassBlue.copy(alpha = DisabledAlpha),
+    disabledContentColor = QvexGlassColors.Cyan.copy(alpha = DisabledAlpha),
+),
+                                    
                                     onClick = {
                                         unit.save(state.switch())
                                     },
