@@ -18,6 +18,8 @@
 
 package com.myqvexzz.qvexlauncher.ui.screens.content
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
