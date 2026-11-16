@@ -113,6 +113,7 @@ fun SimpleTextSlider(
                 onValueChangeFinished = onValueChangeFinished,
                 valueRange = valueRange,
                 steps = steps,
+                colors = sliderColors,
                 modifier = Modifier.weight(1f)
             )
         } else {
@@ -123,6 +124,7 @@ fun SimpleTextSlider(
                 onValueChangeFinished = onValueChangeFinished,
                 valueRange = valueRange,
                 steps = steps,
+                colors = sliderColors,
                 modifier = Modifier.weight(1f)
             )
         }
@@ -132,8 +134,8 @@ fun SimpleTextSlider(
                 .padding(start = 12.dp)
                 .align(Alignment.CenterVertically),
             shape = MaterialTheme.shapes.medium,
-            color = MaterialTheme.colorScheme.primary,
-            contentColor = MaterialTheme.colorScheme.onPrimary
+            color = valueContainerColor,
+            contentColor = valueContentColor
         ) {
             Row(
                 modifier = Modifier.padding(PaddingValues(horizontal = 8.dp, vertical = 4.dp)),
@@ -221,7 +223,6 @@ fun IndicatorSlider(
             val state = rememberSliderState(
                 value = value,
                 steps = steps,
-                colors = sliderColors,
                 trackRange = valueRange,
             )
             Slider(
