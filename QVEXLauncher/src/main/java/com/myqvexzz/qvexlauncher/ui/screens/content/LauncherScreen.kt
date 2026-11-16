@@ -346,7 +346,8 @@ color = QvexGlassColors.TextPrimary
                 if (account != null) {
                     Text(
                         text = getAccountTypeName(account),
-                        style = MaterialTheme.typography.labelSmall
+                        style = MaterialTheme.typography.labelSmall,
+                        color = QvexGlassColors.TextSecondary
                     )
                 }
             }
