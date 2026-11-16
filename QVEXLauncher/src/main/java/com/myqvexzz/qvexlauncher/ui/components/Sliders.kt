@@ -75,11 +75,11 @@ fun SimpleTextSlider(
     fineTuningControl: Boolean = false,
     fineTuningStep: Float = 0.5f,
     valueText: ((Float) -> String)? = null,
-sliderColors: SliderColors = SliderDefaults.colors(),
-valueContainerColor: Color = MaterialTheme.colorScheme.primary,
-valueContentColor: Color = MaterialTheme.colorScheme.onPrimary,
-appendContent: @Composable () -> Unit = {}
-{ }
+    sliderColors: SliderColors = SliderDefaults.colors(),
+    valueContainerColor: Color = MaterialTheme.colorScheme.primary,
+    valueContentColor: Color = MaterialTheme.colorScheme.onPrimary,
+    appendContent: @Composable () -> Unit = {}
+) {
     val formatter = remember(decimalFormat) { DecimalFormat(decimalFormat) }
     fun getTextString(value: Float) = valueText?.invoke(value) ?: "${if (toInt) {
         value.toInt()
