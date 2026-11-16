@@ -275,11 +275,13 @@ fun SettingsCard(
     val shape = rememberSettingsCardShape(position, outerShape, innerShape)
 
     BackgroundCard(
-        modifier = modifier,
-        shape = shape,
-        onClick = onClick,
-        enabled = enabled
-    ) {
+    modifier = modifier,
+    shape = shape,
+    colors = qvexSettingsCardColors(),
+    border = QvexSettingsCardBorder,
+    onClick = onClick,
+    enabled = enabled
+) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
