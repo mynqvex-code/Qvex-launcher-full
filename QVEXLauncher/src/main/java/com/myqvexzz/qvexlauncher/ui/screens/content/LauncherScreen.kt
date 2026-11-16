@@ -781,6 +781,7 @@ private fun VersionManagerLayout(
                         modifier = Modifier.basicMarquee(iterations = Int.MAX_VALUE),
                         text = version.getVersionName(),
                         style = MaterialTheme.typography.labelMedium,
+                        color = QvexGlassColors.TextPrimary,
                         maxLines = 1
                     )
                     if (version.isValid()) {
