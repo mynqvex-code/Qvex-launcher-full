@@ -20,10 +20,10 @@ package com.myqvexzz.qvexlauncher.ui.screens.content.home
 
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.weight
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.BorderStroke
+import com.myqvexzz.qvexlauncher.ui.components.BackgroundCard
 import com.myqvexzz.qvexlauncher.ui.theme.QvexGlassColors
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
