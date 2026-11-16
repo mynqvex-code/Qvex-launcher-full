@@ -312,6 +312,7 @@ private fun HomeCardOperation(
     }
 }
 
+
 /**
  * 调整态底部操作栏
  */
@@ -330,7 +331,60 @@ private fun AdjustingBar(
             .padding(all = 3.dp)
             .barGuard(),
         shape = CircleShape,
-       @Composable
+        color = MaterialTheme.colorScheme.surfaceContainerHighest,
+        contentColor = MaterialTheme.colorScheme.onSurface,
+        shadowElevation = 3.dp
+    ) {
+        Row(
+            modifier = Modifier.padding(all = 6.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            AnimatedVisibility(visible = isServerCard && adjustingId != null) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    IconButton(
+                        modifier = Modifier.size(34.dp),
+                        onClick = { adjustingId?.let(onShowSettings) }
+                    ) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_settings_filled),
+                            contentDescription = stringResource(R.string.generic_setting)
+                        )
+                    }
+                    Spacer(Modifier.width(2.dp))
+                }
+            }
+
+            IconButton(
+                modifier = Modifier.size(34.dp),
+                enabled = adjustingId != null,
+                onClick = { adjustingId?.let(state::removeCard) }
+            ) {
+                Icon(
+                    painter = painterResource(R.drawable.ic_delete_filled),
+                    tint = MaterialTheme.colorScheme.error,
+                    contentDescription = stringResource(R.string.generic_delete)
+                )
+            }
+
+            Spacer(Modifier.width(2.dp))
+
+            IconButton(
+                modifier = Modifier.size(34.dp),
+                onClick = { state.exitAdjusting() }
+            ) {
+                Icon(
+                    painter = painterResource(R.drawable.ic_check),
+                    contentDescription = stringResource(R.string.generic_done)
+                )
+            }
+        }
+    }
+}
+
+/**
+ * QVEX right-side information panel
+ */
+@Composable
 private fun QvexInfoPanel(
     modifier: Modifier = Modifier
 ) {
@@ -345,7 +399,7 @@ private fun QvexInfoPanel(
                 contentColor = QvexGlassColors.TextPrimary
             ),
             shape = MaterialTheme.shapes.extraLarge,
-            border = androidx.compose.foundation.BorderStroke(
+            border = BorderStroke(
                 1.dp,
                 QvexGlassColors.GlassBorder
             )
@@ -379,7 +433,7 @@ private fun QvexInfoPanel(
                 contentColor = QvexGlassColors.TextPrimary
             ),
             shape = MaterialTheme.shapes.extraLarge,
-            border = androidx.compose.foundation.BorderStroke(
+            border = BorderStroke(
                 1.dp,
                 QvexGlassColors.GlassBorder
             )
@@ -407,53 +461,7 @@ private fun QvexInfoPanel(
         }
     }
 }
-        color = MaterialTheme.colorScheme.surfaceContainerHighest,
-        contentColor = MaterialTheme.colorScheme.onSurface,
-        shadowElevation = 3.dp
-    ) {
-        Row(
-            modifier = Modifier.padding(all = 6.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            AnimatedVisibility(visible = isServerCard && adjustingId != null) {
-                IconButton(
-                    modifier = Modifier.size(34.dp),
-                    onClick = { adjustingId?.let(onShowSettings) }
-                ) {
-                    Icon(
-                        painter = painterResource(R.drawable.ic_settings_filled),
-                        contentDescription = stringResource(R.string.generic_setting)
-                    )
-                }
-                Spacer(Modifier.width(2.dp))
-            }
 
-            IconButton(
-                modifier = Modifier.size(34.dp),
-                enabled = adjustingId != null,
-                onClick = { adjustingId?.let(state::removeCard) }
-            ) {
-                Icon(
-                    painter = painterResource(R.drawable.ic_delete_filled),
-                    tint = MaterialTheme.colorScheme.error,
-                    contentDescription = stringResource(R.string.generic_delete)
-                )
-            }
-
-            Spacer(Modifier.width(2.dp))
-
-            IconButton(
-                modifier = Modifier.size(34.dp),
-                onClick = { state.exitAdjusting() }
-            ) {
-                Icon(
-                    painter = painterResource(R.drawable.ic_check),
-                    contentDescription = stringResource(R.string.generic_done)
-                )
-            }
-        }
-    }
-}
 
 /**
  * 消费落在自身范围内的全部指针事件
