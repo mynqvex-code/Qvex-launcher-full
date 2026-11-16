@@ -171,15 +171,15 @@ val actionMenuWeight = when {
 }
             val parentWidthPx = constraints.maxWidth.toFloat()
             dragState.parentWidthPx = parentWidthPx
-            dragState.outerPaddingPx = with(LocalDensity.current) { ActionMenuOuterPadding.toPx() }
+            dragState.outerPaddingPx = with(LocalDensity.current) { actionMenuOuterPadding.toPx() }
             dragState.menuSpanPx = parentWidthPx * (actionMenuWeight / (actionMenuWeight + contentWeight))
 
             //拖拽期间以预览侧为准
             val effectiveSide = dragState.previewSide ?: dockedSide
 
             //卡片尺寸与停泊槽内容区保持一致
-            val cardWidth = maxWidth * (actionMenuWeight / (actionMenuWeight + contentWeight)) - ActionMenuOuterPadding
-            val cardHeight = maxHeight - ActionMenuOuterPadding * 2
+            val cardWidth = maxWidth * (actionMenuWeight / (actionMenuWeight + contentWeight)) - actionMenuOuterPadding
+            val cardHeight = maxHeight - actionMenuOuterPadding * 2
 
             val toAccountManageScreen: () -> Unit = {
                 backStackViewModel.mainScreen.navigateTo(
