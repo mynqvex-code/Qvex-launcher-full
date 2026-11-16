@@ -791,8 +791,8 @@ private fun VersionManagerLayout(
                         style = MaterialTheme.typography.labelSmall,
                         color = QvexGlassColors.TextSecondary,
                         maxLines = 1
-                           )
-                        )
+                       )
+                        
                     }
                 }
             }
