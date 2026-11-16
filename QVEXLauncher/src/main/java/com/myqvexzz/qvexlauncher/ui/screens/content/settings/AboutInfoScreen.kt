@@ -125,7 +125,7 @@ fun AboutInfoScreen(
                         )
 
                         ButtonIconItem(
-                            icon = painterResource(R.drawable.avatar_qvex_launcher),
+                Icon = painterResource(R.drawable.img_avatar_qvex_launcher),
                             title = stringResource(R.string.about_launcher_author_movtery_title),
                             text = stringResource(R.string.about_launcher_author_movtery_text, launcherName),
                             button = {
@@ -162,7 +162,8 @@ fun AboutInfoScreen(
                         )
 
                         ButtonIconItem(
-                            Icon = painterResource(R.drawable.avatar_qvex_launcher),
+                            icon = painterResource(R.drawable.img_avatar_bangbang93),
+                            title = "bangbang93",
                             text = stringResource(R.string.about_acknowledgements_bangbang93_text, BuildKeys.LAUNCHER_SHORT_NAME),
                             button = {
                                 Button(
@@ -193,7 +194,7 @@ fun AboutInfoScreen(
                             openLink = { openLink(URL_MCMOD) }
                         )
                         ButtonIconItem(
-                            Icon = painterResource(R.drawable.avatar_qvex_launcher),
+                            icon = painterResource(R.drawable.img_avatar_mcim),
                             title = "mcmod-info-mirror",
                             text = stringResource(R.string.about_acknowledgements_mcim_text, BuildKeys.LAUNCHER_SHORT_NAME),
                             button = {
