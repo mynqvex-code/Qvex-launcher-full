@@ -18,6 +18,11 @@
 
 package com.myqvexzz.qvexlauncher.ui.screens.content.settings
 
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.CardDefaults
+import com.myqvexzz.qvexlauncher.ui.components.BackgroundCard
+import com.myqvexzz.qvexlauncher.ui.theme.QvexGlassColors
 import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.compose.animation.AnimatedVisibility
