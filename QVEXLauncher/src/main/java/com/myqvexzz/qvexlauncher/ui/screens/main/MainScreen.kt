@@ -550,15 +550,18 @@ private fun QvexLeftNavigationRail(
     onSettings: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Surface(
-        modifier = modifier,
-        shape = MaterialTheme.shapes.extraLarge,
-        color = QvexGlassColors.GlassDark.copy(alpha = 0.78f),
-        border = BorderStroke(
-            1.dp,
-            QvexGlassColors.GlassBorder
-        )
-    ) {
+    BackgroundCard(
+    modifier = modifier,
+    shape = MaterialTheme.shapes.extraLarge,
+    colors = androidx.compose.material3.CardDefaults.cardColors(
+        containerColor = QvexGlassColors.GlassDark.copy(alpha = 0.62f),
+        contentColor = QvexGlassColors.TextPrimary
+    ),
+    border = BorderStroke(
+        1.dp,
+        QvexGlassColors.GlassBorder
+    )
+) {
         Column(
             modifier = Modifier
                 .width(64.dp)
