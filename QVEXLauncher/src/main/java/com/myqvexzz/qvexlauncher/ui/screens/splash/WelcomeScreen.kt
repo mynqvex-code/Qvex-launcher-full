@@ -610,7 +610,7 @@ private fun ProductBanner(
     ) {
         Image(
             modifier = Modifier.size(if (compact) 36.dp else 52.dp),
-            painter = painterResource(R.drawable.img_launcher),
+            painter = painterResource(R.drawable.avatar_qvex_launcher),
             contentDescription = null
         )
 
