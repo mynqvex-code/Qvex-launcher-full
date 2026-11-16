@@ -119,7 +119,6 @@ import kotlin.math.roundToInt
 /**
  * 操作菜单停泊槽位与屏幕边缘的间距
  */
-private val ActionMenuOuterPadding = 12.dp
 
 @Composable
 fun LauncherScreen(
