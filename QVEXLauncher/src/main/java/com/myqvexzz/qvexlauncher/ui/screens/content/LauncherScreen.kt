@@ -315,10 +315,19 @@ private fun AccountAvatarCenter(
     onClick: () -> Unit = {}
 ) {
     Box(
-        modifier = modifier
-            .clip(shape = MaterialTheme.shapes.extraLarge)
-            .clickable(onClick = onClick)
-    ) {
+    modifier = modifier
+        .background(
+            QvexGlassColors.GlassBlue.copy(alpha = 0.32f),
+            MaterialTheme.shapes.extraLarge
+        )
+        .border(
+            1.dp,
+            QvexGlassColors.GlassBorder,
+            MaterialTheme.shapes.extraLarge
+        )
+        .clip(shape = MaterialTheme.shapes.extraLarge)
+        .clickable(onClick = onClick)
+) {
         Column(
             modifier = Modifier.padding(all = 12.dp),
             horizontalAlignment = Alignment.CenterHorizontally
