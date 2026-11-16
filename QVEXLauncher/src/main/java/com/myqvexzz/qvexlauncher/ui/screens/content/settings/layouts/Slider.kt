@@ -203,6 +203,9 @@ fun IntSliderSettingsCard(
     valueText: ((Float) -> String)? = null,
     titleStyle: TextStyle = MaterialTheme.typography.titleSmall,
     summaryStyle: TextStyle = MaterialTheme.typography.labelSmall,
+    sliderColors = sliderColors,
+    valueContainerColor = valueContainerColor,
+    valueContentColor = valueContentColor,
     appendContent: @Composable () -> Unit = {},
     previewContent: @Composable ColumnScope.() -> Unit = {}
 ) {
