@@ -169,6 +169,12 @@ val actionMenuWeight = when {
     maxWidth >= 600.dp -> 3f
     else -> 3.5f
 }
+val actionMenuOuterPadding = when {
+    maxWidth >= 900.dp -> 16.dp
+    maxWidth >= 600.dp -> 12.dp
+    else -> 8.dp
+}
+
             val parentWidthPx = constraints.maxWidth.toFloat()
             dragState.parentWidthPx = parentWidthPx
             dragState.outerPaddingPx = with(LocalDensity.current) { actionMenuOuterPadding.toPx() }
