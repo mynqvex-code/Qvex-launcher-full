@@ -689,16 +689,24 @@ private fun ActionMenuTallerContent(
         )
 
         BackgroundCard(
-            modifier = Modifier
-                .guideNode(
-                    key = GuideKeys.Main.Step.Account,
-                    preferSide = GuideSide.Above,
-                    holeRadius = 28.dp
-                )
-                .fillMaxWidth(),
-            shape = MaterialTheme.shapes.extraLarge,
-            onClick = toAccountManageScreen
-        ) {
+    modifier = Modifier
+        .guideNode(
+            key = GuideKeys.Main.Step.Account,
+            preferSide = GuideSide.Above,
+            holeRadius = 28.dp
+        )
+        .fillMaxWidth(),
+    colors = androidx.compose.material3.CardDefaults.cardColors(
+        containerColor = QvexGlassColors.GlassDark.copy(alpha = 0.72f),
+        contentColor = QvexGlassColors.TextPrimary
+    ),
+    shape = MaterialTheme.shapes.extraLarge,
+    border = androidx.compose.foundation.BorderStroke(
+        1.dp,
+        QvexGlassColors.GlassBorder
+    ),
+    onClick = toAccountManageScreen
+) {
             AccountAvatarRow(
                 modifier = Modifier.fillMaxWidth(),
                 account = account,
