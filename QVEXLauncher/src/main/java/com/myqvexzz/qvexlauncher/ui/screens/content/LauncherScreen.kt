@@ -785,11 +785,13 @@ private fun VersionManagerLayout(
                         maxLines = 1
                     )
                     if (version.isValid()) {
-                        Text(
-                            modifier = Modifier.basicMarquee(iterations = Int.MAX_VALUE),
-                            text = version.getVersionSummary(),
-                            style = MaterialTheme.typography.labelSmall,
-                            maxLines = 1
+                    Text(
+                        modifier = Modifier.basicMarquee(iterations = Int.MAX_VALUE),
+                        text = version.getVersionSummary(),
+                        style = MaterialTheme.typography.labelSmall,
+                        color = QvexGlassColors.TextSecondary,
+                        maxLines = 1
+                           )
                         )
                     }
                 }
