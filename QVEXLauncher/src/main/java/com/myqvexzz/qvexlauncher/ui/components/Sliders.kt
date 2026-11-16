@@ -151,7 +151,7 @@ fun SimpleTextSlider(
                 ) {
                     Text(
                         text = getTextString(value),
-                        color = MaterialTheme.colorScheme.onPrimary,
+                        color = valueContentColor,
                     )
                     suffix?.let { text ->
                         Text(text = text)
