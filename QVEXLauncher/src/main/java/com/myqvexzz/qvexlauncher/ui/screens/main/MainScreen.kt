@@ -190,6 +190,7 @@ fun MainScreen(
             inLauncherScreen = inLauncherScreen,
             taskRunning = taskRunning,
             isTasksExpanded = isTaskMenuExpanded,
+            isWideLandscape = isWideLandscape,
             contentColor = onBackgroundColor(),
             onScreenBack = {
                 screenBackStackModel.mainScreen.backStack.removeFirstOrNull()
