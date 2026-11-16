@@ -567,6 +567,19 @@ private fun QvexLeftNavigationRail(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
+            Box(
+    modifier = Modifier
+        .size(40.dp)
+        .clip(MaterialTheme.shapes.large)
+        .background(QvexGlassColors.GlassHighlight),
+    contentAlignment = Alignment.Center
+) {
+    Text(
+        text = "Q",
+        color = QvexGlassColors.Cyan,
+        style = MaterialTheme.typography.titleLarge
+    )
+            }
             IconButton(
                 onClick = onOpenFileManager
             ) {
