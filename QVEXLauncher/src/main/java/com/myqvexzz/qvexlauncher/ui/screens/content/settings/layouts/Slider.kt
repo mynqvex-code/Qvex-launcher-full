@@ -110,6 +110,9 @@ fun IntSliderSettingsCard(
                 fineTuningControl = fineTuningControl,
                 fineTuningStep = 1f,
                 valueText = valueText,
+                sliderColors = sliderColors,
+                valueContainerColor = valueContainerColor,
+                valueContentColor = valueContentColor,
                 appendContent = appendContent
             )
             previewContent()
