@@ -64,6 +64,7 @@ class CurseForgeSearcher(
             url = "$api/mods/search",
             parameters = searchFilter.toCurseForgeRequest(
                 query = query,
+                headers = apiHeaders,
                 platformClasses = platformClasses
             ).toParameters()
         )
