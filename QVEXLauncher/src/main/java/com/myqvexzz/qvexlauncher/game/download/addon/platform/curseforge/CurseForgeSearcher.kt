@@ -51,7 +51,6 @@ class CurseForgeSearcher(
     platform = Platform.CURSEFORGE,
     source = source
 ) {
-       private val apiHeaders: List<Pair<String, Any?>>?
         private val apiHeaders: List<Pair<String, Any?>>? = null
     override suspend fun searchAddons(
         query: String,
