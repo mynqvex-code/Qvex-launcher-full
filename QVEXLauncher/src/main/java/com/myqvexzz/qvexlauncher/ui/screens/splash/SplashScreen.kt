@@ -145,7 +145,7 @@ private fun LoadingScreen(
             ) {
                 Image(
                     modifier = Modifier.size(58.dp),
-                    painter = painterResource(R.drawable.qvex_launcher_icon),
+                    painter = painterResource(R.drawable.avatar_qvex_launcher),
                     contentDescription = stringResource(R.string.generic_loading)
                 )
                 LinearWavyProgressIndicator(
