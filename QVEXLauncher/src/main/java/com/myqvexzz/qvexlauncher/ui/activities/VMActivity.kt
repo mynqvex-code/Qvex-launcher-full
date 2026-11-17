@@ -589,11 +589,11 @@ setSustainedPerformanceMode(
     applyMaxRefreshRatePolicy()
                 } 
                
-LaunchedEffect(
-    AllSettings.qvexGpuMax.state,
-    AllSettings.sustainedPerformance.state,
-    AllSettings.qvexPowerMax.state
-) {
+LaunchedEffect(AllSettings.sustainedPerformance.state) {
+    window?.setSustainedPerformanceMode(
+        AllSettings.sustainedPerformance.getValue()
+    )
+}
     window?.setSustainedPerformanceMode(
         AllSettings.sustainedPerformance.getValue() ||
         (
