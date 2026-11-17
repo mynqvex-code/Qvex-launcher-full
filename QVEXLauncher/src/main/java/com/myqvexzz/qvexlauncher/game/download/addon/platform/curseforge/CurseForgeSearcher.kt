@@ -18,6 +18,7 @@
 
 package com.myqvexzz.qvexlauncher.game.download.addon.platform.curseforge
 
+import com.myqvexzz.qvexlauncher.BuildConfig
 import com.myqvexzz.qvexlauncher.game.download.addon.platform.AbstractPlatformSearcher
 import com.myqvexzz.qvexlauncher.game.download.addon.platform.Platform
 import com.myqvexzz.qvexlauncher.game.download.addon.platform.PlatformClasses
