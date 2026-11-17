@@ -101,8 +101,9 @@ class CurseForgeSearcher(
         projectID: String,
         index: Int = 0,
         pageSize: Int = 100
-    ): CurseForgeVersions = httpGetJson(
+        ): CurseForgeVersions = httpGetJson(
         url = "$api/mods/$projectID/files",
+        headers = apiHeaders,
         parameters = Parameters.build {
             append("index", index.toString())
             append("pageSize", pageSize.toString())
