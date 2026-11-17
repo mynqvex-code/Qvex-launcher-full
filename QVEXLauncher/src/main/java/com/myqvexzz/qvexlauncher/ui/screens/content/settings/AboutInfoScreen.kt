@@ -107,7 +107,7 @@ fun AboutInfoScreen(
                         val launcherName = remember { launcherName() }
 
                         ButtonIconItem(
-                            icon = painterResource(R.drawable.qvex_launcher_icon),
+                            icon = painterResource(R.drawable.avatar_qvex_launcher),
                             title = BuildKeys.LAUNCHER_NAME,
                             text = stringResource(R.string.about_launcher_version, BuildConfig.VERSION_NAME),
                             button = {
