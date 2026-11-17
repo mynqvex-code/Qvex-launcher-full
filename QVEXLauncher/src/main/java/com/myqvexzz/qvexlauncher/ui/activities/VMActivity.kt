@@ -579,7 +579,9 @@ setSustainedPerformanceMode(
         }
 
         setContent {
-            ZalithLauncherTheme {
+            ZalithLauncherTheme(
+    backgroundViewModel = backgroundViewModel
+) {
                 ObserveFullScreenSetting(AllSettings.gameFullScreen.state)
                 //游戏内菜单切换“请求最高刷新率”后自动重应用策略
                 LaunchedEffect(
