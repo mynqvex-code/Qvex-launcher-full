@@ -819,6 +819,17 @@ private fun CustomBackground(
                 visible = backgroundViewModel.isValid
             ) {
                 IconTextButton(
+                    modifier = Modifier
+                        .border(
+                            1.dp,
+                            QvexGlassColors.GlassBorder,
+                            RoundedCornerShape(12.dp)
+                        )
+                        .background(
+                            QvexGlassColors.GlassBlue.copy(alpha = 0.85f),
+                            RoundedCornerShape(12.dp)
+                        ),
+                    shape = RoundedCornerShape(12.dp),
                     painter = painterResource(R.drawable.ic_restart_alt),
                     text = stringResource(R.string.generic_reset),
                     onClick = {
