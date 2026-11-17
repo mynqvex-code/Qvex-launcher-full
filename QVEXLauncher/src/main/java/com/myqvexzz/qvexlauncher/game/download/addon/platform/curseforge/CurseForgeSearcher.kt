@@ -63,7 +63,6 @@ class CurseForgeSearcher(
         return httpGetJson(
             url = "$api/mods/search",
             parameters = searchFilter.toCurseForgeRequest(
-                headers = apiHeaders,
                 query = query,
                 platformClasses = platformClasses
             ).toParameters()
