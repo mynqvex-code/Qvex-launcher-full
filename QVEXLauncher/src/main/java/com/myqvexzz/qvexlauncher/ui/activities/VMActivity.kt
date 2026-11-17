@@ -140,6 +140,7 @@ import com.myqvexzz.qvexlauncher.utils.getParcelableSafely
 import com.myqvexzz.qvexlauncher.utils.rememberGameRenderSize
 import com.myqvexzz.qvexlauncher.viewmodel.ErrorViewModel
 import com.myqvexzz.qvexlauncher.viewmodel.EventViewModel
+import com.myqvexzz.qvexlauncher.viewmodel.BackgroundViewModel
 import com.myqvexzz.qvexlauncher.viewmodel.GamepadViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
