@@ -142,9 +142,10 @@ class CurseForgeSearcher(
     ): CurseForgeFile? {
         val hash = MurmurHash2Incremental.computeHash(file, byteToSkip = listOf(0x9, 0xa, 0xd, 0x20))
         return httpPostJson<CurseForgeFingerprintsMatches>(
-            url = "$api/fingerprints",
-            body = mapOf("fingerprints" to listOf(hash))
-        ).data.exactMatches
+    url = "$api/fingerprints",
+    headers = apiHeaders,
+    body = mapOf("fingerprints" to listOf(hash))
+).data.exactMatches
             ?.takeIf { it.isNotEmpty() }
             ?.firstOrNull()
             ?.file
