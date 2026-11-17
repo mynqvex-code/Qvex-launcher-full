@@ -159,27 +159,15 @@ suspend fun searchAddons(
         var lastException: Exception? = null
         for (query in queries) {
             try {
-                val r = when (searchPlatform) {
-                    Platform.CURSEFORGE -> mirroredPlatformSearcher(
-                        searchers = mirroredCurseForgeSource(),
-                        printLog = false
-                    ) { searcher ->
-                        searcher.searchAddons(
-                            query = query,
-                            searchFilter = searchFilterForQuery,
-                            platformClasses = platformClasses
-                        )
-                    }
-                    Platform.MODRINTH -> mirroredPlatformSearcher(
-                        searchers = mirroredModrinthSource(),
-                        printLog = false
-                    ) { searcher ->
-                        searcher.searchAddons(
-                            query = query,
-                            searchFilter = searchFilterForQuery,
-                            platformClasses = platformClasses
-                        )
-                    }
+                val r = mirroredPlatformSearcher(
+    searchers = mirroredModrinthSource(),
+    printLog = false
+) { searcher ->
+    searcher.searchAddons(
+        query = query,
+        searchFilter = searchFilterForQuery,
+        platformClasses = platformClasses
+    )
                 }
                 lastResult = r
                 if (r.getAddonPage(platformClasses).data.isNotEmpty()) break
