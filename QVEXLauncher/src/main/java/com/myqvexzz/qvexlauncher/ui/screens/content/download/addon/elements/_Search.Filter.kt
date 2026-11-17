@@ -502,7 +502,7 @@ fun PlatformListLayout(
 ) {
     FilterListLayout(
         modifier = modifier,
-        items = Platform.entries,
+        items = listOf(Platform.MODRINTH),
         selectionMode = FilterSelectionMode.Single,
         selectedItems = listOfNotNull(searchPlatform),
         onSelectionChange = { new ->
