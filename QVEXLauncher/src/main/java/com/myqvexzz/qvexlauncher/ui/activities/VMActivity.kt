@@ -404,6 +404,8 @@ class VMActivity : BaseAppCompatActivity(), SurfaceTextureListener {
 
     private val vmViewModel: VMViewModel by viewModels()
 
+    private val backgroundViewModel: BackgroundViewModel by viewModels()
+    
     /** View used to locate the layout hosting SDL's text input bridge. */
     private var gameTextureView: TextureView? = null
 
