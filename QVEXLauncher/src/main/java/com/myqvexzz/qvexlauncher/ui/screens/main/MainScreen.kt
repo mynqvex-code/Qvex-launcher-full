@@ -645,62 +645,26 @@ private fun QvexLeftNavigationRail(
             Spacer(
     modifier = Modifier.height(8.dp)
 )
-            IconButton(
-                modifier = Modifier
-                    .clip(MaterialTheme.shapes.large)
-                    .background(
-                        if (inMultiplayerScreen)
-                            QvexGlassColors.GlassHighlight
-                        else Color.Transparent
-                    ),
+            QvexGlowNavButton(
+                selected = inMultiplayerScreen,
+                painter = painterResource(R.drawable.ic_group_filled),
+                description = "Multiplayer",
                 onClick = onMultiplayer
-            ) {
-                Icon(
-                    painter = painterResource(R.drawable.ic_group_filled),
-                    contentDescription = "Multiplayer",
-                    tint = if (inMultiplayerScreen)
-                        QvexGlassColors.Cyan
-                    else QvexGlassColors.TextSecondary
-                )
-            }
+            )
 
-            IconButton(
-                modifier = Modifier
-                    .clip(MaterialTheme.shapes.large)
-                    .background(
-                        if (inDownloadScreen)
-                            QvexGlassColors.GlassHighlight
-                        else Color.Transparent
-                    ),
+            QvexGlowNavButton(
+                selected = inDownloadScreen,
+                painter = painterResource(R.drawable.ic_download_2_filled),
+                description = "Downloads",
                 onClick = onDownloads
-            ) {
-                Icon(
-                    painter = painterResource(R.drawable.ic_download_2_filled),
-                    contentDescription = "Downloads",
-                    tint = if (inDownloadScreen)
-                        QvexGlassColors.Cyan
-                    else QvexGlassColors.TextSecondary
-                )
-            }
+            )
 
-            IconButton(
-                modifier = Modifier
-                    .clip(MaterialTheme.shapes.large)
-                    .background(
-                        if (inSettingsScreen)
-                            QvexGlassColors.GlassHighlight
-                        else Color.Transparent
-                    ),
+            QvexGlowNavButton(
+                selected = inSettingsScreen,
+                painter = painterResource(R.drawable.ic_settings_filled),
+                description = "Settings",
                 onClick = onSettings
-            ) {
-                Icon(
-                    painter = painterResource(R.drawable.ic_settings_filled),
-                    contentDescription = "Settings",
-                    tint = if (inSettingsScreen)
-                        QvexGlassColors.Cyan
-                    else QvexGlassColors.TextSecondary
-                )
-            }
+            )
         }
     }
 }
