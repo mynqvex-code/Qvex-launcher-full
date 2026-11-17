@@ -205,10 +205,27 @@ fun BaseIconTextButton(
     enabled: Boolean = true,
     onLongClick: () -> Unit = {},
 ) {
+    val interactionSource = remember { MutableInteractionSource() }
+    val isPressed by interactionSource.collectIsPressedAsState()
+    val scale by animateFloatAsState(
+        targetValue = if (isPressed) 0.94f else 1f,
+        animationSpec = MaterialTheme.motionScheme.fastSpatialSpec(),
+        label = "QvexButtonScale"
+    )
+
     Row(
         modifier = modifier
+            .graphicsLayer {
+                scaleX = scale
+                scaleY = scale
+            }
             .clip(shape = shape)
-            .combinedClickable(enabled = enabled, onClick = onClick, onLongClick = onLongClick)
+            .combinedClickable(
+                enabled = enabled,
+                onClick = onClick,
+                onLongClick = onLongClick,
+                interactionSource = interactionSource
+            )
             .padding(PaddingValues(horizontal = 8.dp, vertical = 4.dp))
             .alpha(if (enabled) 1f else DisabledAlpha),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
