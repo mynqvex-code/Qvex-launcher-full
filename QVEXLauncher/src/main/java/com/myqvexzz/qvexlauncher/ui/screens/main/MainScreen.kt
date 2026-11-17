@@ -65,6 +65,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.painter.Painter
@@ -538,7 +540,49 @@ private fun TopBarRailItem(
         unSelectedPadding = PaddingValues(all = 8.dp),
     )
 }
-
+@Composable
+private fun QvexGlowNavButton(
+    selected: Boolean,
+    painter: Painter,
+    description: String,
+    onClick: () -> Unit
+) {
+    Box(
+        modifier = Modifier
+            .size(44.dp)
+            .drawBehind {
+                if (selected) {
+                    drawCircle(
+                        brush = Brush.radialGradient(
+                            colors = listOf(
+                                QvexGlassColors.Cyan.copy(alpha = 0.38f),
+                                Color.Transparent
+                            ),
+                            radius = size.maxDimension
+                        )
+                    )
+                }
+            }
+    ) {
+        IconButton(
+            modifier = Modifier
+                .fillMaxSize()
+                .clip(MaterialTheme.shapes.large)
+                .background(
+                    if (selected) QvexGlassColors.GlassHighlight
+                    else Color.Transparent
+                ),
+            onClick = onClick
+        ) {
+            Icon(
+                painter = painter,
+                contentDescription = description,
+                tint = if (selected) QvexGlassColors.Cyan
+                else QvexGlassColors.TextSecondary
+            )
+        }
+    }
+}
 @Composable
 private fun QvexLeftNavigationRail(
     inMultiplayerScreen: Boolean,
