@@ -51,6 +51,10 @@ class CurseForgeSearcher(
     platform = Platform.CURSEFORGE,
     source = source
 ) {
+       private val apiHeaders: List<Pair<String, Any?>>?
+        get() = if (api == CURSEFORGE_API && BuildConfig.CURSEFORGE_API.isNotBlank()) {
+            listOf("x-api-key" to BuildConfig.CURSEFORGE_API)
+        } else null
     override suspend fun searchAddons(
         query: String,
         searchFilter: PlatformSearchFilter,
