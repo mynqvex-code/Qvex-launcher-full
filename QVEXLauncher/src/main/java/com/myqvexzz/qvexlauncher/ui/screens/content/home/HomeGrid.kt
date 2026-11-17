@@ -211,6 +211,7 @@ fun HomeGrid(
         BoxWithConstraints(
             modifier = Modifier.fillMaxSize()
         ) {
+          val isWideLayout = maxWidth >= 760.dp  
             Row(
                 modifier = Modifier.fillMaxSize(),
                 horizontalArrangement = Arrangement.spacedBy(10.dp)
@@ -254,7 +255,7 @@ fun HomeGrid(
                 },
             )
         }
-                if (maxWidth >= 760.dp) {
+                if (isWideLayout) {
                     QvexInfoPanel(
                         modifier = Modifier
                             .width(170.dp)
