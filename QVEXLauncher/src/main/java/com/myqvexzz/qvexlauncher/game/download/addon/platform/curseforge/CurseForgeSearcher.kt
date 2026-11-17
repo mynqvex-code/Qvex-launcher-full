@@ -52,9 +52,7 @@ class CurseForgeSearcher(
     source = source
 ) {
        private val apiHeaders: List<Pair<String, Any?>>?
-        get() = if (api == CURSEFORGE_API && BuildConfig.CURSEFORGE_API.isNotBlank()) {
-            listOf("x-api-key" to BuildConfig.CURSEFORGE_API)
-        } else null
+        private val apiHeaders: List<Pair<String, Any?>>? = null
     override suspend fun searchAddons(
         query: String,
         searchFilter: PlatformSearchFilter,
