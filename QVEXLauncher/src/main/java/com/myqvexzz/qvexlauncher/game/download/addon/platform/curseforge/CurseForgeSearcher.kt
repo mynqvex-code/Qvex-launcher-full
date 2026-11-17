@@ -160,9 +160,10 @@ class CurseForgeSearcher(
     ): Map<Long, CurseForgeFile> {
         if (fingerprints.isEmpty()) return emptyMap()
         val matches = httpPostJson<CurseForgeFingerprintsMatches>(
-            url = "$api/fingerprints",
-            body = CurseForgeFingerprintsRequest(fingerprints = fingerprints)
-        )
+    url = "$api/fingerprints",
+    headers = apiHeaders,
+    body = CurseForgeFingerprintsRequest(fingerprints = fingerprints)
+)
         return matches.data.exactMatches.orEmpty()
             .associate { it.file.fileFingerprint to it.file }
     }
