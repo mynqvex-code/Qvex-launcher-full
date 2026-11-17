@@ -87,7 +87,8 @@ class CurseForgeSearcher(
         fileID: String,
     ): CurseForgeVersion {
         return httpGetJson(
-            url = "$api/mods/$projectID/files/$fileID"
+            url = "$api/mods/$projectID/files/$fileID",
+            headers = apiHeaders
         )
     }
 
