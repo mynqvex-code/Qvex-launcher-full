@@ -500,12 +500,9 @@ CallbackBridge.setGraphicOutputListener(object : GraphicOutputListener {
         window?.apply {
             setBackgroundDrawable(NativeColor.BLACK.toDrawable())
             
+// GPU MAX không tự bật chế độ giới hạn hiệu năng đỉnh.
 setSustainedPerformanceMode(
-    AllSettings.sustainedPerformance.getValue() ||
-    (
-        AllSettings.qvexPowerMax.getValue() &&
-        AllSettings.qvexGpuMax.getValue()
-    )
+    AllSettings.sustainedPerformance.getValue()
 )
 
             addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON) // 防止系统息屏
