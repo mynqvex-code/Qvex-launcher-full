@@ -596,10 +596,13 @@ LaunchedEffect(AllSettings.sustainedPerformance.state) {
     )
 }
     if (
-        !AllSettings.qvexPowerMax.getValue() ||
-        !AllSettings.qvexFpsPriority.getValue()
-    ) {
-        QvexFpsBooster.stop()
+    !AllSettings.qvexPowerMax.getValue() ||
+    (
+        !AllSettings.qvexFpsPriority.getValue() &&
+        !AllSettings.qvexGpuMax.getValue()
+    )
+) {
+    QvexFpsBooster.stop()
     }
 }
    LaunchedEffect(
