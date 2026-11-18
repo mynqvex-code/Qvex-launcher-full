@@ -163,7 +163,36 @@ class ZLApplication : Application(), SingletonImageLoader.Factory {
             .crossfade(true)
             .build()
     }
+    private fun logPreviousGameExit() {
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) return
 
+    runCatching {
+        val activityManager =
+            getSystemService(ACTIVITY_SERVICE) as ActivityManager
+
+        val gameExit = activityManager
+            .getHistoricalProcessExitReasons(packageName, 0, 20)
+            .filter { it.processName == "$packageName:game" }
+            .maxByOrNull { it.timestamp }
+
+        if (gameExit == null) {
+            Logger.info("GameExit", "No previous game process exit record found")
+            return
+        }
+
+        Logger.info(
+            "GameExit",
+            "reason=${gameExit.reason}, " +
+                "status=${gameExit.status}, " +
+                "timestamp=${gameExit.timestamp}, " +
+                "pss=${gameExit.pss}, " +
+                "rss=${gameExit.rss}, " +
+                "description=${gameExit.description}"
+        )
+    }.onFailure {
+        Logger.error("GameExit", "Failed to read game process exit history", it)
+    }
+    }
     private fun initializeData() {
         AccountsManager.initialize(this)
         GamePathManager.initialize(this)
