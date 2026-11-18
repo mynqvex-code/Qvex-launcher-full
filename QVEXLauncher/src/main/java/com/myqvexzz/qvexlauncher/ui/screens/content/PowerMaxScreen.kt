@@ -59,7 +59,7 @@ fun PowerMaxScreen(
                     unit = AllSettings.qvexGpuMax,
                     position = CardPosition.Middle,
                     title = "GPU MAX",
-                    summary = "ưu tiên hiệu năng.",
+                    summary = "Ưu tiên lịch xử lý luồng render bằng Android ADPF và yêu cầu tần số quét cao nhất trên 90Hz nếu máy hỗ trợ. Không ép xung hoặc khóa xung GPU.",
                     enabled = AllSettings.qvexPowerMax.state
                 )
 
