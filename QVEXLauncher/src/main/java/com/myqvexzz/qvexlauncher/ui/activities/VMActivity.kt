@@ -585,6 +585,7 @@ setSustainedPerformanceMode(
     AllSettings.requestMaxRefreshRate.state,
     AllSettings.qvexPowerMax.state,
     AllSettings.qvexFpsPriority.state
+    AllSettings.qvexGpuMax.state
 ) {
     applyMaxRefreshRatePolicy()
                 } 
