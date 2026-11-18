@@ -911,13 +911,16 @@ fun applyMaxRefreshRatePolicy() {
     val display = currentDisplay() ?: return
     val best = maxRefreshRateMode(display)
 
-    val fpsBoosterRequestsHighRefreshRate =
-        AllSettings.qvexPowerMax.getValue() &&
-        AllSettings.qvexFpsPriority.getValue() &&
-        best.refreshRate > 90f
+    val qvexMaxRequestsHighRefreshRate =
+    AllSettings.qvexPowerMax.getValue() &&
+    (
+        AllSettings.qvexFpsPriority.getValue() ||
+        AllSettings.qvexGpuMax.getValue()
+    ) &&
+    best.refreshRate > 90f
 
     if (!AllSettings.requestMaxRefreshRate.getValue() &&
-        !fpsBoosterRequestsHighRefreshRate
+        !qvexMaxRequestsHighRefreshRate
     ) {
         requestedRefreshRate = 0f
         setPreferredDisplayModeId(0)
