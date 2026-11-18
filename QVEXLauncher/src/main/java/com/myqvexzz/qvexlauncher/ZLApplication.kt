@@ -20,6 +20,7 @@ package com.myqvexzz.qvexlauncher
 
 import android.content.ComponentCallbacks2
 import android.app.Application
+import android.app.ActivityManager
 import android.content.res.Configuration
 import android.os.Process
 import android.util.Log
