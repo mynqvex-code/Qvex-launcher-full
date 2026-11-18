@@ -379,8 +379,7 @@ static void qvexReportFrameWorkDuration() {
         );
     }
 }
-void calculateFPS() {
-    qvexReportFrameWorkDuration();
+void calculateFPS() 
   
     frameCount++;
     time_t currentTime = time(NULL);
@@ -403,7 +402,7 @@ void calculateFPS() {
 
         if (firstOutput || ++qvexFrameCounter >= 8) {
             qvexFrameCounter = 0;
-
+            qvexReportFrameWorkDuration();
             JNIEnv *dalvikEnv = NULL;
             jboolean detachedBefore =
                 (*pojav_environ->dalvikJavaVMPtr)->GetEnv(
