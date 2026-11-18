@@ -23,6 +23,7 @@ import android.app.Application
 import android.app.ActivityManager
 import android.content.res.Configuration
 import android.os.Process
+import android.os.Build
 import android.util.Log
 import coil3.ImageLoader
 import coil3.PlatformContext
