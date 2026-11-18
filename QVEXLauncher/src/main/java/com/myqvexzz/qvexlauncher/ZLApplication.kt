@@ -98,7 +98,8 @@ class ZLApplication : Application(), SingletonImageLoader.Factory {
             loadAllSettings(this)
 
             Logger.initialize(this)
-
+            logPreviousGameExit()
+            
             initializeData()
             PathManager.DIR_FILES_PRIVATE = getDir("files", MODE_PRIVATE)
             DEVICE_ARCHITECTURE = Architecture.getDeviceArchitecture()
