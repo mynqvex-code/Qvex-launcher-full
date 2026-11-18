@@ -380,7 +380,7 @@ static void qvexReportFrameWorkDuration() {
     }
 }
 void calculateFPS() {
-    qvexReportFrameWorkDuration();
+    // qvexReportFrameWorkDuration();
   
     frameCount++;
     time_t currentTime = time(NULL);
