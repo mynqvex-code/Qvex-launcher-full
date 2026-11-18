@@ -18,8 +18,11 @@ object QvexFpsBooster {
     ) {
         try {
             val enabled =
-                AllSettings.qvexPowerMax.getValue() &&
-                AllSettings.qvexFpsPriority.getValue()
+    AllSettings.qvexPowerMax.getValue() &&
+    (
+        AllSettings.qvexFpsPriority.getValue() ||
+        AllSettings.qvexGpuMax.getValue()
+    )
 
             if (!enabled ||
                 Build.VERSION.SDK_INT < Build.VERSION_CODES.S ||
