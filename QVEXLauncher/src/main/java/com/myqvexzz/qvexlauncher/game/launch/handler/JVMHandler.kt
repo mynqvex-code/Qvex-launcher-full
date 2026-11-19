@@ -115,7 +115,7 @@ class JVMHandler(
     override fun onDestroy() {
     }
 
-    override fun onGraphicOutput(threadId: Int) {
+    override fun onGraphicOutput() {
     }
 
     override fun shouldIgnoreKeyEvent(event: KeyEvent): Boolean {
