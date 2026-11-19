@@ -19,5 +19,6 @@
 package org.lwjgl.glfw;
 
 public interface GraphicOutputListener {
-    void onGraphicOutput();
+    void onGraphicOutput(int threadId);
+    default void onFrameWorkDuration(int threadId, long durationNs) {}
 }
