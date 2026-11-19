@@ -484,40 +484,19 @@ class VMActivity : BaseAppCompatActivity(), SurfaceTextureListener {
         //设置画面渲染输出回调
 
 CallbackBridge.setGraphicOutputListener(object : GraphicOutputListener {
-    override fun onGraphicOutput() {
-        withHandler { onGraphicOutput() }
+    override fun onGraphicOutput(threadId: Int) {
+        withHandler { onGraphicOutput(threadId) }
+        QvexCpuMax.applyToThread(threadId)
+    }
+
+    override fun onFrameWorkDuration(threadId: Int, durationNs: Long) {
+        QvexFpsBooster.onFrameBatch(
+            this@VMActivity,
+            threadId,
+            durationNs
+        )
     }
 })
-        window?.apply {
-            setBackgroundDrawable(NativeColor.BLACK.toDrawable())
-            
-// GPU MAX không tự bật chế độ giới hạn hiệu năng đỉnh.
-setSustainedPerformanceMode(
-    AllSettings.sustainedPerformance.getValue()
-)
-
-            addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON) // 防止系统息屏
-        }
-
-        getSystemService(DisplayManager::class.java)?.registerDisplayListener(displayListener, null)
-        applyMaxRefreshRatePolicy()
-
-        val logFile = withLauncher { getLogFile() }
-        logFile.parentFile?.mkdirs() // 换过一次日志文件路径，此处创建父目录是必要的
-        if (!logFile.exists() && !logFile.createNewFile()) throw IOException("Failed to create a new log file")
-        LoggerBridge.start(logFile.absolutePath)
-
-        //错误信息展示
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                errorViewModel.errorEvents.collect { tm ->
-                    errorViewModel.showErrorDialog(
-                        context = this@VMActivity,
-                        tm = tm
-                    )
-                }
-            }
-        }
 
         lifecycleScope.launch {
             //开始接收事件
