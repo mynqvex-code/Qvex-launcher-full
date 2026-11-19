@@ -147,7 +147,8 @@ class GameHandler(
         Terracotta.setWaiting(false)
     }
 
-    override fun onGraphicOutput() {
+    override fun onGraphicOutput(threadId: Int) {
+    QvexCpuMax.applyToThread(threadId)
         if (!isGameRendering) {
             isGameRendering = true
             showGameInfo = false
