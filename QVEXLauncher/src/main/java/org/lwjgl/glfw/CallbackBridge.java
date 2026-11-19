@@ -526,22 +526,14 @@ public class CallbackBridge {
         sGraphicOutputListener = listener;
     }
 
-    //Called from JRE side
+        //Called from JRE side
     @SuppressWarnings("unused")
     @Keep
-    private static void onGraphicOutput(int threadId) {
-    if (sGraphicOutputListener != null) {
-        sGraphicOutputListener.onGraphicOutput(threadId);
+    private static void onGraphicOutput() {
+        if (sGraphicOutputListener != null) {
+            sGraphicOutputListener.onGraphicOutput();
+        }
     }
-    }
-    @SuppressWarnings("unused")
-    @Keep
-    private static void onFrameWorkDuration(int threadId, long durationNs) {
-    GraphicOutputListener listener = sGraphicOutputListener;
-    if (listener != null) {
-        listener.onFrameWorkDuration(threadId, durationNs);
-    }
-}
     @Keep @CriticalNative public static native void nativeSetUseInputStackQueue(boolean useInputStackQueue);
 
     @Keep @CriticalNative private static native boolean nativeSendChar(char codepoint);
