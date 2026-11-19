@@ -484,17 +484,8 @@ class VMActivity : BaseAppCompatActivity(), SurfaceTextureListener {
         //设置画面渲染输出回调
 
 CallbackBridge.setGraphicOutputListener(object : GraphicOutputListener {
-    override fun onGraphicOutput(threadId: Int) {
-        withHandler { onGraphicOutput(threadId) }
-        QvexCpuMax.applyToThread(threadId)
-    }
-
-    override fun onFrameWorkDuration(threadId: Int, durationNs: Long) {
-        QvexFpsBooster.onFrameBatch(
-            this@VMActivity,
-            threadId,
-            durationNs
-        )
+    override fun onGraphicOutput() {
+        withHandler { onGraphicOutput() }
     }
 })
         window?.apply {
