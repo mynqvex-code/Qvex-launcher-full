@@ -657,6 +657,7 @@ LaunchedEffect(AllSettings.sustainedPerformance.state) {
 
     override fun onPause() {
         super.onPause()
+        QvexFpsBooster.onActivityPaused()
         withHandler { onPause() }
         CallbackBridge.resetInputState()
         CallbackBridge.nativeSetWindowAttrib(LwjglGlfwKeycode.GLFW_FOCUSED, 0)
