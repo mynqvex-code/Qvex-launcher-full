@@ -649,6 +649,7 @@ LaunchedEffect(AllSettings.sustainedPerformance.state) {
 
     override fun onResume() {
         super.onResume()
+        QvexFpsBooster.onActivityResumed()
         withHandler { onResume() }
         CallbackBridge.nativeSetWindowAttrib(LwjglGlfwKeycode.GLFW_FOCUSED, 1)
         CallbackBridge.nativeSetWindowAttrib(LwjglGlfwKeycode.GLFW_HOVERED, 1)
