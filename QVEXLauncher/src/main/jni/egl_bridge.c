@@ -324,24 +324,27 @@ static void qvexReportFrameWorkDuration() {
         return;
     }
 
-    struct timespec cpuTime;
-    if (clock_gettime(CLOCK_THREAD_CPUTIME_ID, &cpuTime) != 0) {
-        return;
-    }
+    struct timespec monotonicTime;
 
-    int64_t currentTimeNs =
-        (int64_t)cpuTime.tv_sec * 1000000000LL +
-        (int64_t)cpuTime.tv_nsec;
+if (clock_gettime(CLOCK_MONOTONIC, &monotonicTime) != 0) {
+    return;
+}
 
-    if (qvexLastThreadCpuTimeNs == 0) {
-        qvexLastThreadCpuTimeNs = currentTimeNs;
-        return;
-    }
+int64_t currentTimeNs =
+    (int64_t)monotonicTime.tv_sec * 1000000000LL +
+    (int64_t)monotonicTime.tv_nsec;
 
-    int64_t durationNs = currentTimeNs - qvexLastThreadCpuTimeNs;
-    qvexLastThreadCpuTimeNs = currentTimeNs;
+if (qvexLastFrameBatchTimeNs == 0) {
+    qvexLastFrameBatchTimeNs = currentTimeNs;
+    return;
+}
 
-    if (durationNs <= 0) return;
+int64_t durationNs =
+    currentTimeNs - qvexLastFrameBatchTimeNs;
+
+qvexLastFrameBatchTimeNs = currentTimeNs;
+
+if (durationNs <= 0) return;
 
     JNIEnv *env = NULL;
     jboolean detachedBefore =
