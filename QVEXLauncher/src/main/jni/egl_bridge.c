@@ -315,7 +315,7 @@ static int frameCount = 0;
 static int fps = 0;
 static time_t lastTime = 0;
 static int qvexFrameCounter = 0;
-static __thread int64_t qvexLastThreadCpuTimeNs = 0;
+static __thread int64_t qvexLastFrameBatchTimeNs = 0;
 
 static void qvexReportFrameWorkDuration() {
     if (!pojav_environ->dalvikJavaVMPtr ||
